@@ -37,6 +37,13 @@
     <title>CRUD5th - Engineering Excellence</title>
   </head>
   <body>
+    <!-- Netlify detects forms in the built HTML before React renders. -->
+    <form name="contact" method="POST" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="type" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

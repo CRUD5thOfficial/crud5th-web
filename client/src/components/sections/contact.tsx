@@ -10,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 import { insertContactSchema } from "@shared/schema";
 import { AnimatedUnderline } from "@/components/animations/svg-path-animation";
 import { z } from "zod";
@@ -33,13 +32,20 @@ export default function Contact() {
 
   const contactMutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
-      const response = await apiRequest('POST', '/api/contact', data);
-      return response.json();
+      const body = new URLSearchParams({ "form-name": "contact", ...data });
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!response.ok) {
+        throw new Error("送信に失敗しました。もう一度お試しください。");
+      }
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
         title: "送信完了",
-        description: data.message,
+        description: "お問い合わせを受け付けました。後日担当者よりご連絡いたします。",
       });
       form.reset();
     },
