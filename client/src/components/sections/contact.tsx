@@ -99,7 +99,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground mb-1">Email</div>
-                    <div className="text-foreground font-semibold text-lg">crudfifth@gmail.com</div>
+                    <div className="text-foreground font-semibold text-lg">crud5th@crud5th.com</div>
                   </div>
                 </div>
                 <div className="flex items-center space-x-5 group hover:bg-secondary/30 p-4 rounded-xl transition-all duration-300" data-testid="contact-phone">
