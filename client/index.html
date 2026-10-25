@@ -44,7 +44,20 @@
       <input type="text" name="type" />
       <textarea name="message"></textarea>
     </form>
-    <div id="root"></div>
+    <div id="root">
+      <main aria-labelledby="site-loading-title" style="min-height: 100vh; box-sizing: border-box; padding: 64px 24px; background: #fff; color: #123c2b; font-family: system-ui, sans-serif; line-height: 1.8;">
+        <div style="max-width: 640px; margin: 0 auto;">
+          <p style="margin: 0 0 16px; font-weight: 700;">CRUD5th</p>
+          <h1 id="site-loading-title" style="margin: 0 0 16px; font-size: 24px;">ページを読み込んでいます。</h1>
+          <p style="margin: 0 0 24px;">表示されない場合は、再読み込みをお試しください。<br />お困りの場合は、メールでお問い合わせいただけます。</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+            <button type="button" onclick="window.location.reload()" style="min-height: 44px; padding: 8px 20px; border: 1px solid #123c2b; border-radius: 6px; background: #123c2b; color: #fff; font: inherit; cursor: pointer;">再読み込み</button>
+            <a href="mailto:crud5th@crud5th.com" style="display: inline-flex; min-height: 44px; align-items: center; color: inherit; text-underline-offset: 4px;">crud5th@crud5th.com</a>
+          </div>
+          <noscript><p>このサイトの表示にはJavaScriptが必要です。ブラウザの設定で有効にしてから、ページを再読み込みしてください。</p></noscript>
+        </div>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
