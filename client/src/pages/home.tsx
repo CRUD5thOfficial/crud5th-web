@@ -44,6 +44,15 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    if (window.location.hash !== "#contact") return;
+    // The app preloader mounts Home after the browser's initial anchor lookup.
+    const frameId = requestAnimationFrame(() => {
+      document.getElementById("contact")?.scrollIntoView({ behavior: "instant", block: "start" });
+    });
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <LoadingScreen />

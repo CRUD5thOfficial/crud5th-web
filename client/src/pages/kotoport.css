@@ -1,0 +1,408 @@
+.kotoport-page {
+  --kp-white: #fff;
+  --kp-sage: #e6f2e9;
+  --kp-ink: #123c2b;
+  --kp-green: #2c7654;
+  --kp-yellow: #f0e6a9;
+  --kp-muted: #50685a;
+  --kp-line: #cbdcd0;
+  color: var(--kp-ink);
+  background: var(--kp-white);
+  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  -webkit-font-smoothing: antialiased;
+}
+.kotoport-page *, .kotoport-page *::before, .kotoport-page *::after { box-sizing: border-box; }
+.kotoport-page :is(h1,h2,h3,h4,p,figure,ul,ol,dl,dd) { margin: 0; }
+.kotoport-page :is(ul,ol) { padding: 0; list-style: none; }
+.kotoport-page :is(a,button,input,select,summary) { -webkit-tap-highlight-color: transparent; }
+.kotoport-page a { color: inherit; text-decoration: none; }
+.kotoport-page button, .kotoport-page input, .kotoport-page select { font: inherit; color: inherit; }
+.kotoport-page button, .kotoport-page summary { cursor: pointer; }
+.kotoport-page svg { width: 24px; height: 24px; flex: 0 0 auto; stroke-width: 1.8; }
+.kotoport-page :is(a,button,input,select,summary):focus-visible { outline: 3px solid var(--kp-green); outline-offset: 5px; }
+.kotoport-page [id] { scroll-margin-top: 32px; }
+.kotoport-page .kp-container { width: min(1180px, calc(100% - 128px)); margin-inline: auto; }
+.kotoport-page .kp-section { padding-block: 112px; }
+.kotoport-page .kp-section-heading { margin-bottom: 48px; }
+.kotoport-page .kp-section-heading h2 { font-size: 48px; font-weight: 800; line-height: 1.45; letter-spacing: -.055em; white-space: pre-line; text-wrap: balance; }
+.kotoport-page .kp-section-heading > p { max-width: 720px; margin-top: 20px; }
+.kotoport-page .kp-small { color: var(--kp-muted); font-size: 15px; line-height: 1.85; }
+.kotoport-page .kp-input-error { color: #a13b29; font-size: 15px; }
+.kotoport-page .kp-button { display: inline-flex; min-height: 60px; align-items: center; justify-content: center; gap: 30px; border: 1px solid transparent; border-radius: 99px; padding: 14px 32px; background: var(--kp-green); color: var(--kp-white); font-weight: 700; line-height: 1.5; transition: background-color .18s ease, color .18s ease; }
+.kotoport-page .kp-button:hover { background: var(--kp-ink); }
+.kotoport-page .kp-button svg { width: 22px; height: 22px; }
+.kotoport-page .kp-skip { position: absolute; left: 24px; top: -100px; z-index: 20; background: var(--kp-white); padding: 12px 24px; }
+.kotoport-page .kp-skip:focus { top: 16px; }
+.kotoport-page .kp-header { padding-block: 32px; }
+.kotoport-page .kp-header-inner { display: flex; align-items: center; gap: 32px; }
+.kotoport-page .kp-brand { font-size: 28px; font-weight: 900; letter-spacing: -.06em; white-space: nowrap; margin-right: auto; }
+.kotoport-page .kp-nav { display: flex; gap: 24px; font-size: 15px; font-weight: 700; }
+.kotoport-page .kp-nav a { padding-block: 12px; }
+.kotoport-page .kp-nav a:hover, .kotoport-page .kp-footer a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.kotoport-page .kp-header-contact { min-height: 48px; padding: 12px 22px; gap: 16px; font-size: 15px; }
+.kotoport-page .kp-hero { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); align-items: center; gap: 48px; padding-block: 80px 136px; }
+.kotoport-page .kp-hero h1 { font-size: clamp(44px, 5.2vw, 72px); line-height: 1.5; letter-spacing: -.075em; font-weight: 900; }
+.kotoport-page .kp-hero h1 span { display: block; white-space: nowrap; }
+.kotoport-page .kp-lead { max-width: 570px; margin-top: 32px; line-height: 2; }
+.kotoport-page .kp-actions { margin-top: 36px; }
+.kotoport-page .kp-actions .kp-button { min-width: 300px; }
+.kotoport-page .kp-hero-flow { background: var(--kp-sage); border-radius: 32px; padding: 34px 24px; }
+.kotoport-page .kp-hero-flow-grid { display: grid; grid-template-columns: minmax(0,1fr) 24px minmax(62px,.8fr) 24px minmax(0,1fr); align-items: center; gap: 7px; min-height: 294px; }
+.kotoport-page .kp-flow-inputs, .kotoport-page .kp-flow-outputs { display: flex; flex-direction: column; gap: 44px; }
+.kotoport-page .kp-flow-inputs > div, .kotoport-page .kp-flow-outputs > div { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.kotoport-page .kp-flow-stage strong { font-size: 16px; line-height: 1.6; font-weight: 800; }
+.kotoport-page .kp-flow-stage svg { width: 34px; height: 34px; }
+.kotoport-page .kp-flow-center { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 7px; }
+.kotoport-page .kp-flow-center > span { font-size: 13px; }
+.kotoport-page .kp-flow-center > strong { white-space: nowrap; font-size: 18px; letter-spacing: -.06em; }
+.kotoport-page .kp-flow-arch { width: 70px; height: 90px; border-radius: 48px 48px 0 0; display: flex; align-items: flex-end; justify-content: center; background: var(--kp-green); margin-bottom: 7px; }
+.kotoport-page .kp-flow-arch > span { width: 32px; height: 62px; border-radius: 30px 30px 0 0; background: var(--kp-yellow); }
+.kotoport-page .kp-flow-arrow { width: 24px; color: var(--kp-green); }
+.kotoport-page .kp-value { padding-top: 96px; border-top: 1px solid var(--kp-line); }
+.kotoport-page .kp-burdens { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 64px; }
+.kotoport-page .kp-burdens li { padding: 0 32px; border-right: 1px solid var(--kp-line); }
+.kotoport-page .kp-burdens li:last-child { border: 0; }
+.kotoport-page .kp-burden-icon { display: flex; width: 80px; height: 80px; border-radius: 50%; background: var(--kp-sage); align-items: center; justify-content: center; margin-bottom: 24px; }
+.kotoport-page .kp-burden-icon svg { width: 36px; height: 36px; }
+.kotoport-page .kp-open-number { font-size: 15px; color: var(--kp-green); font-weight: 700; }
+.kotoport-page .kp-burdens h3 { margin-top: 6px; font-size: 24px; font-weight: 800; letter-spacing: -.03em; }
+.kotoport-page .kp-value-outcome { display: flex; align-items: center; justify-content: space-between; margin-top: 56px; font-weight: 700; border-top: 1px solid var(--kp-line); padding-top: 24px; }
+.kotoport-page .kp-uses { padding-top: 32px; }
+.kotoport-page .kp-use-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.kotoport-page .kp-use-selector button { display: flex; align-items: center; justify-content: center; gap: 16px; min-height: 76px; border: 0; border-radius: 10px; padding: 18px; background: var(--kp-sage); }
+.kotoport-page .kp-use-selector strong { font-size: 22px; }
+.kotoport-page .kp-use-selector button > span { font-size: 13px; }
+.kotoport-page .kp-use-selector button[aria-pressed="true"] { background: var(--kp-ink); color: var(--kp-white); }
+.kotoport-page .kp-use-detail { display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: 48px; padding-block: 40px; border-bottom: 1px solid var(--kp-line); }
+.kotoport-page .kp-use-copy h3 { font-size: 25px; margin-bottom: 20px; font-weight: 800; }
+.kotoport-page .kp-use-copy li { display: flex; align-items: center; gap: 14px; padding-block: 14px; border-bottom: 1px solid var(--kp-line); }
+.kotoport-page .kp-use-copy li:last-child { border-bottom: 0; }
+.kotoport-page .kp-use-copy li svg { width: 18px; color: var(--kp-green); }
+.kotoport-page .kp-use-flow-line { display: grid; grid-template-columns: 1fr .7fr 1fr .7fr 1fr; align-items: center; gap: 8px; }
+.kotoport-page .kp-flow-person { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+.kotoport-page .kp-flow-person > svg { width: 32px; height: 32px; }
+.kotoport-page .kp-flow-person > strong { font-size: 16px; }
+.kotoport-page .kp-flow-person > span { font-size: 13px; }
+.kotoport-page .kp-flow-person-accent { padding: 20px 4px; background: var(--kp-sage); border-radius: 40px 40px 10px 10px; }
+.kotoport-page .kp-flow-connector { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.kotoport-page .kp-flow-connector span { font-size: 13px; text-align: center; line-height: 1.5; }
+.kotoport-page .kp-use-note { font-size: 16px; margin-top: 20px; }
+.kotoport-page .kp-industry-caption { font-size: 16px; color: var(--kp-muted); margin-top: 8px; }
+.kotoport-page .kp-details, .kotoport-page .kp-economics-details { border-top: 1px solid var(--kp-line); margin-top: 32px; }
+.kotoport-page :is(.kp-details,.kp-economics-details,.kp-estimate-details) > summary { padding: 18px 40px 18px 0; font-size: 16px; font-weight: 700; position: relative; list-style: none; }
+.kotoport-page summary::-webkit-details-marker { display: none; }
+.kotoport-page :is(.kp-details,.kp-economics-details,.kp-estimate-details) > summary::after, .kotoport-page .kp-faq-items summary::after { content: "+"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 22px; font-weight: 500; }
+.kotoport-page details[open] > summary::after { content: "−"; }
+.kotoport-page :is(.kp-details,.kp-economics-details) > :not(summary) { margin-block: 16px; font-size: 16px; }
+.kotoport-page :is(.kp-details,.kp-economics-details) dl > div { padding-block: 12px; }
+.kotoport-page :is(.kp-details,.kp-economics-details) dt { font-weight: 700; }
+.kotoport-page .kp-hero-conversation { max-width: 600px; margin-top: 32px; padding: 24px; background: var(--kp-sage); }
+.kotoport-page .kp-hero-conversation figcaption { font-size: 13px; margin-bottom: 16px; }
+.kotoport-page .kp-dialogue-row { display: flex; gap: 12px; padding-block: 12px; }
+.kotoport-page .kp-dialogue-icon { padding-top: 5px; }
+.kotoport-page .kp-dialogue-speaker { display: block; font-weight: 700; font-size: 13px; }
+.kotoport-page .kp-conversation-handoff { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--kp-line); padding-top: 20px; margin-top: 10px; font-size: 13px; }
+.kotoport-page .kp-conversation-handoff > svg { width: 20px; }
+.kotoport-page .kp-approach { background: var(--kp-sage); }
+.kotoport-page .kp-reasons { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 48px; }
+.kotoport-page .kp-reason-number, .kotoport-page .kp-step-number { display: flex; width: 52px; height: 52px; align-items: center; justify-content: center; border-radius: 50%; background: var(--kp-green); color: var(--kp-white); font-size: 18px; font-weight: 700; }
+.kotoport-page .kp-reasons h3 { font-size: 24px; font-weight: 800; margin-block: 18px 10px; }
+.kotoport-page .kp-reasons p { font-size: 16px; }
+.kotoport-page .kp-role-flow { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin-top: 56px; padding: 32px 0; border-block: 1px solid var(--kp-line); }
+.kotoport-page .kp-role-flow li { display: flex; flex-direction: column; align-items: center; position: relative; gap: 6px; }
+.kotoport-page .kp-role-flow li > span { font-size: 15px; }
+.kotoport-page .kp-role-flow strong { font-size: 20px; }
+.kotoport-page .kp-role-flow svg { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); }
+.kotoport-page .kp-division { display: flex; gap: 32px; margin-top: 24px; font-weight: 700; font-size: 16px; }
+.kotoport-page .kp-setup { display: flex; gap: 12px 32px; flex-wrap: wrap; font-weight: 700; }
+.kotoport-page .kp-responsibility-grid, .kotoport-page .kp-scope-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.kotoport-page .kp-responsibility-grid ul { list-style: disc; padding-left: 20px; }
+.kotoport-page .kp-economics-inputs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+.kotoport-page .kp-economics-field { padding: 18px; border-radius: 10px; background: var(--kp-sage); }
+.kotoport-page .kp-economics-field label { display: block; min-height: 26px; margin-bottom: 10px; font-size: 15px; font-weight: 700; }
+.kotoport-page .kp-economics-field > div, .kotoport-page .kp-minutes-field > div { display: flex; align-items: center; gap: 8px; }
+.kotoport-page .kp-economics-field :is(input,select), .kotoport-page .kp-minutes-field input { width: 100%; min-width: 0; min-height: 52px; border: 1px solid var(--kp-line); border-radius: 5px; background: var(--kp-white); padding: 8px 10px; font-weight: 700; }
+.kotoport-page .kp-economics-field input, .kotoport-page .kp-minutes-field input { font-size: 22px; }
+.kotoport-page .kp-economics-field > div > span, .kotoport-page .kp-minutes-field > div > span { flex: 0 0 auto; font-size: 13px; }
+.kotoport-page .kp-economics-field > .kp-small { display: none; }
+.kotoport-page .kp-economics-field .kp-input-error { margin-top: 8px; }
+.kotoport-page .kp-economics-assumption { font-size: 15px; line-height: 1.85; max-width: 900px; margin-top: 20px; color: var(--kp-muted); }
+.kotoport-page .kp-economics-form > .kp-economics-details { margin-top: 16px; }
+.kotoport-page .kp-economics-output { margin-top: 40px; }
+.kotoport-page .kp-cost-bars figcaption { font-size: 13px; color: var(--kp-muted); margin-bottom: 24px; }
+.kotoport-page .kp-cost-bars > div { display: grid; grid-template-columns: 190px minmax(0,1fr) 240px; align-items: center; gap: 24px; margin-top: 24px; }
+.kotoport-page .kp-cost-bars > div > span { font-size: 16px; font-weight: 700; }
+.kotoport-page .kp-cost-bars small { display: block; font-size: 13px; font-weight: 500; }
+.kotoport-page .kp-cost-bars > div > strong { font-size: 30px; line-height: 1.4; text-align: right; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.kotoport-page .kp-cost-track { display: flex; height: 34px; border-radius: 5px; overflow: hidden; background: #f0f4f1; }
+.kotoport-page .kp-cost-wage { display: block; height: 100%; background: #849b8b; }
+.kotoport-page .kp-cost-ai { display: block; height: 100%; background: var(--kp-green); }
+.kotoport-page .kp-cost-result { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; border-block: 1px solid var(--kp-line); margin-top: 32px; padding-block: 28px; }
+.kotoport-page .kp-cost-result dl > div { display: flex; justify-content: space-between; gap: 20px; font-size: 16px; padding-block: 5px; }
+.kotoport-page .kp-cost-difference { text-align: right; }
+.kotoport-page .kp-cost-difference p { font-size: 15px; }
+.kotoport-page .kp-cost-difference strong { font-size: 36px; letter-spacing: -.04em; }
+.kotoport-page .kp-cost-difference small { font-size: 15px; margin-left: 8px; font-weight: 500; }
+.kotoport-page .kp-economics-unchanged { font-size: 15px; margin-top: 24px; }
+.kotoport-page .kp-reference-note { border-left: 3px solid var(--kp-green); padding-left: 14px; margin-top: 20px; font-size: 15px; }
+.kotoport-page .kp-exclusions { margin-top: 20px; }
+.kotoport-page .kp-economics-notes { list-style: disc; padding-left: 20px; }
+.kotoport-page .kp-economics-notes li { margin-bottom: 12px; }
+.kotoport-page .kp-wage-source a { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; }
+.kotoport-page .kp-wage-source a svg { width: 16px; }
+.kotoport-page .kp-volume-comparison { overflow-x: auto; }
+.kotoport-page :is(.kp-volume-comparison, .kp-price-table) table { width: 100%; }
+.kotoport-page table { border-collapse: collapse; width: 100%; font-size: 15px; }
+.kotoport-page caption { text-align: left; margin-block: 12px; font-size: 13px; }
+.kotoport-page :is(th,td) { border-bottom: 1px solid var(--kp-line); text-align: left; padding: 14px 12px; vertical-align: top; }
+.kotoport-page th { font-weight: 700; }
+.kotoport-page .kp-pricing { background: #f8faf7; }
+.kotoport-page .kp-price-qualification { max-width: 900px; font-size: 16px; margin-bottom: 32px; }
+.kotoport-page .kp-plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.kotoport-page .kp-plan { border: 1px solid #e6dda5; border-radius: 16px; overflow: hidden; background: var(--kp-white); }
+.kotoport-page .kp-plan-heading { padding: 28px 32px; background: var(--kp-yellow); }
+.kotoport-page .kp-plan h3 { font-size: 28px; font-weight: 800; }
+.kotoport-page .kp-plan-heading p { margin-top: 6px; font-size: 16px; }
+.kotoport-page .kp-plan-body { padding: 28px 32px; }
+.kotoport-page .kp-plan-price > span { font-size: 13px; }
+.kotoport-page .kp-plan-price > strong { display: block; font-size: 42px; letter-spacing: -.04em; font-weight: 800; }
+.kotoport-page .kp-plan-price small { font-size: 15px; letter-spacing: 0; margin-left: 8px; }
+.kotoport-page .kp-plan dl { border-top: 1px solid var(--kp-line); margin-top: 20px; padding-top: 16px; }
+.kotoport-page .kp-plan dl > div { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding-block: 6px; font-size: 15px; }
+.kotoport-page .kp-plan dd { font-weight: 700; }
+.kotoport-page .kp-plan-selection { margin-top: 20px; font-size: 15px; }
+.kotoport-page .kp-calculator { margin-top: 56px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 24px 40px; align-items: start; padding-top: 36px; border-top: 1px solid var(--kp-line); }
+.kotoport-page .kp-calculator-heading { grid-column: 1 / -1; }
+.kotoport-page .kp-calculator-heading h3 { font-size: 25px; font-weight: 800; }
+.kotoport-page .kp-minutes-field label { display: block; margin-bottom: 12px; font-weight: 700; font-size: 16px; }
+.kotoport-page .kp-minutes-field > div { max-width: 280px; }
+.kotoport-page .kp-minutes-field > p { font-size: 13px; margin-top: 8px; }
+.kotoport-page .kp-estimates { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.kotoport-page .kp-estimate h4 { font-size: 16px; font-weight: 700; }
+.kotoport-page .kp-estimate-label { font-size: 13px; color: var(--kp-muted); margin-top: 12px; }
+.kotoport-page .kp-estimate-amount { font-size: 28px; font-weight: 800; letter-spacing: -.03em; }
+.kotoport-page .kp-estimate-amount > span { display: block; font-size: 13px; font-weight: 500; }
+.kotoport-page .kp-estimate-details { margin-top: 12px; border-top: 1px solid var(--kp-line); }
+.kotoport-page .kp-estimate-details > summary { font-size: 13px; }
+.kotoport-page .kp-estimate-breakdown > div { display: flex; justify-content: space-between; gap: 12px; padding-block: 6px; font-size: 13px; }
+.kotoport-page .kp-first-month { font-size: 13px; margin-block: 14px; }
+.kotoport-page .kp-first-month strong { display: block; font-size: 22px; }
+.kotoport-page .kp-calculator-notes { grid-column: 1 / -1; font-size: 15px; }
+.kotoport-page .kp-table-wrap { overflow-x: auto; }
+.kotoport-page .kp-onboarding-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 40px; }
+.kotoport-page .kp-onboarding-steps li { position: relative; }
+.kotoport-page .kp-onboarding-steps li > div { display: flex; flex-direction: column; gap: 18px; }
+.kotoport-page .kp-onboarding-steps h3 { font-size: 24px; font-weight: 800; }
+.kotoport-page .kp-onboarding-steps p { font-size: 16px; margin-top: 12px; }
+.kotoport-page .kp-onboarding-steps li > svg { position: absolute; top: 14px; right: 10px; width: 48px; color: var(--kp-green); }
+.kotoport-page .kp-operation-labels { display: flex; gap: 32px; font-size: 15px; font-weight: 700; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--kp-line); }
+.kotoport-page .kp-onboarding-note { margin-top: 14px; font-size: 15px; color: var(--kp-muted); }
+.kotoport-page .kp-faq { border-top: 1px solid var(--kp-line); padding-top: 80px; }
+.kotoport-page .kp-faq-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; }
+.kotoport-page .kp-faq .kp-section-heading h2 { font-size: 38px; }
+.kotoport-page .kp-faq-items details { border-bottom: 1px solid var(--kp-line); }
+.kotoport-page .kp-faq-items summary { position: relative; padding: 24px 44px 24px 0; font-size: 17px; font-weight: 700; list-style: none; }
+.kotoport-page .kp-faq-items p { font-size: 16px; padding: 0 24px 24px 0; }
+.kotoport-page .kp-consultation { background: var(--kp-ink); color: var(--kp-white); }
+.kotoport-page .kp-consultation-layout { display: grid; grid-template-columns: 1.15fr 1fr; align-items: end; gap: 80px; }
+.kotoport-page .kp-consultation .kp-section-heading { margin: 0; }
+.kotoport-page .kp-consultation .kp-section-heading p { font-size: 16px; }
+.kotoport-page .kp-consultation .kp-button { background: var(--kp-yellow); color: var(--kp-ink); min-width: 300px; margin-top: 32px; }
+.kotoport-page .kp-consultation .kp-button:hover { background: var(--kp-white); }
+.kotoport-page .kp-consultation .kp-small { color: #d2e4d8; margin-top: 12px; font-size: 13px; }
+.kotoport-page .kp-consultation :is(a,button,summary):focus-visible { outline-color: var(--kp-yellow); }
+.kotoport-page .kp-starting-points { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; font-size: 15px; }
+.kotoport-page .kp-starting-points li { display: flex; align-items: center; gap: 8px; }
+.kotoport-page .kp-starting-points svg { width: 16px; height: 16px; color: var(--kp-yellow); }
+.kotoport-page .kp-provider { border-top: 1px solid #537461; padding-top: 24px; }
+.kotoport-page .kp-provider-name { font-size: 18px; font-weight: 700; }
+.kotoport-page .kp-provider > p + p { font-size: 15px; margin-top: 6px; color: #d2e4d8; }
+.kotoport-page .kp-provider address { margin-top: 24px; font-style: normal; font-size: 13px; line-height: 2; }
+.kotoport-page .kp-provider address span { display: block; }
+.kotoport-page .kp-footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-block: 30px; font-size: 13px; color: var(--kp-muted); }
+.kotoport-page .kp-footer a { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.kotoport-page .kp-footer svg { width: 16px; height: 16px; }
+.kotoport-page .kp-arrow-up { transform: rotate(180deg); }
+/* All information stays visible while motion only demonstrates the order of the flow. */
+.kotoport-page[data-motion-enabled="true"] .kp-flow-stage { animation: kp-flow-sequence 2.4s ease both 1; }
+.kotoport-page[data-motion-enabled="true"] .kp-flow-arrow-in { animation-name: kp-flow-connect; animation-delay: .2s; animation-duration: 2.2s; }
+.kotoport-page[data-motion-enabled="true"] .kp-flow-center { animation-delay: .45s; animation-duration: 1.95s; }
+.kotoport-page[data-motion-enabled="true"] .kp-flow-arrow-out { animation-name: kp-flow-connect; animation-delay: .7s; animation-duration: 1.7s; }
+.kotoport-page[data-motion-enabled="true"] .kp-flow-outputs { animation-delay: .9s; animation-duration: 1.5s; }
+.kotoport-page[data-motion-enabled="true"] [data-motion-section][data-revealed="true"] > .kp-section-heading,
+.kotoport-page[data-motion-enabled="true"] [data-motion-section][data-revealed="true"] > .kp-container > .kp-section-heading { animation: kp-section-reveal .55s ease both 1; }
+.kotoport-page[data-motion-suspended="true"] *, .kotoport-page [data-motion-section][data-in-view="false"] * { animation-play-state: paused !important; }
+.kotoport-page[data-motion-reduced="true"] * { animation: none !important; transition: none !important; }
+@keyframes kp-flow-sequence { 0%, 8% { transform: translateY(8px); } 36%, 100% { transform: translateY(0); } }
+@keyframes kp-flow-connect { 0%, 8% { transform: translateX(-7px); } 42%, 100% { transform: translateX(0); } }
+@keyframes kp-section-reveal { from { transform: translateY(18px); } to { transform: translateY(0); } }
+@media (min-width: 1600px) { .kotoport-page .kp-hero { padding-top: 100px; } }
+@media (max-width: 1100px) {
+  .kotoport-page .kp-container { width: calc(100% - 64px); }
+  .kotoport-page .kp-nav { gap: 16px; font-size: 13px; }
+  .kotoport-page .kp-header-inner { gap: 20px; }
+  .kotoport-page .kp-hero { gap: 32px; }
+  .kotoport-page .kp-hero h1 { font-size: clamp(38px,5.2vw,58px); }
+  .kotoport-page .kp-flow-stage strong { font-size: 15px; }
+  .kotoport-page .kp-flow-center > strong { font-size: 16px; }
+  .kotoport-page .kp-hero-flow { padding-inline: 16px; }
+  .kotoport-page .kp-flow-arch { width: 58px; height: 78px; }
+  .kotoport-page .kp-flow-arch > span { width: 28px; height: 54px; }
+  .kotoport-page .kp-use-selector button > span { display: none; }
+  .kotoport-page .kp-use-detail { gap: 32px; grid-template-columns: 1fr 1.2fr; }
+  .kotoport-page .kp-cost-bars > div { grid-template-columns: 150px minmax(0,1fr) 210px; gap: 20px; }
+  .kotoport-page .kp-cost-bars > div > strong { font-size: 26px; }
+  .kotoport-page .kp-onboarding-steps { gap: 24px; }
+  .kotoport-page .kp-onboarding-steps h3 { font-size: 21px; }
+}
+@media (max-width: 900px) {
+  .kotoport-page .kp-section { padding-block: 80px; }
+  .kotoport-page .kp-section-heading h2 { font-size: 40px; }
+  .kotoport-page .kp-header { padding-block: 24px; }
+  .kotoport-page .kp-nav { display: none; }
+  .kotoport-page .kp-hero { grid-template-columns: 1fr; gap: 48px; padding-block: 48px 88px; }
+  .kotoport-page .kp-hero h1 { font-size: clamp(40px,7vw,64px); }
+  .kotoport-page .kp-hero-flow { width: min(620px,100%); justify-self: center; padding-inline: 32px; }
+  .kotoport-page .kp-flow-stage strong { font-size: 18px; }
+  .kotoport-page .kp-flow-center > strong { font-size: 22px; }
+  .kotoport-page .kp-hero-flow-grid { grid-template-columns: minmax(0,1fr) 32px minmax(74px,.8fr) 32px minmax(0,1fr); gap: 14px; }
+  .kotoport-page .kp-burdens li { padding-inline: 24px; }
+  .kotoport-page .kp-burdens h3 { font-size: 20px; }
+  .kotoport-page .kp-use-detail { grid-template-columns: 1fr; }
+  .kotoport-page .kp-use-flow { max-width: 600px; width: 100%; padding-top: 16px; }
+  .kotoport-page .kp-reasons { gap: 32px; }
+  .kotoport-page .kp-reasons h3 { font-size: 20px; }
+  .kotoport-page .kp-reasons p { font-size: 16px; }
+  .kotoport-page .kp-economics-inputs { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .kotoport-page .kp-cost-bars > div { grid-template-columns: 155px minmax(0,1fr); gap: 14px; }
+  .kotoport-page .kp-cost-bars > div > strong { grid-column: 2; font-size: 28px; margin-top: -8px; }
+  .kotoport-page .kp-cost-result { gap: 24px; }
+  .kotoport-page .kp-cost-difference strong { font-size: 29px; }
+  .kotoport-page .kp-calculator { grid-template-columns: 1fr; }
+  .kotoport-page .kp-onboarding-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .kotoport-page .kp-faq-layout { grid-template-columns: 1fr; gap: 0; }
+  .kotoport-page .kp-consultation-layout { grid-template-columns: 1fr; gap: 64px; }
+  .kotoport-page .kp-provider { max-width: 600px; }
+}
+@media (max-width: 640px) {
+  .kotoport-page { font-size: 17px; }
+  .kotoport-page .kp-container { width: calc(100% - 48px); }
+  .kotoport-page .kp-section { padding-block: 64px; }
+  .kotoport-page .kp-section-heading { margin-bottom: 32px; }
+  .kotoport-page .kp-section-heading h2 { font-size: 32px; line-height: 1.55; letter-spacing: -.05em; }
+  .kotoport-page .kp-section-heading > p { font-size: 16px; margin-top: 16px; }
+  .kotoport-page .kp-header { padding-block: 18px; }
+  .kotoport-page .kp-brand { font-size: 24px; }
+  .kotoport-page .kp-header-contact { min-height: 44px; font-size: 13px; padding: 10px 13px; gap: 10px; }
+  .kotoport-page .kp-header-contact svg { width: 16px; }
+  .kotoport-page .kp-header-inner { gap: 12px; }
+  .kotoport-page .kp-hero { padding-block: 36px 64px; gap: 32px; }
+  .kotoport-page .kp-hero h1 { font-size: clamp(28px,9.2vw,46px); letter-spacing: -.065em; line-height: 1.55; }
+  .kotoport-page .kp-lead { font-size: 17px; margin-top: 24px; line-height: 1.9; }
+  .kotoport-page .kp-actions { margin-top: 24px; }
+  .kotoport-page .kp-actions .kp-button { width: 100%; min-width: 0; }
+  .kotoport-page .kp-button { min-height: 56px; font-size: 16px; padding: 15px 24px; }
+  .kotoport-page .kp-hero-flow { padding: 24px 16px; border-radius: 22px; }
+  .kotoport-page .kp-hero-flow-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto 24px auto 24px auto; min-height: 0; gap: 14px; }
+  .kotoport-page .kp-flow-inputs, .kotoport-page .kp-flow-outputs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; grid-column: 1 / -1; }
+  .kotoport-page .kp-flow-inputs { grid-row: 1; }
+  .kotoport-page .kp-flow-outputs { grid-row: 5; }
+  .kotoport-page .kp-flow-center { grid-column: 1 / -1; grid-row: 3; }
+  .kotoport-page .kp-flow-arrow-in { grid-column: 1 / -1; grid-row: 2; justify-self: center; rotate: 90deg; }
+  .kotoport-page .kp-flow-arrow-out { grid-column: 1 / -1; grid-row: 4; justify-self: center; rotate: 90deg; }
+  .kotoport-page .kp-flow-stage strong { font-size: 15px; }
+  .kotoport-page .kp-flow-stage svg { width: 26px; height: 26px; }
+  .kotoport-page .kp-flow-center > strong { font-size: 16px; }
+  .kotoport-page .kp-flow-center > span { font-size: 13px; }
+  .kotoport-page .kp-flow-arch { width: 54px; height: 70px; }
+  .kotoport-page .kp-flow-arch > span { width: 25px; height: 48px; }
+  .kotoport-page .kp-flow-arrow { width: 18px; }
+  .kotoport-page .kp-burdens { grid-template-columns: 1fr; margin-top: 32px; }
+  .kotoport-page .kp-burdens li { display: grid; grid-template-columns: 56px 26px 1fr; gap: 14px; align-items: center; border-right: 0; border-bottom: 1px solid var(--kp-line); padding: 24px 0; }
+  .kotoport-page .kp-burdens li:first-child { padding-top: 0; }
+  .kotoport-page .kp-burden-icon { width: 56px; height: 56px; margin: 0; }
+  .kotoport-page .kp-burden-icon svg { width: 26px; height: 26px; }
+  .kotoport-page .kp-burdens h3 { font-size: 20px; margin: 0; }
+  .kotoport-page .kp-value-outcome { margin-top: 24px; font-size: 15px; gap: 16px; }
+  .kotoport-page .kp-use-selector { gap: 6px; }
+  .kotoport-page .kp-use-selector button { min-height: 62px; padding: 12px 8px; gap: 8px; }
+  .kotoport-page .kp-use-selector strong { font-size: 16px; }
+  .kotoport-page .kp-use-selector svg { width: 18px; height: 18px; }
+  .kotoport-page .kp-use-detail { gap: 24px; padding-block: 28px; }
+  .kotoport-page .kp-use-copy h3 { font-size: 22px; }
+  .kotoport-page .kp-use-copy li { font-size: 16px; }
+  .kotoport-page .kp-use-flow-line { grid-template-columns: 1fr; gap: 12px; }
+  .kotoport-page .kp-flow-person { flex-direction: row; justify-content: center; flex-wrap: wrap; padding-block: 12px; }
+  .kotoport-page .kp-flow-person-accent { border-radius: 16px; padding: 20px 12px; }
+  .kotoport-page .kp-flow-connector { flex-direction: row; justify-content: center; gap: 12px; }
+  .kotoport-page .kp-flow-person > strong { font-size: 16px; }
+  .kotoport-page .kp-flow-person > span { font-size: 13px; }
+  .kotoport-page .kp-flow-connector span { display: block; font-size: 13px; }
+  .kotoport-page .kp-flow-connector svg { width: 20px; rotate: 90deg; }
+  .kotoport-page .kp-use-note, .kotoport-page .kp-industry-caption { font-size: 13px; }
+  .kotoport-page .kp-reasons { grid-template-columns: 1fr; gap: 32px; }
+  .kotoport-page .kp-reasons li { display: grid; grid-template-columns: 44px 1fr; gap: 4px 18px; }
+  .kotoport-page .kp-reason-number { width: 44px; height: 44px; grid-row: span 2; font-size: 16px; }
+  .kotoport-page .kp-reasons h3 { margin: 0; font-size: 22px; }
+  .kotoport-page .kp-reasons p { font-size: 16px; }
+  .kotoport-page .kp-role-flow { grid-template-columns: 1fr; margin-top: 36px; padding-block: 24px; gap: 40px; }
+  .kotoport-page .kp-role-flow li { flex-direction: row; justify-content: center; gap: 20px; }
+  .kotoport-page .kp-role-flow li > span { font-size: 13px; }
+  .kotoport-page .kp-role-flow strong { font-size: 16px; }
+  .kotoport-page .kp-role-flow svg { width: 18px; height: 18px; left: calc(50% - 9px); right: auto; top: calc(100% + 16px); transform: rotate(90deg); }
+  .kotoport-page .kp-division { flex-direction: column; gap: 6px; font-size: 13px; }
+  .kotoport-page .kp-economics-inputs { grid-template-columns: 1fr; }
+  .kotoport-page .kp-economics-field { padding: 16px; }
+  .kotoport-page .kp-economics-field label { font-size: 15px; min-height: 0; }
+  .kotoport-page .kp-economics-field input { font-size: 20px; padding-inline: 8px; }
+  .kotoport-page .kp-economics-field > div > span { font-size: 13px; }
+  .kotoport-page .kp-economics-field > div { gap: 4px; }
+  .kotoport-page .kp-economics-assumption { font-size: 13px; }
+  .kotoport-page .kp-cost-bars > div { grid-template-columns: 1fr; gap: 10px; margin-top: 30px; }
+  .kotoport-page .kp-cost-bars > div > span { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .kotoport-page .kp-cost-bars > div > strong { grid-column: 1; margin-top: 0; font-size: 30px; }
+  .kotoport-page .kp-cost-bars > div > strong > small { display: inline; margin-left: 8px; }
+  .kotoport-page .kp-cost-track { height: 28px; }
+  .kotoport-page .kp-cost-result { grid-template-columns: 1fr; gap: 20px; }
+  .kotoport-page .kp-cost-difference { text-align: left; }
+  .kotoport-page .kp-cost-difference strong { font-size: 34px; }
+  .kotoport-page .kp-economics-unchanged, .kotoport-page .kp-reference-note, .kotoport-page .kp-exclusions { font-size: 13px; }
+  .kotoport-page .kp-plans { grid-template-columns: 1fr; gap: 20px; }
+  .kotoport-page .kp-plan-heading { padding: 24px; }
+  .kotoport-page .kp-plan h3 { font-size: 26px; }
+  .kotoport-page .kp-plan-body { padding: 24px; }
+  .kotoport-page .kp-plan-price > strong { font-size: 40px; }
+  .kotoport-page .kp-price-qualification { font-size: 13px; }
+  .kotoport-page .kp-plan dl > div { font-size: 13px; }
+  .kotoport-page .kp-estimates { grid-template-columns: 1fr; gap: 24px; }
+  .kotoport-page .kp-estimate-amount { font-size: 23px; }
+  .kotoport-page .kp-estimate-details > summary { font-size: 13px; padding-right: 24px; }
+  .kotoport-page .kp-onboarding-steps { grid-template-columns: 1fr; gap: 28px; }
+  .kotoport-page .kp-onboarding-steps li { padding-left: 62px; }
+  .kotoport-page .kp-onboarding-steps li > div { display: block; }
+  .kotoport-page .kp-step-number { position: absolute; top: 0; left: 0; width: 44px; height: 44px; font-size: 16px; }
+  .kotoport-page .kp-onboarding-steps li > svg { left: 13px; top: 66px; width: 18px; height: 18px; transform: rotate(90deg); }
+  .kotoport-page .kp-onboarding-steps p { font-size: 16px; margin-top: 8px; }
+  .kotoport-page .kp-onboarding-steps h3 { font-size: 22px; }
+  .kotoport-page .kp-operation-labels { flex-direction: column; gap: 6px; font-size: 13px; }
+  .kotoport-page .kp-onboarding-note { font-size: 13px; }
+  .kotoport-page .kp-faq .kp-section-heading h2 { font-size: 32px; }
+  .kotoport-page .kp-faq-items summary { font-size: 16px; padding-block: 22px; }
+  .kotoport-page .kp-faq-items p { font-size: 15px; }
+  .kotoport-page .kp-consultation .kp-button { min-width: 0; width: 100%; }
+  .kotoport-page .kp-consultation .kp-section-heading > p { font-size: 17px; }
+  .kotoport-page .kp-consultation-layout { gap: 48px; }
+  .kotoport-page .kp-footer { flex-wrap: wrap; gap: 4px 20px; font-size: 13px; }
+  .kotoport-page .kp-footer > span { display: none; }
+  .kotoport-page .kp-responsibility-grid, .kotoport-page .kp-scope-comparison { grid-template-columns: 1fr; gap: 24px; }
+  .kotoport-page table { font-size: 13px; }
+  .kotoport-page :is(th,td) { padding: 10px 8px; }
+  .kotoport-page .kp-volume-comparison table { min-width: 540px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kotoport-page *, .kotoport-page *::before, .kotoport-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import ScrollReveal, { RevealOnScroll, SlideInLeft } from "@/components/animations/scroll-reveal";
 import { AnimatedUnderline, AnimatedArrow } from "@/components/animations/svg-path-animation";
-import { Code, Rocket, TrendingUp } from "lucide-react";
+import { ArrowRight, Code, Rocket, TrendingUp } from "lucide-react";
+import { kotoportContent } from "@/pages/kotoport-content";
 
 const services = [
   {
@@ -174,6 +175,19 @@ export default function Services() {
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
+        <a
+          href={kotoportContent.route}
+          className="mt-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-border pt-6 text-foreground group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+        >
+          <span>
+            <span className="block text-xs text-muted-foreground mb-1">{kotoportContent.homeEntry.label}</span>
+            <strong className="block text-lg font-semibold">{kotoportContent.homeEntry.title}</strong>
+            <span className="block text-sm text-muted-foreground mt-1">{kotoportContent.homeEntry.description}</span>
+          </span>
+          <span className="inline-flex min-h-11 items-center gap-3 text-sm text-primary group-hover:underline">
+            {kotoportContent.homeEntry.link}<ArrowRight className="w-5 h-5" aria-hidden="true" />
+          </span>
+        </a>
       </div>
     </section>
   );
