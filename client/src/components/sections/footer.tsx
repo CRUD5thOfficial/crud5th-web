@@ -3,6 +3,10 @@ import { Link } from "wouter";
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
+    if (id === "home") {
+      window.location.assign("/");
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });

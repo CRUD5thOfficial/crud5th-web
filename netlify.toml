@@ -3,6 +3,26 @@
   publish = "dist/public"
 
 [[redirects]]
+  from = "/contact"
+  to = "/legacy-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/legacy-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/information-security"
+  to = "/legacy-app.html"
+  status = 200
+
+[[redirects]]
+  from = "/services/*"
+  to = "/legacy-app.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/legacy-app.html"
   status = 200

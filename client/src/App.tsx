@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -12,10 +12,18 @@ import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 import Preloader from "@/components/preloader";
 
+function CorporateHome() {
+  useEffect(() => {
+    window.location.replace(`/${window.location.search}${window.location.hash}`);
+  }, []);
+  return null;
+}
+
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={CorporateHome} />
+      <Route path="/contact" component={Home} />
       <Route path={kotoportContent.route} component={Kotoport} />
       <Route path="/information-security" component={InformationSecurity} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />

@@ -1,0 +1,1 @@
+window.Typekit={load(){document.fonts.ready.then(()=>{document.documentElement.classList.remove("wf-loading","wf-inactive");document.documentElement.classList.add("wf-active");});}};

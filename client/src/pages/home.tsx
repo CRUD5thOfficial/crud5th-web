@@ -45,7 +45,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (window.location.hash !== "#contact") return;
+    if (window.location.pathname !== "/contact" && window.location.hash !== "#contact") return;
     // The app preloader mounts Home after the browser's initial anchor lookup.
     const frameId = requestAnimationFrame(() => {
       document.getElementById("contact")?.scrollIntoView({ behavior: "instant", block: "start" });

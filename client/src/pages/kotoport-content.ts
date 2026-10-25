@@ -29,7 +29,7 @@ export const kotoportContent = {
   englishName: "Kotoport",
   provider: "エンジニアチームCRUD5th",
   route: "/services/kotoport",
-  contactHref: "/#contact",
+  contactHref: "/contact#contact",
   meta: {
     title: "コトポート | 業務に合わせたAI電話の導入・運用支援 | CRUD5th",
     description: "電話対応をAIへ。人は、本来の仕事へ。受電の一次受付から、予定・状況を確かめる発信まで。御社の業務に合うAI電話を、応対の設計から導入・運用までCRUD5thが支援します。",

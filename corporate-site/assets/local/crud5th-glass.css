@@ -1,0 +1,127 @@
+/* Existing surfaces only. Geometry and animation remain in the source styles. */
+:root {
+  --crud5th-glass-blur: 18px;
+  --crud5th-glass-small-blur: 12px;
+  --crud5th-glass-navy: rgba(7, 21, 31, .76);
+  --crud5th-glass-rim: rgba(204, 251, 255, .44);
+  --crud5th-glass-shadow: 0 18px 50px rgba(0, 9, 16, .20);
+  --crud5th-glass-reflection: inset 0 1px 0 rgba(246, 249, 252, .58), inset 1px 0 0 rgba(56, 232, 241, .20), inset 0 -1px 0 rgba(56, 232, 241, .12);
+}
+
+/* The original rounded menu becomes a smoked pane over the moving scene. */
+.menu .menu_nav {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(135deg, rgba(205, 250, 255, .14), rgba(56, 232, 241, .035) 36%, rgba(7, 21, 31, .12) 76%);
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px var(--crud5th-glass-rim), var(--crud5th-glass-shadow);
+}
+.menu .menu_btn {
+  background-color: rgba(7, 21, 31, .94);
+  background-image: linear-gradient(140deg, rgba(246, 249, 252, .20), rgba(56, 232, 241, .04) 58%);
+  box-shadow: inset 0 1px 0 rgba(246, 249, 252, .55), inset 0 0 0 1px rgba(56, 232, 241, .30), 0 4px 14px rgba(0, 9, 16, .16);
+}
+
+/* The service rows keep their original full-width form and reveal motion. */
+.home_service_item_wrap[data-hover="before"] {
+  --crud5th-muted: #52616a;
+  background-color: rgba(246, 249, 252, .82);
+  background-image: linear-gradient(115deg, rgba(255, 255, 255, .36), rgba(56, 232, 241, .075) 52%, rgba(246, 249, 252, .12));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .88), inset 0 -1px 0 rgba(7, 21, 31, .07);
+}
+.home_service_item_wrap[data-hover="after"] {
+  --crud5th-muted: #bed0da;
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(115deg, rgba(56, 232, 241, .13), rgba(246, 249, 252, .045) 45%, rgba(7, 21, 31, .05));
+  box-shadow: inset 0 1px 0 rgba(204, 251, 255, .56), inset 0 -1px 0 rgba(56, 232, 241, .24), inset 0 12px 25px rgba(246, 249, 252, .035);
+}
+.home_service_item_wrap::after { pointer-events: none; }
+
+/* Existing flip faces, including product calls to action, acquire thickness. */
+.home_recruit_links .flipBtn_front {
+  background-color: rgba(7, 21, 31, .95);
+  background-image: linear-gradient(130deg, rgba(246, 249, 252, .16), rgba(56, 232, 241, .045) 52%, rgba(246, 249, 252, .025));
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px rgba(204, 251, 255, .32), 0 10px 24px rgba(0, 9, 16, .17);
+}
+.home_recruit_links .flipBtn_back {
+  background-color: rgba(246, 249, 252, .96);
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, .40), rgba(56, 232, 241, .16));
+  box-shadow: inset 0 1px 0 white, inset 0 0 0 1px rgba(246, 249, 252, .68), 0 8px 24px rgba(0, 9, 16, .16);
+}
+.footer_pageTop_item[data-hover="after"] {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(140deg, rgba(56, 232, 241, .14), rgba(246, 249, 252, .04));
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px rgba(204, 251, 255, .32), var(--crud5th-glass-shadow);
+}
+
+/* The existing local information dialog retains all input and Escape behavior. */
+#local-research-notice {
+  background-color: rgba(230, 253, 255, .97) !important;
+  background-image: linear-gradient(130deg, rgba(255, 255, 255, .56), rgba(56, 232, 241, .18));
+  color: #06151c !important;
+  box-shadow: inset 0 1px 0 white, inset 0 0 0 1px rgba(246, 249, 252, .86), 0 24px 80px rgba(0, 9, 16, .32);
+}
+#local-research-notice::backdrop { background: rgba(0, 9, 16, .42); }
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .menu .menu_nav {
+    background-color: var(--crud5th-glass-navy);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-blur));
+    backdrop-filter: blur(var(--crud5th-glass-blur));
+  }
+  .menu .menu_btn,
+  .home_recruit_links .flipBtn_front,
+  .footer_pageTop_item[data-hover="after"] {
+    background-color: rgba(7, 21, 31, .64);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  .home_service_item_wrap[data-hover="before"] {
+    background-color: rgba(246, 249, 252, .34);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  .home_recruit_links .flipBtn_front {
+    background-color: rgba(7, 21, 31, .78);
+  }
+  .home_service_item_wrap[data-hover="after"] {
+    background-color: rgba(7, 21, 31, .94);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  .home_recruit_links .flipBtn_back {
+    background-color: rgba(246, 249, 252, .90);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  #local-research-notice {
+    background-color: rgba(230, 253, 255, .88) !important;
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-blur));
+    backdrop-filter: blur(var(--crud5th-glass-blur));
+  }
+}
+
+@media (max-width: 768px) {
+  :root { --crud5th-glass-blur: 12px; --crud5th-glass-small-blur: 10px; }
+  /* Mobile source faces hug the text: a hard rim would cross the glyphs. */
+  .home_recruit_links .flipBtn_front,
+  .home_recruit_links .flipBtn_back {
+    box-shadow: 0 5px 14px rgba(0, 9, 16, .12);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .menu .menu_nav,
+  .menu .menu_btn,
+  .home_recruit_links .flipBtn_front,
+  .footer_pageTop_item[data-hover="after"],
+  .home_service_item_wrap[data-hover="after"] {
+    background-color: #07151f;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .home_service_item_wrap[data-hover="before"],
+  .home_recruit_links .flipBtn_back,
+  #local-research-notice {
+    background-color: #f6f9fc !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

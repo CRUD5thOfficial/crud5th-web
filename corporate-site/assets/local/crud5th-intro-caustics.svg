@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="cyanGlass" x1="0" y1="0" x2="1" y2=".16">
+      <stop stop-color="#061225" stop-opacity="0"/><stop offset=".32" stop-color="#105766" stop-opacity=".16"/>
+      <stop offset=".58" stop-color="#24bed3" stop-opacity=".28"/><stop offset=".80" stop-color="#3ae8f1" stop-opacity=".09"/>
+      <stop offset=".95" stop-color="#9bfcff" stop-opacity=".72"/><stop offset="1" stop-color="#258aee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="blueGlass" x1="1" y1="0" x2="0" y2=".2">
+      <stop stop-color="#061225" stop-opacity="0"/><stop offset=".28" stop-color="#2846af" stop-opacity=".12"/>
+      <stop offset=".60" stop-color="#6559e7" stop-opacity=".32"/><stop offset=".83" stop-color="#6a8dff" stop-opacity=".08"/>
+      <stop offset=".96" stop-color="#adc8ff" stop-opacity=".69"/><stop offset="1" stop-color="#4c83ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cyanEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#7ef7ff" stop-opacity="0"/><stop offset=".24" stop-color="#98fcff" stop-opacity=".64"/>
+      <stop offset=".50" stop-color="#37d5ec" stop-opacity=".18"/><stop offset=".77" stop-color="#b4fdff" stop-opacity=".63"/><stop offset="1" stop-color="#4cbaff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="blueEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#7186ff" stop-opacity="0"/><stop offset=".22" stop-color="#9a95ff" stop-opacity=".40"/>
+      <stop offset=".61" stop-color="#a7e9ff" stop-opacity=".72"/><stop offset=".86" stop-color="#7875ff" stop-opacity=".28"/><stop offset="1" stop-color="#6386ff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="leftGlow"><stop stop-color="#17d3ed" stop-opacity=".12"/><stop offset="1" stop-color="#0c4857" stop-opacity="0"/></radialGradient>
+    <radialGradient id="rightGlow"><stop stop-color="#6660ed" stop-opacity=".16"/><stop offset="1" stop-color="#182857" stop-opacity="0"/></radialGradient>
+  </defs>
+  <ellipse cx="95" cy="410" rx="355" ry="610" fill="url(#leftGlow)"/>
+  <ellipse cx="1380" cy="490" rx="345" ry="590" fill="url(#rightGlow)"/>
+  <g>
+    <path d="M-175-100 C165-60 421 39 309 228 C209 398 75 379 141 562 C199 725 373 789 248 1000 L113 1000 C248 782 75 723 31 574 C-32 367 128 348 205 205 C295 39 63 11-175 2Z" fill="url(#cyanGlass)"/>
+    <path d="M-70-120 C270-29 332 77 227 252 C123 426 119 491 228 647 C314 770 334 881 201 1010 L159 1010 C272 861 247 783 169 663 C52 486 66 407 167 235 C265 67 154-13-70-65Z" fill="url(#cyanGlass)" opacity=".78"/>
+    <path d="M-84-110 C105 1 137 165 56 317 C-17 455 31 592 95 711 C167 845 148 921 58 1010 L-12 1010 C77 907 98 856 38 727 C-32 576-75 459 0 292 C65 150 27 1-84-66Z" fill="url(#cyanGlass)" opacity=".55"/>
+    <path d="M-168-100 C165-60 421 39 309 228 C209 398 75 379 141 562 C199 725 373 789 248 1000" fill="none" stroke="url(#cyanEdge)" stroke-width="1.8"/>
+    <path d="M-70-120 C270-29 332 77 227 252 C123 426 119 491 228 647 C314 770 334 881 201 1010" fill="none" stroke="url(#cyanEdge)" stroke-width="1.2" opacity=".65"/>
+  </g>
+  <g>
+    <path d="M1595-100 C1294-2 1111 105 1193 274 C1276 446 1440 429 1360 623 C1300 771 1121 832 1223 1010 L1350 1010 C1262 837 1430 771 1469 641 C1533 422 1368 407 1292 251 C1217 95 1404 37 1595-10Z" fill="url(#blueGlass)"/>
+    <path d="M1525-100 C1215 42 1200 159 1303 310 C1424 487 1385 571 1278 720 C1204 822 1200 917 1292 1010 L1350 1010 C1275 905 1291 846 1350 754 C1483 546 1478 469 1365 293 C1267 140 1322 40 1525-45Z" fill="url(#blueGlass)" opacity=".83"/>
+    <path d="M1566-100 C1371 83 1395 225 1462 370 C1525 507 1475 629 1415 754 C1360 868 1372 957 1440 1010 L1510 1010 C1437 916 1434 868 1485 758 C1555 605 1585 494 1513 344 C1446 204 1452 56 1566-42Z" fill="url(#blueGlass)" opacity=".5"/>
+    <path d="M1595-100 C1294-2 1111 105 1193 274 C1276 446 1440 429 1360 623 C1300 771 1121 832 1223 1010" fill="none" stroke="url(#blueEdge)" stroke-width="1.8"/>
+    <path d="M1525-100 C1215 42 1200 159 1303 310 C1424 487 1385 571 1278 720 C1204 822 1200 917 1292 1010" fill="none" stroke="url(#blueEdge)" stroke-width="1.2" opacity=".65"/>
+  </g>
+</svg>

@@ -1,0 +1,303 @@
+/* CRUD5th glass material. Existing geometry, typography and motion stay in source CSS.
+   Large 3D scene parents intentionally have no filter/backdrop-filter/opacity. */
+:root {
+  --crud5th-glass-blur: 20px;
+  --crud5th-glass-small-blur: 12px;
+  --crud5th-glass-rim: rgba(214, 253, 255, .44);
+  --crud5th-glass-shadow: 0 18px 44px -22px rgba(0, 9, 16, .38);
+  --crud5th-glass-reflection: inset 0 1px 0 rgba(246, 249, 252, .66), inset 1px 0 0 rgba(56, 232, 241, .22), inset 0 -1px 0 rgba(1, 12, 21, .30);
+  --crud5th-glass-dark: #07151f;
+  --crud5th-glass-light: rgba(246, 249, 252, .90);
+  --crud5th-glass-cyan: rgba(56, 232, 241, .84);
+  --crud5th-glass-dark-light: radial-gradient(ellipse at 10% 0%, rgba(56, 232, 241, .18), transparent 48%), radial-gradient(ellipse at 95% 85%, rgba(56, 232, 241, .075), transparent 48%), linear-gradient(120deg, rgba(246, 249, 252, .045), transparent 42%, rgba(56, 232, 241, .025));
+  --crud5th-glass-light-light: radial-gradient(ellipse at 0% 5%, rgba(56, 232, 241, .18), transparent 48%), radial-gradient(ellipse at 100% 85%, rgba(56, 232, 241, .12), transparent 48%), linear-gradient(120deg, rgba(255, 255, 255, .72), rgba(246, 249, 252, .30) 48%, rgba(255, 255, 255, .55));
+}
+body {
+  background-color: #07151f;
+  background-image: radial-gradient(ellipse at 0% 25%, rgba(56, 232, 241, .12), transparent 48%), radial-gradient(ellipse at 100% 65%, rgba(56, 232, 241, .09), transparent 50%);
+}
+
+/* The original opening tiles catch light individually; no extra model or pane. */
+.home_kv_panel_item {
+  box-shadow: inset 0 1px 1px rgba(246, 249, 252, .42), inset 1px 0 0 rgba(56, 232, 241, .18), inset 0 -2px 2px rgba(0, 9, 16, .36);
+}
+.home_kv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(125deg, rgba(246, 249, 252, .06), transparent 35%, rgba(56, 232, 241, .035) 70%, transparent);
+  box-shadow: inset 0 1px 0 rgba(214, 253, 255, .4), inset 0 -2px 1px rgba(0, 9, 16, .28);
+}
+
+/* Broad slabs preserve scale and whitespace. The opaque navy foundation keeps
+   sticky footer copy out of the reading surface; light fields and rims add glass depth. */
+.home_about {
+  background-color: var(--crud5th-glass-cyan);
+  background-image: radial-gradient(ellipse at 90% 5%, rgba(246, 249, 252, .60), transparent 49%), radial-gradient(ellipse at 12% 95%, rgba(246, 249, 252, .24), transparent 54%), linear-gradient(125deg, rgba(246, 249, 252, .32), rgba(56, 232, 241, .08) 46%, rgba(6, 21, 28, .10));
+  box-shadow: inset 0 2px 1px rgba(236, 255, 255, .86), inset 0 -2px 1px rgba(6, 21, 28, .24), inset 0 18px 35px -30px rgba(255, 255, 255, .9);
+}
+.home_works,
+.home_awards,
+.home_recruit,
+.pageHead,
+.about_mission,
+.about_value,
+.about_character,
+.service_businessFiled,
+.service_faq,
+.recruit_message,
+.recruit_positions,
+.recruit_tvcm,
+.works_detail_header,
+.works_detail_footer_back,
+.bottom {
+  background-color: var(--crud5th-glass-dark);
+  background-image: var(--crud5th-glass-dark-light);
+  box-shadow: inset 0 1px 0 rgba(214, 253, 255, .20), inset 0 -1px 0 rgba(1, 12, 21, .55);
+}
+.home_service,
+.about_vision,
+.about_outline,
+.service_solution,
+.recruit_office,
+.recruit_interview,
+.works_detail_content {
+  background-color: var(--crud5th-glass-light);
+  background-image: var(--crud5th-glass-light-light);
+  box-shadow: inset 0 2px 1px rgba(255, 255, 255, .86), inset 0 -1px 0 rgba(7, 21, 31, .13);
+}
+/* Transparent fill lets the broad pane continue behind the outlined headline. */
+.home_service .home_service_title_wrap > span,
+.home_works .home_works_title_wrap > span,
+.home_awards .home_awards_title_wrap > span,
+.home_recruit .home_recruit_title_wrap > span { background-color: transparent; }
+.home_works_image,
+.home_recruit_image,
+.home_recruit_mainImage_item,
+.works_detail_kv_image,
+.recruit_positions_document_slide iframe {
+  box-shadow: inset 0 1px 0 rgba(246, 249, 252, .48), 0 18px 36px -24px rgba(0, 9, 16, .48);
+}
+
+/* Existing service rows, not new boxes: frosted before and smoked after. */
+.home_service_item_wrap[data-hover="before"],
+.service_solution_item_wrap[data-hover="before"] {
+  --crud5th-muted: #52616a;
+  background-color: rgba(246, 249, 252, .88);
+  background-image: linear-gradient(115deg, rgba(255, 255, 255, .55), rgba(56, 232, 241, .075) 50%, rgba(246, 249, 252, .16));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .92), inset 0 -1px 0 rgba(7, 21, 31, .07);
+}
+.home_service_item_wrap[data-hover="after"],
+.service_solution_item_wrap[data-hover="after"] {
+  --crud5th-muted: #bed0da;
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(115deg, rgba(56, 232, 241, .18), rgba(246, 249, 252, .07) 45%, rgba(7, 21, 31, .04));
+  box-shadow: inset 0 1px 0 rgba(214, 253, 255, .64), inset 0 -1px 0 rgba(56, 232, 241, .24);
+}
+.home_service_item_wrap::after,
+.service_solution_item_wrap::after { pointer-events: none; }
+.home_awards_item,
+.about_outline_item,
+.works_detail_item { border-color: rgba(56, 232, 241, .24); }
+.service_solution_item_detail,
+.service_faq_item_card,
+.recruit_special_inner,
+.cookie_inner {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(125deg, rgba(214, 253, 255, .12), rgba(56, 232, 241, .035) 58%, rgba(7, 21, 31, .05));
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px rgba(214, 253, 255, .25), var(--crud5th-glass-shadow);
+}
+/* The solution detail is on the original light service surface. */
+.service_solution_item_detail {
+  background-color: rgba(246, 249, 252, .90);
+  background-image: var(--crud5th-glass-light-light);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .86), inset 0 -1px 0 rgba(7, 21, 31, .12);
+}
+
+/* The open after face retains its original light text on smoked glass. */
+.service_solution_item_wrap[data-hover="after"] .service_solution_item_detail {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: var(--crud5th-glass-dark-light);
+  box-shadow: var(--crud5th-glass-reflection);
+}
+
+/* Menu and the original flip faces share one material vocabulary. */
+.menu .menu_nav,
+.menu .menu_btn,
+[data-flip-type="home_recruit"] .flipBtn_front,
+[data-flip-type="recruit_positions"] .flipBtn_front,
+[data-flip-type="recruit_joinus"] .flipBtn_front,
+[data-flip-type="service_faq"] .flipBtn_front,
+.footer_pageTop_item[data-hover="after"],
+.toggle_knobs {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(135deg, rgba(214, 253, 255, .21), rgba(56, 232, 241, .055) 38%, rgba(7, 21, 31, .12) 76%);
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px var(--crud5th-glass-rim), var(--crud5th-glass-shadow);
+}
+.flipBtn_front {
+  background-color: rgba(246, 249, 252, .90);
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, .52), rgba(56, 232, 241, .12));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .80), inset 0 -1px 0 rgba(7, 21, 31, .16), 0 8px 22px -17px rgba(0, 9, 16, .34);
+}
+.flipBtn_back {
+  background-color: rgba(7, 21, 31, .96);
+  background-image: linear-gradient(125deg, rgba(214, 253, 255, .18), rgba(56, 232, 241, .055));
+  box-shadow: var(--crud5th-glass-reflection), inset 0 0 0 1px rgba(214, 253, 255, .32);
+}
+[data-flip-type="home_recruit"] .flipBtn_back,
+[data-flip-type="recruit_positions"] .flipBtn_back,
+[data-flip-type="recruit_joinus"] .flipBtn_back,
+[data-flip-type="service_faq"] .flipBtn_back {
+  background-color: rgba(246, 249, 252, .96);
+  background-image: linear-gradient(125deg, rgba(255, 255, 255, .58), rgba(56, 232, 241, .18));
+  box-shadow: inset 0 1px 0 white, inset 0 -1px 0 rgba(7, 21, 31, .18);
+}
+.recruit_positions_item .flipLink_front,
+.recruit_positions_item .flipLink_back {
+  background-image: linear-gradient(125deg, rgba(246, 249, 252, .14), rgba(56, 232, 241, .055));
+  box-shadow: var(--crud5th-glass-reflection);
+}
+#local-research-notice {
+  background-color: rgba(246, 249, 252, .97) !important;
+  background-image: linear-gradient(130deg, rgba(255, 255, 255, .64), rgba(56, 232, 241, .20));
+  color: #06151c !important;
+  box-shadow: inset 0 1px 0 white, inset 0 0 0 1px rgba(246, 249, 252, .86), 0 24px 80px rgba(0, 9, 16, .32);
+}
+#local-research-notice::backdrop { background: rgba(0, 9, 16, .46); }
+
+/* Retain the four symmetric B cuts and their original cyan glass thickness. */
+.footer { isolation: isolate; }
+.footer::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse at 79% 20%, rgba(56,232,241,.94), transparent 60%), radial-gradient(ellipse at 10% 84%, rgba(246,249,252,.48), transparent 64%), linear-gradient(130deg, #07151f 0%, #38e8f1 47%, #07151f 100%);
+}
+.footer_content {
+  background-color: rgba(56,232,241,.88);
+  background-image: linear-gradient(118deg, rgba(246,249,252,.70) 0%, rgba(246,249,252,.32) 20%, rgba(56,232,241,.14) 54%, rgba(246,249,252,.49) 100%);
+  box-shadow: inset 0 2px 1px rgba(234,255,255,.92), inset 2px 0 1px rgba(204,255,255,.64), inset -2px 0 1px rgba(185,245,255,.5), inset 0 -3px 2px rgba(6,21,28,.65), inset 0 -14px 18px -13px rgba(6,21,28,.9), 0 16px 36px -20px rgba(56,232,241,.22);
+}
+.footer_content::before { box-shadow: 2px 2px 1px rgba(246,249,252,.74), 4px 4px 7px rgba(6,21,28,.32); }
+.footer_content::after { box-shadow: -2px 2px 1px rgba(246,249,252,.72), -4px 4px 7px rgba(6,21,28,.32); }
+.footer_inner::before { box-shadow: 2px -2px 1px rgba(246,249,252,.65), 4px -4px 7px rgba(6,21,28,.32); }
+.footer_inner::after { box-shadow: -2px -2px 1px rgba(246,249,252,.65), -4px -4px 7px rgba(6,21,28,.32); }
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .menu .menu_nav,
+  .menu .menu_btn,
+  [data-flip-type="home_recruit"] .flipBtn_front,
+  [data-flip-type="recruit_positions"] .flipBtn_front,
+  [data-flip-type="recruit_joinus"] .flipBtn_front,
+  [data-flip-type="service_faq"] .flipBtn_front,
+  .footer_pageTop_item[data-hover="after"],
+  .toggle_knobs,
+  .service_faq_item_card,
+  .recruit_special_inner,
+  .cookie_inner {
+    background-color: rgba(7, 21, 31, .78);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur)) saturate(125%);
+    backdrop-filter: blur(var(--crud5th-glass-small-blur)) saturate(125%);
+  }
+  .menu .menu_nav {
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-blur)) saturate(125%);
+    backdrop-filter: blur(var(--crud5th-glass-blur)) saturate(125%);
+  }
+  .home_service_item_wrap[data-hover="before"],
+  .service_solution_item_wrap[data-hover="before"],
+  .service_solution_item_detail {
+    background-color: rgba(246, 249, 252, .44);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  .home_service_item_wrap[data-hover="after"],
+  .service_solution_item_wrap[data-hover="after"] {
+    background-color: rgba(7, 21, 31, .94);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-small-blur));
+    backdrop-filter: blur(var(--crud5th-glass-small-blur));
+  }
+  #local-research-notice {
+    background-color: rgba(246, 249, 252, .90) !important;
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-blur));
+    backdrop-filter: blur(var(--crud5th-glass-blur));
+  }
+  .footer_content {
+    background-color: rgba(56,232,241,.24);
+    -webkit-backdrop-filter: blur(var(--crud5th-glass-blur)) saturate(135%);
+    backdrop-filter: blur(var(--crud5th-glass-blur)) saturate(135%);
+  }
+}
+@media (max-width: 949px) {
+  :root { --crud5th-glass-blur: 14px; --crud5th-glass-small-blur: 8px; }
+}
+@media (max-width: 600px) {
+  :root { --crud5th-glass-blur: 12px; --crud5th-glass-small-blur: 6px; }
+  /* Source flip faces hug text on mobile; avoid a hard rim across the glyphs. */
+  .home_recruit_links .flipBtn_front,
+  .home_recruit_links .flipBtn_back { box-shadow: 0 5px 14px rgba(0, 9, 16, .12); }
+}
+/* Opaque defaults outside @supports are the blur-unsupported fallback. */
+@media (prefers-reduced-transparency: reduce) {
+  :root { --crud5th-glass-dark: #07151f; --crud5th-glass-light: #f6f9fc; --crud5th-glass-cyan: #38e8f1; }
+  .home_about,
+  .home_works,
+  .home_awards,
+  .home_recruit,
+  .pageHead,
+  .about_mission,
+  .about_value,
+  .about_character,
+  .service_businessFiled,
+  .service_faq,
+  .recruit_message,
+  .recruit_positions,
+  .recruit_tvcm,
+  .works_detail_header,
+  .works_detail_footer_back,
+  .bottom,
+  .home_service,
+  .about_vision,
+  .about_outline,
+  .service_solution,
+  .recruit_office,
+  .recruit_interview,
+  .works_detail_content { background-image: none; }
+  .home_kv::after,
+  .footer::before { display: none; }
+  .menu .menu_nav,
+  .menu .menu_btn,
+  [data-flip-type="home_recruit"] .flipBtn_front,
+  [data-flip-type="recruit_positions"] .flipBtn_front,
+  [data-flip-type="recruit_joinus"] .flipBtn_front,
+  [data-flip-type="service_faq"] .flipBtn_front,
+  .footer_pageTop_item[data-hover="after"],
+  .home_service_item_wrap[data-hover="after"],
+  .service_solution_item_wrap[data-hover="after"],
+  .service_faq_item_card,
+  .recruit_special_inner,
+  .cookie_inner,
+  .toggle_knobs {
+    background: #07151f;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .home_service_item_wrap[data-hover="before"],
+  .service_solution_item_wrap[data-hover="before"],
+  .service_solution_item_detail,
+  .flipBtn_front,
+  [data-flip-type="home_recruit"] .flipBtn_back,
+  [data-flip-type="recruit_positions"] .flipBtn_back,
+  [data-flip-type="recruit_joinus"] .flipBtn_back,
+  [data-flip-type="service_faq"] .flipBtn_back,
+  #local-research-notice {
+    background: #f6f9fc !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  [data-flip-type="home_recruit"] .flipBtn_front,
+  [data-flip-type="recruit_positions"] .flipBtn_front,
+  [data-flip-type="recruit_joinus"] .flipBtn_front,
+  [data-flip-type="service_faq"] .flipBtn_front { background: #07151f !important; }
+  .service_solution_item_wrap[data-hover="after"] .service_solution_item_detail { background: #07151f !important; }
+  .footer_content { background: #38e8f1; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

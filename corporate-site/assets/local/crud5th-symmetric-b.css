@@ -1,0 +1,48 @@
+/* Mirror the B inset on all four corners; keep the existing footer reveal. */
+.footer { border-radius: 0; --footer-inset-width: clamp(96px, 8.3333333333vw, 120px); --footer-inset-depth: clamp(64px, 5vw, 72px); --footer-inset-radius: clamp(32px, 2.7777777778vw, 40px); }
+body:not([data-namespace=works-detail]):not([data-namespace=any]) .layout::before,
+body:not([data-namespace=works-detail]):not([data-namespace=any]) .layout::after,
+body[data-namespace=works-detail][data-transitioned=true] main::before,
+body[data-namespace=works-detail][data-transitioned=true] main::after { display: none; }
+.footer_content::before,
+.footer_content::after,
+.footer_inner::before,
+.footer_inner::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: var(--footer-inset-width);
+  height: var(--footer-inset-depth);
+  background: #07151f;
+  pointer-events: none;
+}
+.footer_inner { position: relative; }
+.footer_content::before { top: 0; left: 0; border-radius: 0 0 var(--footer-inset-radius) 0; }
+.footer_content::after { top: 0; right: 0; border-radius: 0 0 0 var(--footer-inset-radius); }
+.footer_inner::before { bottom: 0; left: 0; border-radius: 0 var(--footer-inset-radius) 0 0; }
+.footer_inner::after { bottom: 0; right: 0; border-radius: var(--footer-inset-radius) 0 0 0; }
+.footer_menu { margin-right: calc(min(56px, 3.5%) + 24px); }
+.footer_pageTop { margin-right: max(min(110px, 6.875%), calc(var(--footer-inset-width) + 24px)); }
+@media (max-width: 949px) {
+  .footer_menu { margin-right: auto; }
+  .footer { --footer-inset-width: 72px; --footer-inset-depth: 48px; --footer-inset-radius: 28px; }
+  .footer_pageTop { margin-right: max(min(50px, 5.8823529412%), calc(var(--footer-inset-width) + 12px)); }
+}
+@media (max-width: 600px) {
+  .footer { --footer-inset-width: 32px; --footer-inset-depth: 24px; --footer-inset-radius: 16px; }
+}
+/* Keep the existing sticky copyright clear only while the footer is revealed. */
+@supports (animation-timeline: scroll()) {
+  .copyright_text {
+    --copyright-corner-depth: clamp(64px, 5vw, 72px);
+    animation: footer-copyright-clearance linear both;
+    animation-timeline: scroll(root block);
+    animation-range: calc(100% - 50vw) 100%;
+  }
+  @keyframes footer-copyright-clearance {
+    from { padding-bottom: 5px; }
+    to { padding-bottom: calc(var(--copyright-corner-depth) + 8px); }
+  }
+  @media (max-width: 949px) { .copyright_text { --copyright-corner-depth: 48px; } }
+  @media (max-width: 600px) { .copyright_text { --copyright-corner-depth: 24px; } }
+}
