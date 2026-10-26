@@ -22,3 +22,12 @@
 /* Keep product names and stages together while the original card keeps its width. */
 .recruit_positions_item_text{position:relative;left:50%;width:max-content;max-width:none;transform:translateX(-50%);white-space:nowrap;text-align:center}
 @media(max-width:767px){.recruit_positions_item:nth-child(4) .recruit_positions_item_text{transform:translateX(calc(-50% - 12px))}.recruit_positions_item:nth-child(5) .recruit_positions_item_text{transform:translateX(calc(-50% + 12px))}}
+
+/* Seven repeatText layers travel by up to 60% of a glyph height. Reserve their
+   full animated envelope before the normal-flow category copy begins. */
+.catalog-title-stage{position:relative;width:100%;font-size:min(288px,18vw);height:2.2em}
+.catalog-title-stage>.repeatText{top:.32em}
+.home_service:has(>.catalog-title-stage){padding-top:min(180px,11.25vw)}
+@media(max-width:767px){.catalog-title-stage{font-size:min(153px,18vw)}.home_service:has(>.catalog-title-stage){padding-top:min(100px,11.7647058824vw)}}
+/* GSAP hides ABOUT after its final 100px handoff; keep MENU light until that hook. */
+body:has(.catalog-title-stage):has(.home_about:not([style*="visibility: hidden"])) .menu_text{color:#f6f9fc}
