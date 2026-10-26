@@ -118,9 +118,28 @@
 .kotoport-page .kp-role-flow strong { font-size: 20px; }
 .kotoport-page .kp-role-flow svg { position: absolute; right: -12px; top: 50%; transform: translateY(-50%); }
 .kotoport-page .kp-division { display: flex; gap: 32px; margin-top: 24px; font-weight: 700; font-size: 16px; }
-.kotoport-page .kp-setup { display: flex; gap: 12px 32px; flex-wrap: wrap; font-weight: 700; }
+.kotoport-page .kp-setup-details { max-width: 1040px; }
+.kotoport-page .kp-setup-details > .kp-setup-block { margin-block: 0; padding-block: 28px; }
+.kotoport-page .kp-setup-block + .kp-setup-block { border-top: 1px solid var(--kp-line); }
+.kotoport-page .kp-setup-block > h3 { font-size: 20px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; text-wrap: balance; }
+.kotoport-page .kp-setup-block > p { max-width: 42em; margin-top: 20px; line-height: 1.65; }
+.kotoport-page .kp-setup { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 40px; }
+.kotoport-page .kp-setup dt { font-size: 17px; font-weight: 600; line-height: 1.5; }
+.kotoport-page .kp-setup dd { margin-top: 6px; color: var(--kp-muted); font-size: 15px; line-height: 1.65; }
 .kotoport-page .kp-responsibility-grid, .kotoport-page .kp-scope-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-.kotoport-page .kp-responsibility-grid ul { list-style: disc; padding-left: 20px; }
+.kotoport-page .kp-setup-details .kp-responsibility-grid { gap: 20px; }
+.kotoport-page .kp-responsibility-grid > div { padding: 24px; background: var(--kp-white); border-radius: 8px; }
+.kotoport-page .kp-responsibility-grid h4 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+.kotoport-page .kp-responsibility-grid p { margin-block: 6px 16px; color: var(--kp-muted); font-size: 15px; }
+.kotoport-page .kp-responsibility-grid ul { list-style: disc; padding-left: 20px; line-height: 1.65; }
+.kotoport-page .kp-responsibility-grid li + li { margin-top: 8px; }
+.kotoport-page .kp-maintenance-flow { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 40px; }
+.kotoport-page .kp-maintenance-flow li { position: relative; }
+.kotoport-page .kp-maintenance-flow span { font-size: 14px; color: var(--kp-muted); }
+.kotoport-page .kp-maintenance-flow h4 { font-size: 17px; font-weight: 600; margin-block: 4px 8px; }
+.kotoport-page .kp-maintenance-flow p { font-size: 15px; line-height: 1.65; max-width: 20em; }
+.kotoport-page .kp-maintenance-flow svg { position: absolute; right: -30px; top: 25px; width: 20px; height: 20px; color: var(--kp-green); }
+.kotoport-page .kp-provider-website a { text-decoration: underline; text-underline-offset: 3px; }
 .kotoport-page .kp-economics-inputs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
 .kotoport-page .kp-economics-field { padding: 18px; border-radius: 10px; background: var(--kp-sage); }
 .kotoport-page .kp-economics-field label { display: block; min-height: 26px; margin-bottom: 10px; font-size: 15px; font-weight: 700; }
@@ -194,11 +213,11 @@
 .kotoport-page .kp-calculator-notes { grid-column: 1 / -1; font-size: 15px; }
 .kotoport-page .kp-table-wrap { overflow-x: auto; }
 .kotoport-page .kp-onboarding-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 40px; }
-.kotoport-page .kp-onboarding-steps li { position: relative; }
-.kotoport-page .kp-onboarding-steps li > div { display: flex; flex-direction: column; gap: 18px; }
+.kotoport-page .kp-onboarding-steps li { position: relative; text-align: center; }
+.kotoport-page .kp-onboarding-steps li > div { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .kotoport-page .kp-onboarding-steps h3 { font-size: 24px; font-weight: 800; }
 .kotoport-page .kp-onboarding-steps p { font-size: 16px; margin-top: 12px; }
-.kotoport-page .kp-onboarding-steps li > svg { position: absolute; top: 14px; right: 10px; width: 48px; color: var(--kp-green); }
+.kotoport-page .kp-onboarding-steps li > svg { position: absolute; top: 14px; left: calc(100% + 20px); width: 32px; height: 24px; transform: translateX(-50%); color: var(--kp-green); }
 .kotoport-page .kp-operation-labels { display: flex; gap: 32px; font-size: 15px; font-weight: 700; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--kp-line); }
 .kotoport-page .kp-onboarding-note { margin-top: 14px; font-size: 15px; color: var(--kp-muted); }
 .kotoport-page .kp-faq { border-top: 1px solid var(--kp-line); padding-top: 80px; }
@@ -257,6 +276,7 @@
   .kotoport-page .kp-cost-bars > div { grid-template-columns: 150px minmax(0,1fr) 210px; gap: 20px; }
   .kotoport-page .kp-cost-bars > div > strong { font-size: 26px; }
   .kotoport-page .kp-onboarding-steps { gap: 24px; }
+  .kotoport-page .kp-onboarding-steps li > svg { left: calc(100% + 12px); }
   .kotoport-page .kp-onboarding-steps h3 { font-size: 21px; }
 }
 @media (max-width: 900px) {
@@ -284,6 +304,8 @@
   .kotoport-page .kp-cost-difference strong { font-size: 29px; }
   .kotoport-page .kp-calculator { grid-template-columns: 1fr; }
   .kotoport-page .kp-onboarding-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .kotoport-page .kp-onboarding-steps li > svg { left: calc(100% + 20px); }
+  .kotoport-page .kp-onboarding-steps li:nth-child(2) > svg { display: none; }
   .kotoport-page .kp-faq-layout { grid-template-columns: 1fr; gap: 0; }
   .kotoport-page .kp-consultation-layout { grid-template-columns: 1fr; gap: 64px; }
   .kotoport-page .kp-provider { max-width: 600px; }
@@ -381,11 +403,14 @@
   .kotoport-page .kp-estimates { grid-template-columns: 1fr; gap: 24px; }
   .kotoport-page .kp-estimate-amount { font-size: 23px; }
   .kotoport-page .kp-estimate-details > summary { font-size: 13px; padding-right: 24px; }
-  .kotoport-page .kp-onboarding-steps { grid-template-columns: 1fr; gap: 28px; }
-  .kotoport-page .kp-onboarding-steps li { padding-left: 62px; }
-  .kotoport-page .kp-onboarding-steps li > div { display: block; }
-  .kotoport-page .kp-step-number { position: absolute; top: 0; left: 0; width: 44px; height: 44px; font-size: 16px; }
-  .kotoport-page .kp-onboarding-steps li > svg { left: 13px; top: 66px; width: 18px; height: 18px; transform: rotate(90deg); }
+  .kotoport-page .kp-setup { grid-template-columns: 1fr; gap: 8px; }
+  .kotoport-page .kp-setup-details .kp-responsibility-grid { grid-template-columns: 1fr; gap: 16px; }
+  .kotoport-page .kp-responsibility-grid > div { padding: 20px; }
+  .kotoport-page .kp-maintenance-flow { grid-template-columns: 1fr; gap: 36px; }
+  .kotoport-page .kp-maintenance-flow svg { top: auto; bottom: -28px; right: auto; left: 0; transform: rotate(90deg); }
+  .kotoport-page .kp-onboarding-steps { grid-template-columns: 1fr; gap: 48px; }
+  .kotoport-page .kp-step-number { width: 44px; height: 44px; font-size: 16px; }
+  .kotoport-page .kp-onboarding-steps li > svg, .kotoport-page .kp-onboarding-steps li:nth-child(2) > svg { display: block; left: 50%; top: auto; bottom: -34px; width: 20px; height: 20px; transform: translateX(-50%) rotate(90deg); }
   .kotoport-page .kp-onboarding-steps p { font-size: 16px; margin-top: 8px; }
   .kotoport-page .kp-onboarding-steps h3 { font-size: 22px; }
   .kotoport-page .kp-operation-labels { flex-direction: column; gap: 6px; font-size: 13px; }

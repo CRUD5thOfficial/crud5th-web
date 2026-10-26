@@ -329,7 +329,23 @@ export default function Kotoport() {
         <ol className="kp-reasons">{content.approach.reasons.map((reason, index) => <li key={reason.title}><span className="kp-reason-number">{String(index + 1).padStart(2, "0")}</span><h3>{reason.title}</h3><p>{reason.description}</p></li>)}</ol>
         <ol className="kp-role-flow">{content.approach.roles.map((role, index) => <li key={`${role.title}-${index}`}><span>{role.title}</span><strong>{role.description}</strong>{index < content.approach.roles.length - 1 && <ArrowRight aria-hidden="true" />}</li>)}</ol>
         <div className="kp-division">{content.approach.divisionLabels.map(label => <p key={label}>{label}</p>)}</div>
-        <details className="kp-details"><summary>{content.approach.detailsLabel}</summary><ul className="kp-setup">{content.approach.setup.map(item => <li key={item}>{item}</li>)}</ul><p>{content.approach.setupDescription}</p><p>{content.approach.maintenance}</p><div className="kp-responsibility-grid">{content.approach.responsibilities.map(role => <div key={role.title}><h3>{role.title}</h3><p>{role.subtitle}</p><ul>{role.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div><p>{content.approach.responsibilityNote}</p></details>
+        <details className="kp-details kp-setup-details"><summary>{content.approach.detailsLabel}</summary>
+          <section className="kp-setup-block" aria-labelledby="kotoport-setup-title">
+            <h3 id="kotoport-setup-title">{content.approach.setupTitle}</h3>
+            <dl className="kp-setup">{content.approach.setup.map(item => <div key={item.title}><dt>{item.title}</dt><dd>{item.example}</dd></div>)}</dl>
+            <p>{content.approach.setupDescription}</p>
+          </section>
+          <section className="kp-setup-block" aria-labelledby="kotoport-responsibility-title">
+            <h3 id="kotoport-responsibility-title">{content.approach.responsibilityTitle}</h3>
+            <div className="kp-responsibility-grid">{content.approach.responsibilities.map(role => <div key={role.title}><h4>{role.title}</h4><p>{role.subtitle}</p><ul>{role.items.map(item => <li key={item}>{item}</li>)}</ul></div>)}</div>
+            <p>{content.approach.responsibilityNote}</p>
+          </section>
+          <section className="kp-setup-block" aria-labelledby="kotoport-maintenance-title">
+            <h3 id="kotoport-maintenance-title">{content.approach.maintenanceTitle}</h3>
+            <ol className="kp-maintenance-flow">{content.approach.maintenanceSteps.map((step, index) => <li key={step.title}><span>{step.owner}</span><h4>{step.title}</h4><p>{step.description}</p>{index < content.approach.maintenanceSteps.length - 1 && <ArrowRight aria-hidden="true" />}</li>)}</ol>
+            <p>{content.approach.maintenanceNote}</p>
+          </section>
+        </details>
       </div></section>
       <EconomicsCalculator />
       <section className="kp-section kp-pricing" id="kotoport-pricing" aria-labelledby="kotoport-pricing-title" data-motion-section><div className="kp-container">
@@ -350,7 +366,7 @@ export default function Kotoport() {
         <details className="kp-details"><summary>{content.onboarding.detailsLabel}</summary><div className="kp-operation-labels">{content.onboarding.roleLabels.map(role => <p key={role}>{role}</p>)}</div><h3>{content.onboarding.preparationTitle}</h3><p>{content.onboarding.preparationDescription}</p><dl className="kp-preparations">{content.onboarding.preparations.map(item => <div key={item.title}><dt>{item.title}</dt><dd>{item.description}</dd></div>)}</dl><dl className="kp-operation-roles">{content.onboarding.responsibilities.map(role => <div key={role.title}><dt>{role.title}</dt><dd>{role.description}</dd></div>)}</dl><p>{content.onboarding.acceptanceNote}</p></details>
       </div></section>
       <section className="kp-section kp-faq" aria-labelledby="kotoport-faq-title" data-motion-section><div className="kp-container kp-faq-layout"><div className="kp-section-heading"><h2 id="kotoport-faq-title">{content.faq.title}</h2></div><div className="kp-faq-items">{content.faq.items.map(item => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div></div></section>
-      <section className="kp-section kp-consultation" aria-labelledby="kotoport-consultation-title" data-motion-section><div className="kp-container kp-consultation-layout"><div className="kp-section-heading"><h2 id="kotoport-consultation-title">{content.consultation.title}</h2><p>{content.consultation.description}</p><ul className="kp-starting-points">{content.consultation.startingPoints.map(point => <li key={point}><Check aria-hidden="true" />{point}</li>)}</ul><a className="kp-button" href={content.contactHref}>{content.navigation.contact}<ArrowRight aria-hidden="true" /></a><p className="kp-small">{content.consultation.contactNote}</p></div><div className="kp-provider"><p className="kp-provider-name">{content.provider}</p><p>{content.consultation.providerDescription}</p><address>{content.consultation.signature.map(line => <span key={line}>{line}</span>)}</address></div></div></section>
+      <section className="kp-section kp-consultation" aria-labelledby="kotoport-consultation-title" data-motion-section><div className="kp-container kp-consultation-layout"><div className="kp-section-heading"><h2 id="kotoport-consultation-title">{content.consultation.title}</h2><p>{content.consultation.description}</p><ul className="kp-starting-points">{content.consultation.startingPoints.map(point => <li key={point}><Check aria-hidden="true" />{point}</li>)}</ul><a className="kp-button" href={content.contactHref}>{content.navigation.contact}<ArrowRight aria-hidden="true" /></a><p className="kp-small">{content.consultation.contactNote}</p></div><div className="kp-provider"><p className="kp-provider-name">{content.provider}</p><p>{content.consultation.providerDescription}</p><address>{content.consultation.signature.map(line => <span key={line}>{line}</span>)}<span className="kp-provider-website">ホームページ：<a href={content.consultation.homepageHref}>{content.consultation.homepageHref}</a></span></address></div></div></section>
     </main>
     <footer className="kp-footer kp-container"><a href="/"><ArrowLeft aria-hidden="true" />{content.navigation.home}</a><span>{content.name} / {content.englishName}</span><a href="#kotoport-top">{content.navigation.back}<ArrowDown className="kp-arrow-up" aria-hidden="true" /></a></footer>
   </div>;

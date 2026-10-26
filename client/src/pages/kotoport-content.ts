@@ -143,7 +143,14 @@ export const kotoportContent = {
   approach: {
     title: "いつもの仕事に、\n合う電話を。",
     reasons: [{"title": "資料からつくる", "description": "FAQや資料から、応対をつくります。"}, {"title": "声まで確かめる", "description": "実際の電話で、声や返し方を確かめます。"}, {"title": "使いながら直す", "description": "情報が変われば、設定を直します。"}],
-    setup: ["役割・対応範囲", "参照する業務知識", "判断・実行の権限", "話し方・トーン"],
+    setupTitle: "最初に決める、4つのこと",
+    setup: [
+      { title: "何を受け持つか", example: "例：問い合わせの一次受付、予定の確認" },
+      { title: "何をもとに答えるか", example: "例：FAQ、営業時間、サービスの資料" },
+      { title: "どこから人に戻すか", example: "例：金額の確定、例外の判断、緊急対応" },
+      { title: "どう話すか", example: "例：丁寧な言葉づかい、簡潔な案内" },
+    ],
+    responsibilityTitle: "AIと人で、受け持つこと",
     responsibilities: [
       { title: "AIに任せること", subtitle: "一次受付・案内・確認", items: ["問い合わせと希望の聞き取り", "共有された事実に基づく案内", "予定・状況の質問と返答の整理"] },
       { title: "人が判断すること", subtitle: "例外・確約・緊急対応", items: ["契約・金額の確定やクレーム解決", "配置決定・緊急時の指示", "根拠がない質問や重要な手続き"] },
@@ -151,8 +158,14 @@ export const kotoportContent = {
     divisionLabels: ["AI：受付・案内・確認", "人：判断・約束・困りごとの対応"],
     roles: [{ title: "御社", description: "資料を共有" }, { title: "CRUD5th", description: "設定・調整・改善" }, { title: "御社", description: "内容を確認" }],
     detailsLabel: "応対をつくるときに決めること",
-    setupDescription: "役割、使ってよい業務情報、判断の範囲、話し方を御社ごとに設定します。台詞をすべて書いたり、分岐を増やし続けたりする準備は不要です。",
-    maintenance: "御社は、営業時間や担当者などの変更を共有。CRUD5thは設定を直し、版を管理して確認します。会話の品質、障害、使える通話量も確認しながら改善します。",
+    setupDescription: "御社の業務に合わせて設定します。台詞をすべて書いたり、分岐を増やし続けたりする準備は不要です。",
+    maintenanceTitle: "変更があったときは",
+    maintenanceSteps: [
+      { owner: "御社", title: "変更を共有", description: "営業時間や担当者などの変更を知らせます。" },
+      { owner: "CRUD5th", title: "設定を更新", description: "応対を直し、変更した版を管理します。" },
+      { owner: "御社・CRUD5th", title: "電話で確認", description: "変更後の内容を一緒に確かめます。" },
+    ],
+    maintenanceNote: "CRUD5thが会話の品質・障害・使える通話量も確認し、改善を続けます。",
     responsibilityNote: "AIが扱う範囲と、人へ戻す条件を先に決めます。AIであることを偽らない案内も設計します。",
   },
   pricing: {
@@ -229,8 +242,9 @@ export const kotoportContent = {
     providerDescription: "使い始めたあとも支えます。",
     contactNote: "お問い合わせフォームへ",
     startingPoints: ["任せたい電話", "件数と時間帯", "人に残す仕事"],
+    homepageHref: "https://crud5th.com/",
     signature: [
-      "CRUD5th", "髙橋綱弥", "メール：crud5th@crud5th.com", "電話番号：09094238717", "住所：〒106-0032 東京都港区六本木7-17-12-513", "ホームページ：https://crud5th.netlify.app/",
+      "CRUD5th", "髙橋綱弥", "メール：crud5th@crud5th.com", "電話番号：09094238717", "住所：〒106-0032 東京都港区六本木7-17-12-513",
     ],
   },
 };
