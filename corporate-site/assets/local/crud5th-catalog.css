@@ -1,0 +1,24 @@
+/* Category copy and product stages share the existing glass and motion layout. */
+.catalog-section-intro,.catalog-service-intro{position:relative;z-index:4;width:85%;max-width:1400px;margin:0 auto 2.2rem;color:#f6f9fc;font-family:ryo-gothic-plusn,sans-serif;font-size:clamp(18px,1.8vw,28px);font-weight:600;line-height:1.6;letter-spacing:.06em}
+.catalog-section-intro span,.catalog-service-intro span{display:block;margin-top:.45rem;font-size:clamp(12px,1vw,16px);font-weight:400;letter-spacing:.04em}
+.catalog-service-intro{color:#07151f;margin-bottom:3rem}
+.catalog-product-stage{display:block;margin-top:.65em;font-size:.45em;font-weight:400;letter-spacing:.06em}
+.catalog-feature-list{padding-left:1.25em;line-height:1.9}
+.catalog-feature-list li+li{margin-top:.55em}
+.catalog-status{display:inline-block;padding:.45em 1em;border:1px solid currentColor;border-radius:100px;font-size:.9em}
+.works_detail_body h3{margin:2.5em 0 1em;font-size:1.2em;line-height:1.6}
+.works_detail_body a{text-decoration:underline;text-underline-offset:.2em}
+.nav_item_link,.footer_menu_link,.bottom_item_link,.nav_sns_item_link{font-family:ryo-gothic-plusn,sans-serif}
+.nav_item_link{font-size:clamp(20px,2.2vw,32px);line-height:1.5;letter-spacing:.035em}
+.footer_menu_link{font-size:clamp(12px,1.5vw,24px)}
+.bottom_item_link{font-size:clamp(12px,1.25vw,20px)}
+.nav_sns_item_link{font-size:clamp(11px,1vw,16px)}
+@media(max-width:767px){.catalog-section-intro,.catalog-service-intro{width:86%;margin-bottom:1.5rem;font-size:18px}.catalog-section-intro span,.catalog-service-intro span{font-size:12px}.nav_item_link{font-size:25px}.catalog-product-stage{font-size:12px}.footer_menu_link,.bottom_item_link{font-size:11px;letter-spacing:0}}
+
+.recruit_positions_item_text{font-family:ryo-gothic-plusn,sans-serif;font-size:clamp(13px,1.15vw,18px);line-height:1.5}
+.catalog-product-stage{font-size:12px;line-height:1.5}
+/* Placeholder media stays in the source for the existing page hooks. */
+.recruit_special_youtube,.recruit_positions_document_slide,.recruit_office_map,.recruit_tvcm_youtube{display:none}
+/* Keep product names and stages together while the original card keeps its width. */
+.recruit_positions_item_text{position:relative;left:50%;width:max-content;max-width:none;transform:translateX(-50%);white-space:nowrap;text-align:center}
+@media(max-width:767px){.recruit_positions_item:nth-child(4) .recruit_positions_item_text{transform:translateX(calc(-50% - 12px))}.recruit_positions_item:nth-child(5) .recruit_positions_item_text{transform:translateX(calc(-50% + 12px))}}
