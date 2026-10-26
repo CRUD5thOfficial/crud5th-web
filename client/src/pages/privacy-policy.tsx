@@ -49,6 +49,10 @@ export default function PrivacyPolicy() {
     {
       category: "求職者及び従業員に関する個人情報",
       purpose: "求職者の採用可否の検討・連絡、従業員の雇用管理"
+    },
+    {
+      category: "Webサイトの利用状況",
+      purpose: "サイトの改善のため、Google Analyticsを用いてページの閲覧、アクティブな閲覧時間、料金試算や相談への導線の利用状況を解析します。Cookie等を利用しますが、お問い合わせの氏名・メールアドレス・本文や、URLの検索パラメータは解析イベントに送信しません。広告向けのパーソナライズやGoogle Signalsは利用しません。"
     }
   ];
 
@@ -176,6 +180,13 @@ export default function PrivacyPolicy() {
                 </motion.div>
               ))}
             </div>
+            <p className="text-muted-foreground text-sm mt-6 leading-relaxed">
+              アクセス解析のデータ取扱いは
+              <a className="underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Googleの説明</a>
+              をご確認ください。収集はブラウザのCookie設定や
+              <a className="underline" href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analyticsオプトアウトアドオン</a>
+              で制限できます。当サイトはDo Not Trackが有効なブラウザでは計測を開始しません。
+            </p>
           </motion.div>
         </div>
       </section>

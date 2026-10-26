@@ -43,6 +43,7 @@ export default function Contact() {
       }
     },
     onSuccess: () => {
+      document.dispatchEvent(new Event("site-analytics:contact-success"));
       toast({
         title: "送信完了",
         description: "お問い合わせを受け付けました。後日担当者よりご連絡いたします。",
