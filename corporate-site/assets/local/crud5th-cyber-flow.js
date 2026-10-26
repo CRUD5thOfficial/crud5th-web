@@ -3,19 +3,10 @@
   'use strict';
   if (window.__crud5thCyberFlow) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const status = { fields: 0, activeFields: 0, techRows: 0, paused: false, hidden: document.hidden, reduced: reduced.matches };
-  let paused = false;
-  try { paused = localStorage.getItem('crud5th-flow-paused') === 'true'; } catch (_) {}
+  const status = { fields: 0, activeFields: 0, techRows: 0, hidden: document.hidden, reduced: reduced.matches };
   const targets = new Set();
   const visible = new Set();
   const selector = '.crud5th-light-opening,.home_about,.home_works,.home_service,.home_awards,.home_recruit,.footer,.pageHead,.about_mission,.about_vision,.about_value,.about_outline,.service_businessFiled,.service_solution,.service_faq,.works_detail_header,.works_detail_content,.works_detail_footer_back,.recruit_message,.recruit_positions';
-  const toggle = document.createElement('button');
-  toggle.type = 'button'; toggle.className = 'crud5th-flow-toggle';
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    try { localStorage.setItem('crud5th-flow-paused', String(paused)); } catch (_) {}
-    update();
-  });
   // The existing SVG is the shape/color source. Only its decorative control points deform.
   const waves = new Map();
   const waveStatus = { frames: 0, instances: 0, running: false, time: 0 };
@@ -97,12 +88,12 @@
     waveStatus.frames++; waveStatus.time = waveTime;
   }
   function runningWave() {
-    return !paused && !reduced.matches && !document.hidden && [...waves.keys()].some(e => e.isConnected && visible.has(e));
+    return !status.reduced && !document.hidden && [...waves.keys()].some(e => e.isConnected && visible.has(e));
   }
   function tickWave(now) {
     waveFrame = 0;
     if (!runningWave()) { waveLast = 0; waveStatus.running = false; return; }
-    // Limit work to 30 fps. Hidden, paused, reduced, and offscreen time is never accumulated.
+    // Limit work to 30 fps. Hidden, reduced, and offscreen time is never accumulated.
     if (!waveLast || now - waveLast >= 32) {
       if (waveLast) waveTime += Math.min(now - waveLast, 70) / 1000;
       waveLast = now;
@@ -135,21 +126,13 @@
     waveStatus.instances = waves.size;
   }
 
-  function updateDock() {
-    const remaining = document.documentElement.scrollHeight - scrollY - innerHeight;
-    toggle.dataset.dock = remaining < 130 ? 'footer' : 'normal';
-  }
   function update() {
-    const stopped = paused || reduced.matches || document.hidden;
+    const stopped = reduced.matches || document.hidden;
     document.body.dataset.crud5thFlow = stopped ? 'paused' : 'running';
+    status.hidden = document.hidden; status.reduced = reduced.matches;
     updateWaves();
-    status.paused = paused; status.hidden = document.hidden; status.reduced = reduced.matches;
     status.activeFields = [...visible].filter(e => e.isConnected && e.classList.contains('crud5th-flow-field')).length;
-    toggle.setAttribute('aria-pressed', String(paused));
-    toggle.disabled = reduced.matches;
-    const label = reduced.matches ? 'MOTION REDUCED' : paused ? 'MOTION PLAY' : 'MOTION PAUSE';
-    if (toggle.textContent !== label) toggle.textContent = label;
-    toggle.setAttribute('aria-label', reduced.matches ? '動きの軽減設定に従っています' : paused ? '背景の光と技術リストの動きを再開' : '背景の光と技術リストの動きを停止');
+
   }
   const intersection = new IntersectionObserver(entries => {
     for (const entry of entries) {
@@ -159,7 +142,6 @@
     update();
   }, { rootMargin: '80px' });
   function sync() {
-    if (!toggle.isConnected) document.body.append(toggle);
     for (const target of targets) {
       if (!target.isConnected) { intersection.unobserve(target); targets.delete(target); visible.delete(target); }
     }
@@ -177,13 +159,11 @@
     syncWaves();
     status.fields = document.querySelectorAll('.crud5th-flow-field').length;
     status.techRows = document.querySelectorAll('.crud5th-tech-row').length;
-    updateDock();
     update();
   }
   reduced.addEventListener('change', update);
   document.addEventListener('visibilitychange', update);
-  window.addEventListener('scroll', updateDock, { passive: true });
-  window.addEventListener('resize', () => { updateDock(); for (const wave of waves.values()) if (wave.shapes) paint(wave); }, { passive: true });
+  window.addEventListener('resize', () => { for (const wave of waves.values()) if (wave.shapes) paint(wave); }, { passive: true });
   const observer = new MutationObserver(sync);
   observer.observe(document.body, { childList: true, subtree: true });
   window.__crud5thCyberFlow = { status, sync, waveStatus };

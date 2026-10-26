@@ -31,3 +31,8 @@
 @media(max-width:767px){.catalog-title-stage{font-size:min(153px,18vw)}.home_service:has(>.catalog-title-stage){padding-top:min(100px,11.7647058824vw)}}
 /* GSAP hides ABOUT after its final 100px handoff; keep MENU light until that hook. */
 body:has(.catalog-title-stage):has(.home_about:not([style*="visibility: hidden"])) .menu_text{color:#f6f9fc}
+
+/* Keep the introduction with the pinned product roll, below the title envelope. */
+.home_works_wrap>.catalog-section-intro{position:absolute;left:7.5%;bottom:clamp(150px,20vh,220px);width:85%;margin:0;visibility:hidden}
+.home_works_wrap:has(>.home_works_inner.is-visible .home_works_item[data-item-active=true])>.catalog-section-intro{visibility:visible}
+@media(max-width:767px){.home_works_wrap>.catalog-section-intro{left:7%;width:86%;bottom:clamp(132px,20vh,180px)}}

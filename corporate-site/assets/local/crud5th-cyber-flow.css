@@ -55,11 +55,6 @@
 .crud5th-tech-lane:focus-within .crud5th-tech-track { animation-play-state: paused; }
 @keyframes crud5th-tech-slide { to { transform: translateX(-50%); } }
 
-.crud5th-flow-toggle { position: fixed; z-index: 10100; left: 24px; bottom: 24px; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid rgba(186,245,255,.45); border-radius: 999px; background: rgba(7,21,31,.94); color: #e5f9fc; box-shadow: inset 0 1px 0 rgba(246,249,252,.18), 0 5px 20px rgba(0,9,16,.2); font: 10px/1.4 Arial, sans-serif; letter-spacing: .09em; cursor: pointer; }
-.crud5th-flow-toggle::before { content: "Ⅱ"; color: #38e8f1; font-size: 12px; }
-.crud5th-flow-toggle[aria-pressed="true"]::before { content: "▷"; }
-.crud5th-flow-toggle:focus-visible { outline: 2px solid #38e8f1; outline-offset: 4px; }
-.crud5th-flow-toggle[data-dock="footer"] { bottom: 144px; }
 body[data-crud5th-flow="paused"] .crud5th-flow-field::before,
 body[data-crud5th-flow="paused"] .crud5th-flow-field::after,
 body[data-crud5th-flow="paused"] .crud5th-tech-track { animation-play-state: paused !important; }
@@ -81,8 +76,6 @@ body[data-crud5th-flow="paused"] .crud5th-tech-track { animation-play-state: pau
   .crud5th-tech-category { font-size: 11px; margin-bottom: 12px; }
   .crud5th-tech-group { gap: 12px; padding-right: 12px; }
   .crud5th-tech-group li { padding: 10px 16px; font-size: 16px; }
-  .crud5th-flow-toggle { left: 14px; bottom: 14px; padding: 8px 11px; min-height: 44px; font-size: 9px; }
-  .crud5th-flow-toggle[data-dock="footer"] { bottom: 92px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .crud5th-flow-field::before, .crud5th-flow-field::after { animation: none !important; }
@@ -93,7 +86,7 @@ body[data-crud5th-flow="paused"] .crud5th-tech-track { animation-play-state: pau
 }
 
 /* A quiet opaque reading surface framed by three folded glass ribbons per side.
-   Only these decorative children move; the existing visibility/pause policy applies. */
+   Only these decorative children move; the existing visibility and reduced-motion policy applies. */
 .home_kv--light + .home_about {
   background-color: #040b1a;
   background-image: none;

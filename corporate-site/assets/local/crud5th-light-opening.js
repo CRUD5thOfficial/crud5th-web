@@ -15,6 +15,43 @@
     let width = 0, height = 0, raf = 0, started = performance.now(), complete = false, disposed = false;
     let scrollProgress = 0;
     status.mounts++; status.active = true;
+    function drawTiles(time) {
+      const size = Math.max(64, Math.min(width, height) * .16);
+      const columns = Math.ceil(width / size) + 2, rows = Math.ceil(height / size) + 2;
+      context.globalCompositeOperation = 'source-over';
+      for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++) {
+          const x = (column - .5) * size, y = (row - .5) * size;
+          const delay = (column + row * .8) / (columns + rows * .8) * 1.35;
+          const progress = clamp((time - .12 - delay) / 1.25);
+          const lift = Math.sin(progress * Math.PI);
+          const edge = clamp(Math.abs(x / width - .5) * 2);
+          const readability = .12 + .88 * ease(edge);
+          const halfWidth = size * .46;
+          const halfHeight = size * .46 * (.2 + .8 * Math.abs(Math.cos(progress * Math.PI)));
+          const rise = lift * size * .24;
+          const skew = lift * size * .18;
+          const face = context.createLinearGradient(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
+          face.addColorStop(0, `rgba(141,247,255,${(.025 + lift * .18) * readability})`);
+          face.addColorStop(.45, `rgba(28,109,139,${(.045 + lift * .16) * readability})`);
+          face.addColorStop(1, `rgba(7,21,31,${.12 * readability})`);
+          context.beginPath();
+          context.moveTo(x - halfWidth + skew, y - halfHeight - rise);
+          context.lineTo(x + halfWidth + skew, y - halfHeight - rise);
+          context.lineTo(x + halfWidth - skew, y + halfHeight - rise);
+          context.lineTo(x - halfWidth - skew, y + halfHeight - rise);
+          context.closePath(); context.fillStyle = face; context.fill();
+          context.strokeStyle = `rgba(91,211,231,${(.075 + lift * .34) * readability})`;
+          context.lineWidth = .7; context.stroke();
+          if (lift > .01) {
+            context.beginPath(); context.moveTo(x - halfWidth + skew, y - halfHeight - rise);
+            context.lineTo(x + halfWidth + skew, y - halfHeight - rise);
+            context.strokeStyle = `rgba(203,253,255,${lift * .58 * readability})`;
+            context.lineWidth = 1.1; context.stroke();
+          }
+        }
+      }
+    }
     function draw(now) {
       raf = 0; status.raf = false;
       if (disposed || !host.isConnected) return;
@@ -24,6 +61,7 @@
       const spread = Math.max(settle * .66, scrollProgress);
       const cx = width * .5, cy = height * (.66 + spread * .14);
       context.clearRect(0, 0, width, height);
+      drawTiles(time);
       context.globalCompositeOperation = 'lighter';
       const glow = context.createRadialGradient(cx, cy, 0, cx, cy, width * .55);
       glow.addColorStop(0, `rgba(48,209,224,${.19 * arrival * (1 - spread * .6)})`);
