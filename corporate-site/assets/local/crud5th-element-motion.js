@@ -164,6 +164,10 @@
     if (destination.origin !== location.origin || destination.pathname !== '/' || destination.hash !== '#member' || location.pathname !== '/') return;
     event.preventDefault();
     memberAnchorPending = true;
+    const menu = anchor.closest('.menu');
+    if (anchor.closest('.menu_nav') && (menu?.dataset.menuOpen === 'true' || menu?.dataset.menuActive === 'true')) {
+      menu.querySelector('.menu_btn')?.click();
+    }
     if (location.hash !== '#member') location.hash = '#member';
     else syncMemberAnchor();
   }, true);
