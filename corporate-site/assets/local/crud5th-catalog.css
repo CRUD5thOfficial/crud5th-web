@@ -48,3 +48,16 @@ body:has(.catalog-title-stage):has(.home_about:not([style*="visibility: hidden"]
 .flipBtn_item_text,.footer_pageTop_text,.bottom_item_text,.scrollDown_text,.moreDetail_text{font-family:ryo-gothic-plusn,sans-serif;letter-spacing:.04em}
 
 @media(max-width:767px){.catalog-title-stage{height:3.2em}.catalog-title-stage>.repeatText{top:1.3em}}
+
+/* Keep PRODUCTS clear of ABOUT and tighten title-to-roll spacing. */
+@media(min-width:768px){
+  .home_works:has(>.catalog-title-stage){--catalog-products-entry-clearance:max(0px,calc(470px - var(--catalog-title-size)*3.32))}
+  .home_works>.catalog-title-stage{height:calc(1.6em + var(--catalog-products-entry-clearance))}
+  .home_works>.catalog-title-stage>.home_works_title{top:calc(1.72em + var(--catalog-products-entry-clearance))}
+  .home_works:has(>.catalog-title-stage)>.crud5th-scene-heading{top:calc(70px + var(--catalog-title-size)*1.4 + var(--catalog-products-entry-clearance))}
+}
+@media(max-width:767px){
+  .home_works>.catalog-title-stage{height:2.4em}
+  .home_works>.catalog-title-stage>.home_works_title{top:calc(1.3em + 110px)}
+  .home_works:has(>.catalog-title-stage)>.crud5th-scene-heading{top:74px}
+}

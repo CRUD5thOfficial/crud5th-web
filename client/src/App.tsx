@@ -13,6 +13,7 @@ import InformationSecurity from "@/pages/information-security";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 import Preloader from "@/components/preloader";
+import "@/pages/contact-theme.css";
 
 function CorporateHome() {
   useEffect(() => {
@@ -23,12 +24,13 @@ function CorporateHome() {
 
 function ContactPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navigation />
+    <div className="gen-contact-page min-h-screen bg-background text-foreground overflow-x-hidden">
+      <link rel="stylesheet" href="/assets/local/crud5th-gen-fonts.css" />
+      <Navigation corporate />
       <main className="pt-16">
         <Contact />
       </main>
-      <Footer />
+      <Footer corporate />
     </div>
   );
 }
@@ -51,7 +53,9 @@ function Router() {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(() => window.location.pathname !== kotoportContent.route);
+  const [isLoading, setIsLoading] = useState(
+    () => window.location.pathname !== kotoportContent.route && window.location.pathname !== "/contact",
+  );
 
   const handleLoadingComplete = () => {
     setIsLoading(false);

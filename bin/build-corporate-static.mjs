@@ -31,6 +31,19 @@ function addAnalytics(html) {
 copyFileSync(path.join(publish, "index.html"), path.join(publish, "legacy-app.html"));
 cpSync(source, publish, { recursive: true });
 
+let memberLinks = 0;
+function addMemberLinks(html) {
+  for (const [itemClass, linkClass] of [['nav_item', 'nav_item_link'], ['footer_menu_item', 'footer_menu_link']]) {
+    const marker = `<li class="${itemClass}" data-menu="recruit">`;
+    const memberMarker = `<li class="${itemClass}" data-menu="member">`;
+    if (html.includes(marker) && !html.includes(memberMarker)) {
+      html = html.replace(marker, `${memberMarker}<a href="/#member" class="${linkClass}" data-no-swup>MEMBER</a></li>${marker}`);
+      memberLinks += 1;
+    }
+  }
+  return html;
+}
+
 let contactLinks = 0;
 function activateContactLinks(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -39,7 +52,7 @@ function activateContactLinks(directory) {
       activateContactLinks(filename);
     } else if (entry.name.endsWith(".html")) {
       const relative = path.relative(source, filename);
-      const html = readFileSync(filename, "utf8").replace(
+      const html = addMemberLinks(readFileSync(filename, "utf8")).replace(
         /<div class="(nav_item_link|footer_menu_link)">CONTACT<\/div>/g,
         (_, className) => {
           contactLinks += 1;
@@ -59,4 +72,4 @@ copyFileSync(
   path.join(projectRoot, "bin/corporate-production-navigation.js"),
   path.join(publish, "assets/local/local-research-guard.js"),
 );
-console.log(`Published corporate site with ${contactLinks} active contact links and the existing app.`);
+console.log(`Published corporate site with ${contactLinks} active contact links, ${memberLinks} member links, and the existing app.`);

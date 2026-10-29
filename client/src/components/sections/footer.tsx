@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 
-export default function Footer() {
+export default function Footer({ corporate = false }: { corporate?: boolean }) {
   const scrollToSection = (id: string) => {
     if (id === "home") {
       window.location.assign("/");
@@ -36,7 +36,17 @@ export default function Footer() {
               className="flex flex-wrap gap-4 md:gap-8"
               data-testid="footer-nav"
             >
-              {[
+              {corporate ? [
+                { label: "HOME", href: "/" },
+                { label: "ABOUT", href: "/about" },
+                { label: "RESEARCH", href: "/works" },
+                { label: "SERVICES", href: "/service" },
+                { label: "MEMBER", href: "/#member" },
+                { label: "PRODUCTS", href: "/recruit" },
+                { label: "CONTACT", href: "/contact" },
+              ].map(item => (
+                <a key={item.href} href={item.href} className="text-muted-foreground hover:text-primary">{item.label}</a>
+              )) : [
                 { label: "ホーム", id: "home" },
                 { label: "サービス", id: "services" },
                 { label: "チーム", id: "team" },

@@ -20,12 +20,6 @@ const teamMembers = [
     role: "Creative Engineer",
     description: "UI/UX デザインとフロントエンド開発のスペシャリスト。ユーザー体験の向上に情熱を注ぐ。",
     initials: "カ"
-  },
-  {
-    name: "mir",
-    role: "Backend Engineer",
-    description: "サーバーサイド開発とインフラ構築のエキスパート。スケーラブルなシステム設計を得意とする。",
-    initials: "M"
   }
 ];
 

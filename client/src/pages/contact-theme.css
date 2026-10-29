@@ -1,0 +1,138 @@
+.gen-contact-page {
+  --background: #f8f9fa;
+  --foreground: #171717;
+  --card: #fdfdfd;
+  --card-foreground: #171717;
+  --primary: #4a287c;
+  --primary-foreground: #f8f9fa;
+  --secondary: #c6b5f8;
+  --secondary-foreground: #171717;
+  --muted: #ede7f6;
+  --muted-foreground: #454545;
+  --border: rgba(23, 23, 23, .2);
+  --input: #fdfdfd;
+  --ring: #7445d6;
+  --radius: 2px;
+  --font-sans: "Noto Sans JP Variable", system-ui, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  background: #f8f9fa;
+  color: #171717;
+  font-family: var(--font-sans);
+}
+.gen-contact-page [data-testid="navigation"] {
+  background: #f8f9fa;
+  border-bottom: 1px solid rgba(23, 23, 23, .2);
+  box-shadow: 0 3px 0 rgba(198, 181, 248, .6);
+}
+.gen-contact-page [data-testid="logo"],
+.gen-contact-page [data-testid="footer-brand"] > div:first-child {
+  font-family: "Anton", "Barlow Condensed", sans-serif;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+.gen-contact-page .gradient-text {
+  background: none;
+  color: #171717;
+  -webkit-text-fill-color: currentColor;
+}
+.gen-contact-page #contact { padding: 76px 0 72px; background: none; }
+.gen-contact-page [data-testid="contact-header"] { margin-bottom: 54px; }
+.gen-contact-page [data-testid="contact-header"] h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.5; }
+.gen-contact-page [data-testid="contact-header"] svg { display: none; }
+.gen-contact-page [data-testid="contact-form"] > div {
+  border: 1px solid rgba(23, 23, 23, .3);
+  border-radius: 2px;
+  background: #fdfdfd;
+  box-shadow: 7px 7px 0 #c6b5f8;
+  backdrop-filter: none;
+}
+.gen-contact-page [data-testid="contact-form"] > div > .pointer-events-none { display: none; }
+.gen-contact-page [data-testid="contact-info"] h3 { font-size: 26px; margin-bottom: 24px; }
+.gen-contact-page [data-testid="contact-info"] .group { border-bottom: 1px solid rgba(23, 23, 23, .16); border-radius: 0; background: rgba(247,249,248,.9); }
+.gen-contact-page [data-testid="contact-info"] .group > div:first-child {
+  flex-shrink: 0;
+  border: 1px solid rgba(23,23,23,.16);
+  border-radius: 2px;
+  background: #c6b5f8;
+  color: #4a287c;
+}
+.gen-contact-page [data-testid="contact-social"] a { border: 1px solid rgba(23,23,23,.3); border-radius: 2px; background: #f8f9fa; color: #171717; box-shadow: none; }
+.gen-contact-page [data-testid="contact-social"] a:hover { background: #c6b5f8; }
+.gen-contact-page .text-white { color: #171717; }
+.gen-contact-page .glass-input {
+  border: 1px solid rgba(23,23,23,.4) !important;
+  border-radius: 2px !important;
+  background: #f8f9fa !important;
+  color: #171717 !important;
+  font: inherit;
+  backdrop-filter: none;
+}
+.gen-contact-page .glass-input::placeholder { color: #655d6a; }
+.gen-contact-page .glass-input:hover { border-color: #4a287c !important; }
+.gen-contact-page .glass-input:focus,
+.gen-contact-page .glass-input:focus-visible {
+  border-color: #7445d6 !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(116,69,214,.2) !important;
+}
+.gen-contact-page [data-testid="button-submit"] {
+  min-height: 52px;
+  border: 1px solid #171717;
+  border-radius: 2px;
+  background: #171717;
+  color: #f8f9fa;
+  box-shadow: 4px 4px 0 #c6b5f8 !important;
+  backdrop-filter: none;
+}
+.gen-contact-page [data-testid="button-submit"]:hover { background: #4a287c; transform: none; }
+.gen-contact-page a:focus-visible, .gen-contact-page button:focus-visible { outline: 2px solid #7445d6; outline-offset: 4px; }
+.gen-contact-page [data-testid="footer"] {
+  --foreground: #f8f9fa;
+  --primary: #c6b5f8;
+  --muted-foreground: #c6b5f8;
+  background: #171717;
+  color: #f8f9fa;
+}
+.gen-contact-page [data-testid="footer"] .text-muted-foreground { color: #c6b5f8; }
+.gen-contact-page [data-testid="footer"] .gradient-text { color: #f8f9fa; }
+
+/* Radix renders its list outside the wrapper; the route presence keeps its scope local. */
+body:has(.gen-contact-page) [data-radix-popper-content-wrapper] [role="listbox"] {
+  border: 1px solid #171717;
+  border-radius: 2px;
+  background: #fdfdfd !important;
+  color: #171717 !important;
+  font-family: "Noto Sans JP Variable", system-ui, sans-serif;
+  box-shadow: 4px 4px 0 #c6b5f8;
+}
+body:has(.gen-contact-page) [data-radix-popper-content-wrapper] [role="option"] { color: #171717; }
+body:has(.gen-contact-page) [data-radix-popper-content-wrapper] [role="option"][data-highlighted],
+body:has(.gen-contact-page) [data-radix-popper-content-wrapper] [role="option"][data-state="checked"] { background: #c6b5f8; color: #171717; }
+@media (max-width: 767px) {
+  .gen-contact-page { background-size: auto 1000px; }
+  .gen-contact-page #contact { padding: 52px 0 48px; }
+  .gen-contact-page [data-testid="contact-header"] { margin-bottom: 38px; text-align: left; }
+  .gen-contact-page [data-testid="contact-header"] p { font-size: 15px; line-height: 1.8; }
+  .gen-contact-page [data-testid="contact-form"] > div { padding: 24px; box-shadow: 4px 4px 0 #c6b5f8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gen-contact-page [data-testid="navigation"],
+  .gen-contact-page [data-testid="contact-header"],
+  .gen-contact-page [data-testid="contact-info"],
+  .gen-contact-page [data-testid="contact-form"] { opacity: 1 !important; transform: none !important; transition: none; }
+}
+
+.gen-contact-page::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 1000px; pointer-events: none; background: url("/assets/local/liquid-metal-mint.webp") center top / 100% auto no-repeat; filter: hue-rotate(116deg); }
+.gen-contact-page [data-testid="navigation"] a,
+.gen-contact-page [data-testid="footer-nav"] a { display: inline-block; font-family: "Anton", "Barlow Condensed", sans-serif; font-weight: 400; line-height: 1.1; transition: color .25s, translate .3s; }
+.gen-contact-page [data-testid="navigation"] a { font-size: clamp(18px, 1.8vw, 26px); }
+.gen-contact-page [data-testid="footer-nav"] a { font-size: clamp(26px, 2.8vw, 40px); }
+.gen-contact-page [data-testid="navigation"] a:hover,
+.gen-contact-page [data-testid="footer-nav"] a:hover { translate: 4px 0; }
+.gen-contact-page [data-testid="mobile-menu"] a { display: block; font-size: clamp(30px, 9vw, 42px); }
+@media (max-width: 767px) { .gen-contact-page::before { background-size: auto 1000px; } }
+@media (prefers-reduced-motion: reduce) { .gen-contact-page [data-testid="navigation"] a, .gen-contact-page [data-testid="footer-nav"] a { transition: none; translate: none !important; } }

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
-export default function Navigation() {
+export default function Navigation({ corporate = false }: { corporate?: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +27,50 @@ export default function Navigation() {
       setIsMobileMenuOpen(false);
     }
   };
+
+  if (corporate) {
+    const links = [
+      { label: "HOME", href: "/" },
+      { label: "ABOUT", href: "/about" },
+      { label: "RESEARCH", href: "/works" },
+      { label: "SERVICES", href: "/service" },
+      { label: "MEMBER", href: "/#member" },
+      { label: "PRODUCTS", href: "/recruit" },
+      { label: "CONTACT", href: "/contact" },
+    ];
+    return (
+      <motion.nav
+        initial={reducedMotion ? false : { y: -90 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 w-full z-50"
+        data-testid="navigation"
+        aria-label="グローバルナビゲーション"
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between gap-6">
+            <a href="/" className="gradient-text" data-testid="logo">CRUD5th</a>
+            <div className="hidden lg:flex items-center gap-6">
+              {links.map(link => <a key={link.href} href={link.href} aria-current={link.href === "/contact" ? "page" : undefined}>{link.label}</a>)}
+            </div>
+            <button
+              type="button"
+              className="lg:hidden p-2"
+              aria-label={isMobileMenuOpen ? "メニューを閉じる" : "メニューを開く"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="corporate-mobile-menu"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              data-testid="mobile-menu-button"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+          <div id="corporate-mobile-menu" hidden={!isMobileMenuOpen} className="lg:hidden py-5 space-y-4" data-testid="mobile-menu">
+            {links.map(link => <a key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)} aria-current={link.href === "/contact" ? "page" : undefined}>{link.label}</a>)}
+          </div>
+        </div>
+      </motion.nav>
+    );
+  }
 
   return (
     <motion.nav
