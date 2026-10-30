@@ -16,10 +16,10 @@ const teamMembers = [
     }
   },
   {
-    name: "かえる",
+    name: "鶴岡健太",
     role: "Creative Engineer",
     description: "UI/UX デザインとフロントエンド開発のスペシャリスト。ユーザー体験の向上に情熱を注ぐ。",
-    initials: "カ"
+    initials: "鶴"
   }
 ];
 

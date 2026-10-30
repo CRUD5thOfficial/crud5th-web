@@ -9,6 +9,7 @@
   }
   function updateCinemaDimming() {
     cinemaFrame = 0;
+    updateGearBackgrounds();
     if (!cinemaSection?.isConnected) return;
     const scrollArea = cinemaSection.querySelector('.home_recruit_scrollArea');
     if (!scrollArea) return;
@@ -35,6 +36,13 @@
     cinemaSection.style.setProperty('--cinema-vignette', Math.max(0, (progress - .4) / .6) * .45);
     cinemaSection.style.setProperty('--cinema-ornament', Math.max(0, 1 - progress / .25));
     cinemaSection.dataset.cinemaReady = 'true';
+    const surface = gearBackgrounds.get(cinemaSection);
+    if (surface) {
+      for (const name of ['stage', 'highlight', 'vignette', 'ornament']) {
+        surface.style.setProperty(`--cinema-${name}`, cinemaSection.style.getPropertyValue(`--cinema-${name}`));
+      }
+      surface.dataset.cinemaReady = 'true';
+    }
   }
   function syncMotionVisibility() {
     document.documentElement.dataset.crud5thMotionPaused = String(document.hidden);
@@ -62,6 +70,9 @@
     ['.home_member', '06', 'MEMBER'],
     ['.home_recruit', '07', 'PRODUCTS']
   ];
+  const gearBackgrounds = new Map();
+  const gearBackgroundResize = new ResizeObserver(requestCinemaUpdate);
+  let gearBackgroundPlane = null;
   function createGearSeam(width, teeth) {
     const ns = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(ns, 'svg');
@@ -100,6 +111,7 @@
       tracks.push(`M${point(0, inset)}A${radius + inset},${radius + inset} 0 0 ${side ? 1 : 0} ${point(1, inset)}`);
     }
     const edge = `M${edges.join('L')}`;
+    svg.__crud5thGearPoints = edges.map(point => point.split(',').map(Number));
     for (const [name, d] of [['surface', `M0,-2H${width}V${baseline}L${edges.slice().reverse().join('L')}Z`], ['edge', edge], ['track', tracks.join('')], ['ticks', ticks.join('')]]) {
       const path = document.createElementNS(ns, 'path');
       path.setAttribute('class', `crud5th-gear-${name}`);
@@ -107,6 +119,66 @@
       svg.append(path);
     }
     return svg;
+  }
+  function syncGearBackgrounds() {
+    for (const [section, surface] of gearBackgrounds) {
+      if (section.isConnected) continue;
+      gearBackgroundResize.unobserve(section); surface.remove(); gearBackgrounds.delete(section);
+    }
+    for (const name of ['service', 'awards', 'member', 'recruit']) {
+      const section = document.querySelector(`.home_${name}`);
+      if (!section) continue;
+      if (!gearBackgroundPlane?.isConnected) {
+        gearBackgroundPlane = document.createElement('div');
+        gearBackgroundPlane.className = 'crud5th-seam-background-plane';
+        gearBackgroundPlane.setAttribute('aria-hidden', 'true');
+        document.body.append(gearBackgroundPlane);
+      }
+      let surface = gearBackgrounds.get(section);
+      if (!surface) {
+        surface = document.createElement('div');
+        surface.className = 'crud5th-seam-background'; surface.dataset.scene = name;
+        gearBackgroundPlane.append(surface); gearBackgrounds.set(section, surface);
+        gearBackgroundResize.observe(section);
+      }
+      const field = section.__crud5thFlowField || section.querySelector(':scope > .crud5th-flow-field');
+      if (field && field.parentElement !== surface) {
+        section.__crud5thFlowField = field; surface.append(field);
+      }
+      section.dataset.gearBackground = 'true';
+    }
+    if (!gearBackgrounds.size) { gearBackgroundPlane?.remove(); gearBackgroundPlane = null; }
+    requestCinemaUpdate();
+  }
+  function updateGearBackgrounds() {
+    if (!gearBackgroundPlane?.isConnected) return;
+    const plane = gearBackgroundPlane.getBoundingClientRect();
+    const entries = [...gearBackgrounds].filter(([section]) => section.isConnected).map(([section, surface]) => ({
+      section, surface, rect: section.getBoundingClientRect(),
+      seam: section.querySelector(':scope > .crud5th-gear-seam')
+    }));
+    const shape = entry => {
+      const svg = entry.seam?.querySelector(`[data-seam-size="${innerWidth <= 767 ? 'compact' : 'wide'}"]`);
+      if (!svg) return null;
+      return { rect: svg.getBoundingClientRect(), points: svg.__crud5thGearPoints, box: svg.viewBox.baseVal };
+    };
+    const write = (surface, name, value) => {
+      const previous = surface.__crud5thGearStyle ||= {};
+      if (previous[name] !== value) { surface.style[name] = value; previous[name] = value; }
+    };
+    for (let index = 0; index < entries.length; index++) {
+      const entry = entries[index], next = entries[index + 1];
+      const top = shape(entry), bottom = next && shape(next);
+      if (!top?.points || !entry.rect.width) continue;
+      const height = bottom ? bottom.rect.bottom - entry.rect.top : entry.rect.height;
+      const points = edge => edge.points.map(([x, y]) => `${x / edge.box.width * 100}% ${edge.rect.top - entry.rect.top + y / edge.box.height * edge.rect.height}px`);
+      const polygon = points(top).concat(bottom ? points(bottom).reverse() : [`100% ${height}px`, `0% ${height}px`]);
+      write(entry.surface, 'left', `${entry.rect.left - plane.left}px`);
+      write(entry.surface, 'top', `${entry.rect.top - plane.top}px`);
+      write(entry.surface, 'width', `${entry.rect.width}px`);
+      write(entry.surface, 'height', `${height}px`);
+      write(entry.surface, 'clipPath', `polygon(${polygon.join(',')})`);
+    }
   }
   function syncSceneStructure() {
     for (const [selector, number, label] of scenes) {
@@ -129,6 +201,7 @@
       section.prepend(seam);
       section.dataset.gearSeam = 'true';
     }
+    syncGearBackgrounds();
     const hero = document.querySelector('.crud5th-light-opening');
     if (hero && !hero.querySelector('.crud5th-scene-plates')) {
       const plates = document.createElement('div'); plates.className = 'crud5th-scene-plates'; plates.setAttribute('aria-hidden', 'true');

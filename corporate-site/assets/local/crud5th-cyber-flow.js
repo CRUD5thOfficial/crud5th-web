@@ -160,8 +160,11 @@
       if (!target.isConnected) { intersection.unobserve(target); targets.delete(target); visible.delete(target); fields.delete(target); }
     }
     for (const section of document.querySelectorAll(selector)) {
-      let field = [...section.children].find(child => child.classList.contains('crud5th-flow-field'));
+      // Gear backgrounds keep the same live field outside clipped 3D sections.
+      let field = section.__crud5thFlowField;
+      if (!field?.isConnected) field = [...section.children].find(child => child.classList.contains('crud5th-flow-field'));
       if (!field) { field = document.createElement('div'); field.className = 'crud5th-flow-field'; field.setAttribute('aria-hidden', 'true'); section.prepend(field); }
+      section.__crud5thFlowField = field;
       if (!targets.has(field)) {
         const canvas = document.createElement('canvas'); canvas.className = 'crud5th-orbit-canvas'; canvas.setAttribute('aria-hidden', 'true');
         const context = canvas.getContext('2d', { alpha: true });
