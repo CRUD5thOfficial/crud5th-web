@@ -179,14 +179,21 @@
 @media(max-width:640px) { .kotoport-page .kp-concept {grid-template-columns:minmax(0,1fr);} }
 
 /* Content panels use the existing Kotoport palette and reading order. */
-.kotoport-page .kp-labor-background { display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:40px;margin-top:56px;padding:36px 40px;border-radius:28px;background:var(--kp-sage); }
+.kotoport-page .kp-labor-background { margin-top:56px;padding:36px 40px;border-radius:28px;background:var(--kp-sage); }
 .kotoport-page .kp-labor-label { display:block;font-size:13px;font-weight:800;color:var(--kp-muted);margin-bottom:12px; }
 .kotoport-page .kp-labor-copy h2 { font-size:27px;line-height:1.6;letter-spacing:-.035em;text-wrap:initial; }
-.kotoport-page .kp-labor-copy p { font-size:15px;line-height:1.9;margin-top:16px; }
-.kotoport-page .kp-labor-source { border-left:1px solid var(--kp-line);padding-left:30px;font-size:12px;line-height:1.9;color:var(--kp-muted); }
-.kotoport-page .kp-labor-source>svg { width:23px;height:23px;margin-bottom:10px;color:var(--kp-blue); }
-.kotoport-page .kp-labor-source a { display:block;text-decoration:underline;text-underline-offset:3px;margin-block:12px;font-weight:700;color:var(--kp-ink);overflow-wrap:anywhere; }
-.kotoport-page .kp-labor-source a svg { display:inline-block;width:15px;height:15px;margin-left:6px;vertical-align:middle; }
+.kotoport-page .kp-labor-copy p { font-size:16px;line-height:1.9;margin-top:16px; }
+.kotoport-page .kp-labor-statistics { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px; }
+.kotoport-page .kp-labor-stat { display:flex;flex-direction:column;min-width:0;padding:24px;border:1px solid var(--kp-line);border-radius:20px;background:var(--kp-white); }
+.kotoport-page .kp-labor-stat h3 { font-size:16px;font-weight:800;line-height:1.65; }
+@media(min-width:1001px) { .kotoport-page .kp-labor-stat h3 { min-height:3.3em; } }
+.kotoport-page .kp-labor-stat-value { margin-block:16px;font-size:42px;font-weight:800;line-height:1.15;letter-spacing:-.04em;white-space:nowrap; }
+.kotoport-page .kp-labor-stat-value span { margin-left:6px;font-size:20px;letter-spacing:0; }
+.kotoport-page .kp-labor-stat-description { font-size:16px;line-height:1.9; }
+.kotoport-page .kp-labor-stat-source { margin-top:auto;padding-top:22px;font-size:13px;line-height:1.9;color:var(--kp-muted); }
+.kotoport-page .kp-labor-stat-source a { display:block;min-height:44px;padding-block:8px;margin-bottom:8px;text-decoration:underline;text-underline-offset:3px;font-weight:700;color:var(--kp-ink);overflow-wrap:anywhere; }
+.kotoport-page .kp-labor-stat-source a svg { display:inline-block;width:15px;height:15px;margin-left:6px;vertical-align:middle; }
+.kotoport-page .kp-labor-note { margin-top:24px;font-size:16px;font-weight:700;line-height:1.9; }
 .kotoport-page .kp-feature-blue { padding-bottom:135px; }
 .kotoport-page .kp-inbound-example { display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;max-width:1120px;margin:48px auto 0; }
 .kotoport-page .kp-inbound-example .kp-inbound-scene { display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:0;padding:0;min-width:0; }
@@ -243,8 +250,8 @@
 .kotoport-page .kp-economics-review h3 { font-size:20px;font-weight:800;line-height:1.5; }
 .kotoport-page .kp-economics-review p { font-size:14px;line-height:1.9;margin-top:12px; }
 @media(max-width:1000px) {
-  .kotoport-page .kp-labor-background { grid-template-columns:minmax(0,1fr);gap:24px;padding:30px; }
-  .kotoport-page .kp-labor-source { padding:24px 0 0;border-left:0;border-top:1px solid var(--kp-line); }
+  .kotoport-page .kp-labor-background { padding:30px; }
+  .kotoport-page .kp-labor-statistics { grid-template-columns:minmax(0,1fr); }
   .kotoport-page .kp-feature-blue { padding-bottom:70px; }
   .kotoport-page .kp-inbound-example { grid-template-columns:minmax(0,1fr);gap:28px;max-width:680px; }
   .kotoport-page .kp-inbound-example .kp-scene-assistant { width:140px; }
@@ -257,7 +264,7 @@
 @media(max-width:640px) {
   .kotoport-page .kp-labor-background { margin-top:32px;padding:26px 24px;border-radius:24px; }
   .kotoport-page .kp-labor-copy h2 { font-size:23px; }
-  .kotoport-page .kp-labor-copy p { font-size:14px; }
+  .kotoport-page .kp-labor-stat { padding:20px; }
   .kotoport-page .kp-feature-blue { padding-bottom:50px; }
   .kotoport-page .kp-inbound-example { margin-top:36px;gap:30px; }
   .kotoport-page .kp-inbound-example .kp-inbound-card { padding:22px 17px 30px;border-radius:24px; }

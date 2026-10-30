@@ -66,13 +66,46 @@ export const kotoportContent = {
   laborBackground: {
     label: "電話業務を見直す背景",
     title: "人を増やす以外の方法も、選択肢に。",
-    description: "帝国データバンクの2026年7月調査では、正社員が不足していると回答した企業は51.3％でした。繰り返しの受付や確認をどう分担するか、電話業務から見直してみませんか。",
-    scope: "全国企業を対象にした人手不足の調査です。",
-    source: {
-      label: "帝国データバンク「人手不足に対する企業の動向調査（2026年7月）」",
-      url: "https://www.tdb.co.jp/report/economic/20260817-laborshortage202607/",
-      details: "2026年8月17日公表。全国22,350社を対象、有効回答10,518社。調査期間：2026年7月17日〜31日。",
-    },
+    description: "人手の確保や採用時給、電話のつながりやすさ。公開調査からも、電話業務を見直す背景が見えてきます。",
+    statistics: [
+      {
+        id: "staffing",
+        title: "正社員が不足している企業",
+        value: "51.3",
+        unit: "％",
+        description: "全国企業の雇用過不足調査。2026年7月、有効回答10,518社。",
+        source: {
+          label: "帝国データバンク「人手不足に対する企業の動向調査」",
+          url: "https://www.tdb.co.jp/report/economic/20260817-laborshortage202607/",
+          details: "2026年8月17日公表。調査期間：2026年7月17日〜31日。対象22,350社。",
+        },
+      },
+      {
+        id: "wage",
+        title: "コールセンターの平均採用時時給",
+        value: "1,533",
+        unit: "円",
+        description: "全国のコールセンターの公開求人情報を集計した、採用時の平均時給。2026年1〜3月調査。",
+        source: {
+          label: "コールセンタージャパン「全国採用時 時給・月給調査2026」",
+          url: "https://callcenter-japan.com/article/9054/1/",
+          details: "2026年6月20日公表。対象：全国のコールセンター公開求人2,530件。",
+        },
+      },
+      {
+        id: "connection",
+        title: "すぐにつながった人",
+        value: "22.5",
+        unit: "％",
+        description: "直近にコールセンターへ電話した際、オペレーターにすぐにつながった人の割合。4業種800人の調査。",
+        source: {
+          label: "コールセンタージャパン「コールセンター白書2025」消費者調査",
+          url: "https://callcenter-japan.com/article/8548/1/",
+          details: "2025年12月20日公表記事。通信販売・携帯通信・生損保・クレジットカードの4業種、各200人・計800人。",
+        },
+      },
+    ],
+    note: "繰り返しの受付や確認をAIへ。人は、判断が必要な対応に。",
   },
   handoffExample: {
     label: "架空の利用例",
