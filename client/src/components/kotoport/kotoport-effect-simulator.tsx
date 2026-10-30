@@ -2,13 +2,11 @@ import { useId, useRef, useState } from "react";
 import { AlertCircle, ArrowDown, ArrowRight, Calculator, CalendarDays, ChevronDown, Clock3, Coins, Headphones, Phone, RotateCcw, SlidersHorizontal, UserRound, type LucideIcon } from "lucide-react";
 import { kotoportContent as content, type KotoportPlan } from "@/pages/kotoport-content";
 import { aiMonthlyQuoteBounds, compareKotoportStaffing, isValidAiMonthlyQuoteYen, simulateKotoport, simulationInputDefinitions, staffingInputDefinitions, type SimulationValues, type StaffingValues } from "@/pages/kotoport-simulation";
+import { readSimulatorConditions, resetSimulatorConditions, saveSimulatorConditions, type FieldKey, type ResultUnit, type SimulatorConditions } from "./kotoport-simulator-storage";
 import "./kotoport-effect-simulator.css";
 
-type FieldKey = keyof SimulationValues | keyof StaffingValues;
-type RawValues = Record<FieldKey, string>;
 type SimulationResult = NonNullable<ReturnType<typeof simulateKotoport>>;
 type StaffingResult = NonNullable<ReturnType<typeof compareKotoportStaffing>>;
-type ResultUnit = "call" | "minute" | "month" | "time";
 const inputDefinitions = { ...simulationInputDefinitions, ...staffingInputDefinitions };
 const fieldKeys = Object.keys(inputDefinitions) as FieldKey[];
 const workloadKeys = Object.keys(simulationInputDefinitions) as (keyof SimulationValues)[];
@@ -28,7 +26,6 @@ const numberFormat = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 1 }
 const yenFormat = new Intl.NumberFormat("ja-JP", { maximumFractionDigits: 0 });
 const format = (value: number) => numberFormat.format(value);
 const yen = (value: number) => yenFormat.format(value);
-const initialValues = () => Object.fromEntries(fieldKeys.map(key => [key, String(inputDefinitions[key].defaultValue)])) as RawValues;
 
 function parseField(key: FieldKey, raw: string): number | null {
   if (raw.trim() === "") return null;
@@ -130,11 +127,8 @@ function CostResults({ comparison, plan, unit, feeMode, onEdit }: {
 
 export function KotoportEffectSimulator() {
   const id = useId();
-  const [rawValues, setRawValues] = useState<RawValues>(initialValues);
-  const [rawMonthlyQuote, setRawMonthlyQuote] = useState("");
-  const [planId, setPlanId] = useState("medium");
-  const [feeMode, setFeeMode] = useState<"reference" | "quote">("reference");
-  const [unit, setUnit] = useState<ResultUnit>("call");
+  const [conditions, setConditions] = useState(() => readSimulatorConditions());
+  const { rawValues, rawMonthlyQuote, planId, feeMode, unit } = conditions;
   const [detailsOpen, setDetailsOpen] = useState(false);
   const quoteRef = useRef<HTMLInputElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -151,8 +145,14 @@ export function KotoportEffectSimulator() {
   const comparison = workloadValid && staffingValid ? compareKotoportStaffing(parsedValues as SimulationValues, plan, parsedValues as StaffingValues, feeMode === "reference" ? { mode: "reference" } : { mode: "quote", monthlyQuoteYen: parsedQuote }) : null;
   const hasEmptyField = workloadKeys.some(key => rawValues[key].trim() === "");
   const coverage = parsedValues.aiCoveragePercent;
-  const change = (key: FieldKey, value: string) => setRawValues(previous => ({ ...previous, [key]: value }));
-  const reset = () => { setRawValues(initialValues()); setRawMonthlyQuote(""); setPlanId("medium"); setFeeMode("reference"); setUnit("call"); setDetailsOpen(false); };
+  const updateConditions = (changes: Partial<SimulatorConditions>) => {
+    const next = { ...conditions, ...changes };
+    // Save in the input event; a later effect could lose the last edit on navigation.
+    saveSimulatorConditions(next);
+    setConditions(next);
+  };
+  const change = (key: FieldKey, value: string) => updateConditions({ rawValues: { ...rawValues, [key]: value } });
+  const reset = () => { setConditions(resetSimulatorConditions()); setDetailsOpen(false); };
 
   function openDetails(focus: "invalid" | "quote" | "staffing" = "invalid") {
     setDetailsOpen(true);
@@ -202,11 +202,11 @@ export function KotoportEffectSimulator() {
               <p className="kp-sim-field-help">AI対象の電話業務へ、新たに専任担当者を置く仮定です。</p>
               <div className="kp-sim-secondary-fields kp-sim-review-fields">{field("reviewMinutesPerAiCall")}{field("hourlyWageYen")}</div>
               <p className="kp-sim-field-help">確認時間はAIが受けた1件あたり。時給は配置時間と内容確認の換算に使います。</p>
-              <div className="kp-sim-plan"><label htmlFor={`${id}-fee-mode`}>料金の条件</label><select id={`${id}-fee-mode`} value={feeMode} onChange={event => setFeeMode(event.target.value as "reference" | "quote")}><option value="reference">参考料金で試算</option><option value="quote">月額見積額で試算</option></select></div>
-              <div className="kp-sim-plan"><label htmlFor={`${id}-plan`}>{feeMode === "reference" ? "参考プラン" : "初期費用の参考プラン"}</label><select id={`${id}-plan`} value={planId} onChange={event => setPlanId(event.target.value)}>{content.pricing.plans.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div>
+              <div className="kp-sim-plan"><label htmlFor={`${id}-fee-mode`}>料金の条件</label><select id={`${id}-fee-mode`} value={feeMode} onChange={event => updateConditions({ feeMode: event.target.value as "reference" | "quote" })}><option value="reference">参考料金で試算</option><option value="quote">月額見積額で試算</option></select></div>
+              <div className="kp-sim-plan"><label htmlFor={`${id}-plan`}>{feeMode === "reference" ? "参考プラン" : "初期費用の参考プラン"}</label><select id={`${id}-plan`} value={planId} onChange={event => updateConditions({ planId: event.target.value })}>{content.pricing.plans.map(item => <option key={item.id} value={item.id}>{item.name}</option>)}</select></div>
               {feeMode === "quote" ? <div className={`kp-sim-field kp-sim-quote${quoteInvalid ? " kp-sim-field-invalid" : ""}`}>
                 <label htmlFor={quoteInputId}><Coins aria-hidden="true" />AIの月額見積額<span className="kp-sim-optional">税別</span></label>
-                <div className="kp-sim-input-wrap"><input ref={quoteRef} id={quoteInputId} type="number" inputMode="decimal" min={aiMonthlyQuoteBounds.min} max={aiMonthlyQuoteBounds.max} step="any" value={rawMonthlyQuote} placeholder="見積額を入力" onChange={event => setRawMonthlyQuote(event.target.value)} aria-invalid={quoteInvalid || undefined} aria-describedby={`${quoteInputId}-help${quoteInvalid ? ` ${quoteInputId}-error` : ""}`} /><span>円／月</span></div>
+                <div className="kp-sim-input-wrap"><input ref={quoteRef} id={quoteInputId} type="number" inputMode="decimal" min={aiMonthlyQuoteBounds.min} max={aiMonthlyQuoteBounds.max} step="any" value={rawMonthlyQuote} placeholder="見積額を入力" onChange={event => updateConditions({ rawMonthlyQuote: event.target.value })} aria-invalid={quoteInvalid || undefined} aria-describedby={`${quoteInputId}-help${quoteInvalid ? ` ${quoteInputId}-error` : ""}`} /><span>円／月</span></div>
                 <p className="kp-sim-field-help" id={`${quoteInputId}-help`}>基本料と従量料金を含む月額小計です。参考料金へ加算しません。未入力なら費用比較は未算定です。</p>
                 {quoteInvalid && <p className="kp-sim-field-error" id={`${quoteInputId}-error`}>{rawMonthlyQuote.trim() === "" ? "月額見積額を入力してください。" : `${format(aiMonthlyQuoteBounds.min)}〜${format(aiMonthlyQuoteBounds.max)}円で入力してください。`}</p>}
               </div> : <p className="kp-sim-field-help">参考条件：基本{yen(plan.monthlyFeeYen)}円（{format(plan.includedMinutes)}分込み）＋超過1分{yen(plan.overageYenPerMinute)}円。実際の料金は見積で確認します。</p>}
@@ -214,11 +214,11 @@ export function KotoportEffectSimulator() {
             </div>
           </div>
           <a className="kp-sim-nearby-result" href="#kp-sim-results">{comparison?.perCall ? <span>1通話 <strong>{format(comparison.perCall.humanYen)} → {format(comparison.perCall.aiYen)}</strong> 円</span> : <span>条件と結果を確認する</span>}<ArrowDown aria-hidden="true" /></a>
-          <p className="kp-sim-privacy">入力内容は送信・保存されません。</p>
+          <p className="kp-sim-privacy">入力内容はこのブラウザに保存されます。外部には送信しません。</p>
         </div>
         <div className="kp-sim-results" id="kp-sim-results" aria-labelledby="kp-sim-result-title">
           <div className="kp-sim-result-heading"><h3 id="kp-sim-result-title">同じ電話業務で比較</h3><button type="button" className="kp-sim-cost-button" onClick={() => openDetails()} aria-controls={detailsId} aria-expanded={detailsOpen}><SlidersHorizontal aria-hidden="true" />条件を変更<ArrowRight aria-hidden="true" /></button></div>
-          <div className="kp-sim-unit-switch" role="group" aria-label="比較する単位">{([["call", "1通話"], ["minute", "1分"], ["month", "月額"], ["time", "対応時間"]] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={unit === value} onClick={() => setUnit(value)}>{label}</button>)}</div>
+          <div className="kp-sim-unit-switch" role="group" aria-label="比較する単位">{([["call", "1通話"], ["minute", "1分"], ["month", "月額"], ["time", "対応時間"]] as const).map(([value, label]) => <button type="button" key={value} aria-pressed={unit === value} onClick={() => updateConditions({ unit: value })}>{label}</button>)}</div>
           {result && <div className="kp-sim-comparison-scope"><p><Headphones aria-hidden="true" />{unit === "time" ? "すべての電話" : "AI対象"} <strong>月{format(unit === "time" ? result.monthlyCalls : result.aiCalls)}件／{format(unit === "time" ? result.monthlyMinutes : result.aiMinutes)}分</strong>を比較</p>{unit !== "time" && <p>{staffingValid ? `人${format(parsedValues.staffingCount!)}人×${format(parsedValues.staffingHoursPerDay!)}h／日・時給${yen(parsedValues.hourlyWageYen!)}円` : "専任配置の入力を確認してください"}<span className="kp-sim-reference-tag">{feeMode === "reference" ? "参考料金" : "月額見積額"}</span></p>}</div>}
           <p className="sr-only" aria-live="polite" aria-atomic="true">{resultSummary}</p>
           {result ? unit === "time" ? <>
