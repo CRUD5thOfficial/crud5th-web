@@ -276,6 +276,14 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 2px s
 .flipBtn .flipBtn_item[data-flip="back"] { background: var(--gen-accent) !important; color: var(--gen-paper); }
 .flipBtn .flipBtn_item[data-flip] .flipBtn_item_icon path { stroke: currentColor; }
 .flipBtn_item_text { font-family: var(--gen-japanese); }
+a.flipBtn:is([data-flip-type="home_about"], [data-flip-type="home_service"], [data-flip-type="home_recruit"]) .flipBtn_item_text {
+  font-family: var(--gen-latin);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: .04em;
+  padding-inline: .12em;
+}
 .footer { --footer-surface: #0d0c10; --footer-line: rgba(198,181,248,.22); background: var(--footer-surface); }
 .footer::before { background: var(--footer-surface); }
 .footer_content { background: var(--footer-surface); box-shadow: inset 0 1px 0 var(--footer-line); }
@@ -502,6 +510,9 @@ body[data-crud5th-opening-surface="about"] .copyright_text { color: #f4f2f8 !imp
 @media (max-width: 1024px) and (min-width: 768px) {
   .crud5th-light-heading p { font-size: 23px; }
 }
+@media (max-width: 768px) {
+  .home_kv--light + .home_about .flipBtn_item[data-flip] { min-height: 44px; padding: 12px 22px; box-sizing: border-box; align-items: center; }
+}
 @media (max-width: 767px) {
   .crud5th-light-opening > .crud5th-scene-heading { left: 6%; top: calc(var(--gen-hero-base) * .12); gap: 12px; }
   .crud5th-light-opening .crud5th-scene-number { font-size: 118px; }
@@ -517,7 +528,6 @@ body[data-crud5th-opening-surface="about"] .copyright_text { color: #f4f2f8 !imp
   .crud5th-scene-heading { top: 24px; left: 6%; gap: 12px; }
   .crud5th-scene-number { font-size: 90px; }
   .home_kv--light + .home_about { padding-top: 160px; }
-  .home_kv--light + .home_about .flipBtn_item[data-flip] { min-height: 44px; padding: 12px 22px; box-sizing: border-box; align-items: center; }
   .home_works .crud5th-scene-heading { top: 14px; right: 5%; }
   .home_works .crud5th-scene-number { font-size: 74px; }
   .home_service .crud5th-scene-heading { top: 12px; left: 6%; right: auto; }
