@@ -1,0 +1,77 @@
+.kotoport-page .kp-case-card.kp-case-card-scene {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+}
+
+.kotoport-page .kp-case-card.kp-case-card-scene > h3 {
+  padding: 24px 26px 0;
+  font-size: 22px;
+  line-height: 1.5;
+  letter-spacing: -.03em;
+}
+
+.kotoport-page .kp-case-scene-stage {
+  margin-top: 8px;
+  padding-inline: 10px;
+  background: var(--kp-case-scene-tint, #f4efff);
+}
+
+.kotoport-page .kp-case-card-scene.kp-case-purple { --kp-case-scene-tint: #f4efff; }
+.kotoport-page .kp-case-card-scene.kp-case-green { --kp-case-scene-tint: #e2f8ee; }
+.kotoport-page .kp-case-card-scene.kp-case-yellow { --kp-case-scene-tint: #fff5d9; }
+.kotoport-page .kp-case-card-scene.kp-case-blue { --kp-case-scene-tint: #deecff; }
+.kotoport-page .kp-case-card-scene.kp-case-pink { --kp-case-scene-tint: #ffe3f5; }
+
+.kotoport-page .kp-case-responsibilities {
+  display: grid;
+  gap: 13px;
+  padding: 22px 26px 26px;
+  margin: 0;
+}
+
+.kotoport-page .kp-case-responsibilities > div {
+  min-width: 0;
+}
+
+.kotoport-page .kp-case-responsibilities > div + div {
+  padding-top: 13px;
+  border-top: 1px solid #e7e8ed;
+}
+
+.kotoport-page .kp-case-responsibilities dt {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+  color: var(--kp-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kotoport-page .kp-case-responsibilities dt svg {
+  width: 16px;
+  height: 16px;
+}
+
+.kotoport-page .kp-case-responsibilities dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.85;
+}
+
+@media (min-width: 1001px) {
+  .kotoport-page .kp-case-grid.kp-case-scene-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .kotoport-page .kp-case-scene-grid > article { grid-column: span 2; }
+  .kotoport-page .kp-case-scene-grid > article:nth-last-child(2) { grid-column: 2 / span 2; }
+}
+
+@media (max-width: 640px) {
+  .kotoport-page .kp-case-card.kp-case-card-scene > h3 { padding: 22px 24px 0; }
+  .kotoport-page .kp-case-responsibilities { padding: 20px 24px 24px; }
+}

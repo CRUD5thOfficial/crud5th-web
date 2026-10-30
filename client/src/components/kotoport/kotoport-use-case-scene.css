@@ -1,0 +1,77 @@
+.kotoport-page .kp-case-scene {
+  --kp-scene-ink:#725992;
+  --kp-scene-main:#ccb5ed;
+  --kp-scene-soft:#e7daf8;
+  --kp-scene-backdrop:#f4edfc;
+  position:relative;
+  isolation:isolate;
+  width:100%;
+  max-width:340px;
+  height:200px;
+  margin:5px auto 12px;
+}
+.kotoport-page .kp-case-scene-facilities { --kp-scene-ink:#39735e;--kp-scene-main:#95cab0;--kp-scene-soft:#c8e5d6;--kp-scene-backdrop:#edf7f1; }
+.kotoport-page .kp-case-scene-booking { --kp-scene-ink:#96713d;--kp-scene-main:#edce81;--kp-scene-soft:#f6e7bd;--kp-scene-backdrop:#fff9e9; }
+.kotoport-page .kp-case-scene-commerce { --kp-scene-ink:#55789f;--kp-scene-main:#a2c4ea;--kp-scene-soft:#d4e5f6;--kp-scene-backdrop:#eef5fc; }
+.kotoport-page .kp-case-scene-repair { --kp-scene-ink:#9b617e;--kp-scene-main:#e2adc7;--kp-scene-soft:#f1d8e4;--kp-scene-backdrop:#fff0f6; }
+.kotoport-page .kp-case-scene>.kp-case-scene-workplace {
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:200px;
+  overflow:visible;
+}
+.kotoport-page .kp-case-scene-drawing { stroke:var(--kp-scene-ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round; }
+.kotoport-page .kp-case-scene-backdrop { fill:var(--kp-scene-backdrop); }
+.kotoport-page .kp-case-scene-ground { fill:var(--kp-scene-soft);opacity:.6; }
+.kotoport-page .kp-case-scene-main { fill:var(--kp-scene-main); }
+.kotoport-page .kp-case-scene-soft { fill:var(--kp-scene-soft); }
+.kotoport-page .kp-case-scene-paper { fill:#fffcff; }
+.kotoport-page .kp-case-scene-ink { fill:var(--kp-scene-ink); }
+.kotoport-page .kp-case-scene-assistant { position:absolute;left:3%;bottom:13px;width:31%;max-width:105px;z-index:2; }
+.kotoport-page .kp-case-scene-assistant>.kp-plush-portrait { display:block;width:100%;height:auto;max-height:133px; }
+.kotoport-page .kp-case-scene-call { position:absolute;left:23%;top:19%;width:54px;height:38px;border:1px solid var(--kp-scene-soft);border-radius:15px 15px 15px 3px;background:#fffcff;box-shadow:0 4px 0 var(--kp-scene-soft);z-index:3; }
+.kotoport-page .kp-case-scene-call>svg { display:block;width:54px;height:38px;stroke:var(--kp-scene-ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
+.kotoport-page .kp-case-scene-call-signal { animation:kp-case-call-signal 3.6s ease-in-out infinite; }
+
+/* The workplace carries the action; the existing plush silhouette remains rigid. */
+.kotoport-page .kp-case-scene-gate { transform-origin:237px 131px;animation:kp-case-gate 7s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-gate-stripes { stroke-width:4; }
+.kotoport-page .kp-case-scene-roster-check { stroke-width:3; }
+.kotoport-page .kp-case-scene-cleaning-cart { animation:kp-case-cleaning-cart 5.8s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-clean-shine { fill:#fffcff;animation:kp-case-clean-shine 5.8s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-clean-shine-small { fill:#fffcff; }
+.kotoport-page .kp-case-scene-calendar-day { fill:var(--kp-scene-soft);stroke:none; }
+.kotoport-page .kp-case-scene-booking-check { stroke-width:3;animation:kp-case-booking-check 5.2s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-desk-bell { transform-origin:221px 143px; }
+.kotoport-page .kp-case-scene-van { animation:kp-case-delivery 6.4s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-road { stroke-dasharray:3 4;opacity:.65; }
+.kotoport-page .kp-case-scene-repair-tool { transform-origin:246px 106px;animation:kp-case-repair-tool 5.6s ease-in-out infinite; }
+.kotoport-page .kp-case-scene-repair .kp-case-scene-call-signal { animation-delay:-1.8s; }
+.kotoport-page .kp-case-scene-commerce .kp-case-scene-call-signal { animation-delay:-.9s; }
+
+@keyframes kp-case-call-signal { 0%,100% { opacity:.4; } 45%,65% { opacity:1; } }
+@keyframes kp-case-gate { 0%,18%,76%,100% { transform:rotate(0); } 36%,59% { transform:rotate(-17deg); } }
+@keyframes kp-case-cleaning-cart { 0%,100% { transform:translateX(-3px); } 50% { transform:translateX(4px); } }
+@keyframes kp-case-clean-shine { 0%,22%,100% { opacity:.35; } 45%,67% { opacity:1; } }
+@keyframes kp-case-booking-check { 0%,12%,100% { opacity:.4;transform:translateY(1px); } 32%,77% { opacity:1;transform:translateY(0); } }
+@keyframes kp-case-delivery { 0%,15%,100% { transform:translateX(-3px); } 48%,68% { transform:translateX(5px); } }
+@keyframes kp-case-repair-tool { 0%,18%,82%,100% { transform:rotate(-5deg); } 38%,61% { transform:rotate(8deg); } }
+
+/* Existing motion-zone/document-visibility rules pause every animated descendant. */
+.kotoport-page[data-motion-static=true] .kp-case-scene *,
+.kotoport-page[data-document-visible=false] .kp-case-scene *,
+.kotoport-page .kp-case-scene[data-motion-onscreen=false] * { animation-play-state:paused !important; }
+.kotoport-page[data-motion-static=true] .kp-case-scene-call-signal,
+.kotoport-page[data-motion-static=true] .kp-case-scene-booking-check,
+.kotoport-page[data-motion-static=true] .kp-case-scene-clean-shine { opacity:1; }
+@media(prefers-reduced-motion:reduce) {
+  .kotoport-page .kp-case-scene * { animation:none !important; }
+  .kotoport-page .kp-case-scene-call-signal,
+  .kotoport-page .kp-case-scene-booking-check,
+  .kotoport-page .kp-case-scene-clean-shine { opacity:1; }
+}
+@media(max-width:640px) {
+  .kotoport-page .kp-case-scene { margin-block:0 12px; }
+}

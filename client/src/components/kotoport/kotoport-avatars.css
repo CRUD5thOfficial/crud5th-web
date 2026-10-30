@@ -1,0 +1,18 @@
+.kotoport-page .kp-avatar-stage { position:relative;z-index:6;--kp-avatar-level:0; }
+.kotoport-page .kp-hero-assistants.kp-plush-lineup { display:block;max-width:1120px;width:100%;margin:8px auto 0;aspect-ratio:2048 / 759;overflow:visible; }
+.kotoport-page .kp-plush-lineup .kp-plush-original { display:block;width:100%;height:auto;margin:0;filter:none;transform:none; }
+.kotoport-page .kp-plush-mask { position:absolute;width:0;height:0;overflow:hidden; }
+.kotoport-page .kp-plush-canvas { position:absolute;inset:0;display:block;width:100%;height:100%;opacity:0; }
+.kotoport-page .kp-plush-lineup[data-renderer="webgl"] .kp-plush-canvas { opacity:1; }
+.kotoport-page .kp-plush-lineup[data-renderer="webgl"] .kp-plush-original { opacity:0; }
+.kotoport-page .kp-plush-portrait { display:block;height:auto;overflow:visible; }
+.kotoport-page .kp-role-figure .kp-plush-portrait { width:200px;max-width:100%;position:relative;z-index:2; }
+.kotoport-page .kp-closing-art>.kp-plush-portrait { width:30%;flex-shrink:0; }
+.kotoport-page .kp-closing-art>.kp-plush-portrait:first-child { transform:rotate(-10deg); }
+.kotoport-page .kp-closing-art>.kp-plush-portrait:last-child { transform:rotate(8deg); }
+.kotoport-page .kp-avatar-stage[data-running="false"] { --kp-avatar-level:0 !important; }
+@media (max-width:640px) {
+  .kotoport-page .kp-hero-assistants.kp-plush-lineup { width:100%;margin:20px auto 0; }
+  .kotoport-page .kp-role-figure .kp-plush-portrait { width:190px; }
+  .kotoport-page .kp-closing-art>.kp-plush-portrait { width:33%; }
+}

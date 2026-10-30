@@ -58,6 +58,14 @@
         </div>
       </main>
     </div>
+    <script>
+      // Keep other routes and no-JavaScript recovery intact; avoid flashing the fallback on the LP.
+      if (window.location.pathname.replace(/\/+$/, "") === "/services/kotoport") {
+        const fallback = document.getElementById("site-loading-title").closest("main");
+        fallback.hidden = true;
+        window.setTimeout(() => { fallback.hidden = false; }, 5000);
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

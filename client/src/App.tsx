@@ -54,7 +54,10 @@ function Router() {
 
 function App() {
   const [isLoading, setIsLoading] = useState(
-    () => window.location.pathname !== kotoportContent.route && window.location.pathname !== "/contact",
+    () => {
+      const pathname = window.location.pathname.replace(/\/+$/, "");
+      return pathname !== kotoportContent.route && pathname !== "/contact";
+    },
   );
 
   const handleLoadingComplete = () => {

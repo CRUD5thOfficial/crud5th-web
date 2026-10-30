@@ -1,0 +1,332 @@
+.kotoport-page .kp-support-flow {
+  margin-top: 30px;
+}
+
+.kotoport-page .kp-support-roles > h3 {
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.kotoport-page .kp-support-role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.kotoport-page .kp-support-role {
+  min-width: 0;
+  padding: 20px 24px;
+  border: 1px solid #ffffffa6;
+  border-radius: 20px;
+  background: #ffffffb8;
+}
+
+.kotoport-page .kp-support-role-owner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #74405f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.kotoport-page .kp-support-role-owner svg {
+  width: 18px;
+  height: 18px;
+}
+
+.kotoport-page .kp-support-role h4 {
+  margin-top: 6px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -.03em;
+}
+
+.kotoport-page .kp-support-role p {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.kotoport-page .kp-support-start-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 16px 24px;
+  border-radius: 18px;
+  background: #fff4fb;
+}
+
+.kotoport-page .kp-support-start-bar > svg {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
+  color: #fff;
+  background: #277f67;
+}
+
+.kotoport-page .kp-support-start-bar p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.kotoport-page .kp-support-start-bar strong {
+  font-weight: 800;
+}
+
+.kotoport-page .kp-support-updates {
+  margin-top: 24px;
+  padding: 28px 30px 22px;
+  border-radius: 28px;
+  background: #fff;
+}
+
+.kotoport-page .kp-support-update-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.kotoport-page .kp-support-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: #74405f;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.kotoport-page .kp-support-update-heading h3 {
+  font-size: clamp(24px, 2.2vw, 30px);
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -.04em;
+}
+
+.kotoport-page .kp-support-heading-break {
+  display: none;
+}
+
+.kotoport-page .kp-support-update-heading p {
+  max-width: 710px;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.kotoport-page .kp-support-change-example {
+  padding: 15px 18px;
+  border-radius: 17px;
+  background: #fff2fa;
+  color: #74405f;
+}
+
+.kotoport-page .kp-support-change-example > span {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.kotoport-page .kp-support-change-example > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.kotoport-page .kp-support-change-example svg {
+  width: 17px;
+  height: 17px;
+}
+
+.kotoport-page .kp-support-change-example strong {
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.kotoport-page .kp-support-update-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+
+.kotoport-page .kp-support-update-step {
+  position: relative;
+  min-width: 0;
+  padding: 10px 20px 20px;
+  border: 1px solid #eee7ed;
+  border-radius: 20px;
+  background: #fffbfe;
+}
+
+.kotoport-page .kp-support-step-visual {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.kotoport-page .kp-support-step-visual > span {
+  color: #9b7890;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.kotoport-page .kp-support-illustration {
+  display: block;
+  width: 128px;
+  height: 82px;
+  max-width: 72%;
+  overflow: visible;
+}
+
+.kotoport-page .kp-support-step-owner {
+  display: inline-block;
+  margin-top: 1px;
+  color: #74405f;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+.kotoport-page .kp-support-update-step h4 {
+  margin-top: 3px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -.03em;
+}
+
+.kotoport-page .kp-support-update-step p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.kotoport-page .kp-support-connector {
+  position: absolute;
+  top: 50%;
+  right: -26px;
+  display: flex;
+  color: #895a75;
+  transform: translateY(-50%);
+}
+
+.kotoport-page .kp-support-connector svg {
+  width: 24px;
+  height: 24px;
+}
+
+.kotoport-page .kp-support-scope-note {
+  margin-top: 18px;
+  color: var(--kp-muted);
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.kotoport-page .kp-support-paper {
+  animation: kp-support-share 5.5s ease-in-out infinite;
+}
+
+.kotoport-page .kp-support-setting-check,
+.kotoport-page .kp-support-call-check {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: kp-support-confirm 6s ease-in-out infinite;
+}
+
+.kotoport-page .kp-support-call-check {
+  animation-delay: -2s;
+}
+
+.kotoport-page .kp-support-call-ring {
+  animation: kp-support-ring 4.5s ease-in-out infinite;
+}
+
+@keyframes kp-support-share {
+  0%, 35%, 100% { transform: translateX(0); }
+  52%, 68% { transform: translateX(4px); }
+}
+
+@keyframes kp-support-confirm {
+  0%, 32%, 70%, 100% { transform: scale(1); }
+  45%, 56% { transform: scale(1.07); }
+}
+
+@keyframes kp-support-ring {
+  0%, 34%, 72%, 100% { opacity: .55; }
+  46%, 60% { opacity: 1; }
+}
+
+@media (max-width: 1000px) {
+  .kotoport-page .kp-support-update-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .kotoport-page .kp-support-change-example {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .kotoport-page .kp-support-change-example > span { margin-bottom: 0; }
+  .kotoport-page .kp-support-update-steps { gap: 24px; }
+  .kotoport-page .kp-support-update-step { padding-inline: 16px; }
+  .kotoport-page .kp-support-connector { right: -23px; }
+  .kotoport-page .kp-support-connector svg { width: 21px; height: 21px; }
+  .kotoport-page .kp-support-updates { padding-inline: 24px; }
+  .kotoport-page .kp-support-role { padding-inline: 20px; }
+  .kotoport-page .kp-support-role h4 { font-size: 19px; }
+}
+
+@media (max-width: 760px) {
+  .kotoport-page .kp-support-update-steps { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+  .kotoport-page .kp-support-update-step { padding: 18px 20px 20px 108px; min-height: 152px; }
+  .kotoport-page .kp-support-step-visual { position: absolute; left: 12px; top: 18px; width: 82px; display: block; }
+  .kotoport-page .kp-support-step-visual > span { display: block; margin-left: 12px; font-size: 14px; }
+  .kotoport-page .kp-support-illustration { width: 90px; height: 65px; max-width: 100%; }
+  .kotoport-page .kp-support-connector { top: auto; bottom: -25px; right: calc(50% - 11px); transform: rotate(90deg); }
+  .kotoport-page .kp-support-role-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .kotoport-page .kp-support-role { padding: 17px 20px; }
+  .kotoport-page .kp-support-start-bar { padding: 16px 18px; align-items: flex-start; }
+  .kotoport-page .kp-support-start-bar p { display: block; }
+  .kotoport-page .kp-support-start-bar strong { display: block; margin-bottom: 4px; }
+}
+
+@media (max-width: 640px) {
+  .kotoport-page .kp-support-flow { margin-top: 24px; }
+  .kotoport-page .kp-support-roles > h3 { font-size: 16px; }
+  .kotoport-page .kp-support-updates { margin-top: 20px; padding: 24px 18px 20px; border-radius: 24px; }
+  .kotoport-page .kp-support-update-heading h3 { font-size: 24px; }
+  .kotoport-page .kp-support-heading-break { display: block; }
+  .kotoport-page .kp-support-change-example { display: block; padding: 14px; }
+  .kotoport-page .kp-support-change-example > span { margin-bottom: 8px; }
+  .kotoport-page .kp-support-change-example > div { gap: 8px; font-size: 13px; }
+  .kotoport-page .kp-support-update-step { padding: 16px 16px 18px 88px; }
+  .kotoport-page .kp-support-step-visual { left: 6px; width: 72px; }
+  .kotoport-page .kp-support-illustration { height: 58px; }
+  .kotoport-page .kp-support-update-step h4 { font-size: 20px; }
+  .kotoport-page .kp-support-scope-note { text-align: left; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kotoport-page .kp-support-illustration * { animation: none !important; }
+}

@@ -1,0 +1,155 @@
+/* The transcript is static for assistive technology; only this reserved visual layer loops. */
+.kotoport-page .kp-chat-row>div { min-width:0;transition:background .35s,box-shadow .35s,opacity .35s; }
+.kotoport-page .kp-chat-row p { position:relative; }
+.kotoport-page .kp-chat-text { display:block;transition:opacity .4s,transform .4s; }
+.kotoport-page .kp-chat-row[data-chat-state=queued] .kp-chat-text,
+.kotoport-page .kp-chat-row[data-chat-state=typing] .kp-chat-text { opacity:0;transform:translateY(5px); }
+.kotoport-page .kp-chat-row[data-chat-state=queued]>div { opacity:.45; }
+.kotoport-page .kp-chat-avatar { transition:box-shadow .35s,background .35s; }
+.kotoport-page .kp-chat-row[data-chat-state=speaking] .kp-chat-avatar { box-shadow:0 0 0 5px #347cff15;animation:kp-speaker-ring 1.8s ease-in-out infinite; }
+.kotoport-page .kp-chat-row[data-chat-state=speaking]>div { background:#e5efff;box-shadow:inset 3px 0 #347cff; }
+.kotoport-page .kp-chat-human[data-chat-state=speaking]>div { background:#eef1f5;box-shadow:inset 3px 0 #87929e; }
+.kotoport-page .kp-chat-human[data-chat-state=speaking] .kp-chat-avatar { animation-name:kp-human-ring; }
+.kotoport-page .kp-typing-dots { position:absolute;inset:0;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .25s; }
+.kotoport-page .kp-typing-dots i { width:5px;height:5px;background:#6a9ce8;border-radius:50%;animation:kp-typing 1.05s ease-in-out infinite; }
+.kotoport-page .kp-chat-human .kp-typing-dots i { background:#87929e; }
+.kotoport-page .kp-typing-dots i:nth-child(2) { animation-delay:.15s; }
+.kotoport-page .kp-typing-dots i:nth-child(3) { animation-delay:.3s; }
+.kotoport-page .kp-chat-row[data-chat-state=typing] .kp-typing-dots { opacity:1; }
+.kotoport-page .kp-conversation-status { display:block;min-height:1.6em;margin-top:8px;font-size:11px;font-weight:600;line-height:1.6;color:#65707c;white-space:nowrap; }
+.kotoport-page .kp-conversation .kp-conversation-sound p { margin-top:12px; }
+.kotoport-page .kp-conversation-meter { display:flex;align-items:center;gap:14px;min-height:32px;margin-top:15px;border-top:1px solid #e8ecf0;padding-top:12px; }
+.kotoport-page .kp-conversation-meter .kp-conversation-status { margin:0; }
+.kotoport-page .kp-conversation-meter .kp-soundwave { width:66px;height:24px;gap:3px; }
+.kotoport-page .kp-conversation-meter .kp-soundwave i { width:3px;max-height:24px; }
+.kotoport-page .kp-soundwave { --kp-wave-floor:.15;--kp-wave-peak:.3; }
+.kotoport-page .kp-soundwave i { transform-origin:center;animation:kp-voice-bar 1.05s ease-in-out infinite;transition:background .4s; }
+.kotoport-page .kp-soundwave i:nth-child(2n) { animation-duration:.73s;animation-delay:-.28s; }
+.kotoport-page .kp-soundwave i:nth-child(3n) { animation-duration:1.21s;animation-delay:-.56s; }
+.kotoport-page .kp-soundwave i:nth-child(4n) { animation-duration:.89s;animation-delay:-.13s; }
+.kotoport-page .kp-soundwave i:nth-child(5n) { animation-duration:1.37s;animation-delay:-.82s; }
+.kotoport-page .kp-soundwave[data-speaker=ai] { --kp-wave-floor:.28;--kp-wave-peak:1; }
+.kotoport-page .kp-soundwave[data-speaker=human] { --kp-wave-floor:.22;--kp-wave-peak:.72; }
+.kotoport-page .kp-soundwave[data-speaker=human] i { background:#879dbd; }
+.kotoport-page .kp-conversation[data-running=false] * { animation-play-state:paused !important; }
+
+/* Broad SVG paths overscan the frame, so their slow translations never expose an edge. */
+.kotoport-page .kp-wave-ribbon { overflow:hidden;pointer-events:none; }
+.kotoport-page .kp-wave-layer { transform-origin:center;animation:kp-ribbon-drift 16s ease-in-out infinite; }
+.kotoport-page .kp-wave-layer-back { animation-duration:19s;animation-delay:-5s; }
+.kotoport-page .kp-wave-layer-middle { animation-name:kp-ribbon-counter;animation-duration:14s;animation-delay:-3s; }
+.kotoport-page .kp-wave-layer-front { animation-duration:17s;animation-delay:-9s; }
+.kotoport-page .kp-closing-wave.kp-wave-ribbon { height:440px;bottom:-12px; }
+.kotoport-page .kp-hero-wave.kp-wave-ribbon { height:290px; }
+
+/* Separate screens of coarse and fine ink dots fade into the paper, away from copy. */
+.kotoport-page .kp-halftone { position:absolute;pointer-events:none;display:block;z-index:1; }
+.kotoport-page .kp-halftone::before,
+.kotoport-page .kp-halftone::after { content:"";position:absolute;inset:0;border-radius:50%;background-image:radial-gradient(circle,#7d3bff 1.6px,transparent 1.9px);background-size:8px 8px;mask-image:radial-gradient(ellipse at 34% 45%,#000 0 16%,#000a 35%,transparent 70%); }
+.kotoport-page .kp-halftone::after { inset:26% -12% -12% 30%;background-image:radial-gradient(circle,#0176f0 1px,transparent 1.35px);background-size:5px 5px;mask-image:radial-gradient(ellipse at 50% 50%,#000 0 12%,transparent 69%); }
+.kotoport-page .kp-halftone-hero { left:-70px;top:300px;width:310px;height:340px;opacity:.21;transform:rotate(-18deg); }
+.kotoport-page .kp-hero::after { content:"";position:absolute;right:-55px;top:405px;width:240px;height:250px;background-image:radial-gradient(circle,#0176f0 1.4px,transparent 1.75px);background-size:7px 7px;mask-image:radial-gradient(ellipse at 80% 40%,#000,transparent 70%);opacity:.19;pointer-events:none; }
+.kotoport-page .kp-halftone-feature { left:-115px;top:260px;width:330px;height:420px;opacity:.36; }
+.kotoport-page .kp-halftone-feature::before { background-image:radial-gradient(circle,#fff 1.8px,transparent 2.1px);background-size:9px 9px; }
+.kotoport-page .kp-halftone-feature::after { background-image:radial-gradient(circle,#bde7ff 1.1px,transparent 1.4px); }
+.kotoport-page .kp-halftone-closing { right:-50px;bottom:62px;width:490px;height:290px;opacity:.43;transform:rotate(12deg); }
+.kotoport-page .kp-halftone-closing::before { background-image:radial-gradient(circle,#fff 1.8px,transparent 2.1px);background-size:9px 9px; }
+.kotoport-page .kp-halftone-closing::after { background-image:radial-gradient(circle,#d9eeff 1.2px,transparent 1.55px);background-size:6px 6px; }
+
+.kotoport-page .kp-closing-art>.kp-plush-portrait { transform-origin:50% 92%;animation:kp-mascot-step 6.7s ease-in-out infinite; }
+.kotoport-page .kp-closing-art>.kp-plush-portrait:last-child { animation-name:kp-mascot-nod;animation-duration:7.9s;animation-delay:-3s; }
+.kotoport-page .kp-closing-message { animation:kp-message-tilt 8s ease-in-out infinite;animation-delay:-2s; }
+.kotoport-page .kp-role-figure>.kp-plush-portrait { transform-origin:50% 90%;animation:kp-role-greet 8s ease-in-out infinite; }
+.kotoport-page .kp-role-card:nth-child(2) .kp-plush-portrait { animation-delay:-2.6s; }
+.kotoport-page .kp-role-card:nth-child(3) .kp-plush-portrait { animation-delay:-5.2s; }
+.kotoport-page .kp-role-figure>span>svg { animation:kp-icon-arrival 8s ease-in-out infinite; }
+.kotoport-page .kp-role-card:nth-child(2) .kp-role-figure>span>svg { animation-delay:-2.6s; }
+.kotoport-page .kp-role-card:nth-child(3) .kp-role-figure>span>svg { animation-delay:-5.2s; }
+.kotoport-page .kp-petal-surface { animation:kp-petal-breathe 12s ease-in-out infinite;animation-delay:var(--kp-petal-delay); }
+.kotoport-page .kp-petal-content>svg { transform-origin:center;animation:kp-concept-icon-bob 12s ease-in-out infinite;animation-delay:var(--kp-petal-delay); }
+.kotoport-page .kp-flower-center>svg { transform-origin:50% 70%;animation:kp-concept-phone-ring 7s ease-in-out infinite; }
+.kotoport-page .kp-concept-ribbon { animation:kp-concept-ribbon-drift 18s ease-in-out infinite; }
+.kotoport-page .kp-workflow-card { animation:kp-flow-focus 12s ease-in-out infinite; }
+.kotoport-page .kp-workflow-card:nth-child(2) { animation-delay:-9s; }
+.kotoport-page .kp-workflow-card:nth-child(3) { animation-delay:-6s; }
+.kotoport-page .kp-workflow-card:nth-child(4) { animation-delay:-3s; }
+.kotoport-page .kp-flow-connector { animation:kp-connector-travel 3s ease-in-out infinite; }
+.kotoport-page .kp-workflow-card:nth-child(2) .kp-flow-connector { animation-delay:-1s; }
+.kotoport-page .kp-workflow-card:nth-child(3) .kp-flow-connector { animation-delay:-2s; }
+.kotoport-page .kp-start-steps .kp-step-icon { animation:kp-step-focus 12s ease-in-out infinite; }
+.kotoport-page .kp-start-steps li:nth-child(2) .kp-step-icon { animation-delay:-9s; }
+.kotoport-page .kp-start-steps li:nth-child(3) .kp-step-icon { animation-delay:-6s; }
+.kotoport-page .kp-start-steps li:nth-child(4) .kp-step-icon { animation-delay:-3s; }
+.kotoport-page .kp-maintenance-steps li>svg,
+.kotoport-page .kp-outbound-line>svg,
+.kotoport-page .kp-case-graphic>svg:nth-of-type(2) { animation:kp-connector-travel 3.6s ease-in-out infinite; }
+.kotoport-page .kp-workflow-card:nth-child(2)>.kp-flow-connector,
+.kotoport-page .kp-outbound-line>svg,
+.kotoport-page .kp-case-graphic>svg:nth-of-type(2) { animation-name:kp-connector-down; }
+.kotoport-page .kp-outbound-requests>span { animation:kp-request-focus 9s ease-in-out infinite; }
+.kotoport-page .kp-outbound-requests>span:nth-child(2) { animation-delay:-6s; }
+.kotoport-page .kp-outbound-requests>span:nth-child(3) { animation-delay:-3s; }
+.kotoport-page .kp-handoff-heading>svg { animation:kp-icon-arrival 9s ease-in-out infinite; }
+.kotoport-page .kp-handoff-sheet dl>div { animation:kp-handoff-line 9s ease-in-out infinite; }
+.kotoport-page .kp-handoff-sheet dl>div:nth-child(2) { animation-delay:.4s; }
+.kotoport-page .kp-handoff-sheet dl>div:nth-child(3) { animation-delay:.8s; }
+.kotoport-page .kp-handoff-sheet dl>div:nth-child(4) { animation-delay:1.2s; }
+.kotoport-page .kp-handoff-next { animation:kp-handoff-line 9s ease-in-out infinite;animation-delay:1.6s; }
+
+.kotoport-page[data-motion-static=true] *,
+.kotoport-page[data-motion-static=true] *::before,
+.kotoport-page[data-motion-static=true] *::after,
+.kotoport-page[data-document-visible=false] *,
+.kotoport-page .kp-motion-zone[data-motion-onscreen=false] * { animation-play-state:paused !important; }
+.kotoport-page[data-motion-static=true] .kp-chat-text { opacity:1;transform:none; }
+.kotoport-page[data-motion-static=true] .kp-typing-dots { visibility:hidden; }
+.kotoport-page[data-motion-static=true] .kp-chat-row>div { opacity:1; }
+.kotoport-page[data-motion-static=true] .kp-chat-text,
+.kotoport-page[data-document-visible=false] .kp-chat-text { transition:none; }
+
+@keyframes kp-voice-bar { 0%,100% { transform:scaleY(var(--kp-wave-floor));opacity:.5; } 46% { transform:scaleY(var(--kp-wave-peak));opacity:1; } }
+@keyframes kp-typing { 0%,65%,100% { transform:translateY(0);opacity:.35; } 30% { transform:translateY(-4px);opacity:1; } }
+@keyframes kp-speaker-ring { 0%,100% { box-shadow:0 0 0 3px #347cff0c; } 50% { box-shadow:0 0 0 6px #347cff1a; } }
+@keyframes kp-human-ring { 0%,100% { box-shadow:0 0 0 3px #87929e0c; } 50% { box-shadow:0 0 0 6px #87929e22; } }
+@keyframes kp-ribbon-drift { 0%,100% { transform:translate(-35px,5px) rotate(-.5deg); } 50% { transform:translate(35px,-12px) rotate(.5deg); } }
+@keyframes kp-ribbon-counter { 0%,100% { transform:translate(28px,-7px) rotate(.4deg); } 50% { transform:translate(-28px,10px) rotate(-.4deg); } }
+@keyframes kp-mascot-step { 0%,34%,68%,100% { transform:translate(0,0) rotate(-9deg); } 42% { transform:translate(4px,-5px) rotate(-7deg); } 51% { transform:translate(7px,0) rotate(-10deg); } 59% { transform:translate(3px,-3px) rotate(-8deg); } }
+@keyframes kp-mascot-nod { 0%,35%,65%,100% { transform:translate(0,0) rotate(7deg); } 44% { transform:translate(-4px,-4px) rotate(5deg); } 52% { transform:translate(-5px,1px) rotate(9deg); } }
+@keyframes kp-message-tilt { 0%,100% { transform:translateY(0) rotate(-4deg); } 48% { transform:translateY(-5px) rotate(-2.7deg); } }
+@keyframes kp-role-greet { 0%,10%,40%,100% { transform:translateY(0) rotate(0); } 21% { transform:translateY(-4px) rotate(-1.8deg); } 30% { transform:translateY(-1px) rotate(1deg); } }
+@keyframes kp-icon-arrival { 0%,12%,45%,100% { translate:0 0;opacity:1; } 21% { translate:0 -5px;opacity:.7; } 30% { translate:0 0;opacity:1; } }
+@keyframes kp-petal-breathe { 0%,4%,30%,100% { background:#f4eeff;transform:translate(0,0); } 12%,20% { background:#fff6dc;transform:translate(var(--kp-petal-drift-x),var(--kp-petal-drift-y)); } }
+@keyframes kp-concept-icon-bob { 0%,4%,30%,100% { transform:translateY(0) rotate(0); } 12% { transform:translateY(-3px) rotate(-7deg); } 20% { transform:translateY(-1px) rotate(4deg); } }
+@keyframes kp-concept-phone-ring { 0%,10%,30%,100% { transform:translateY(0) rotate(0); } 15% { transform:translateY(-2px) rotate(-9deg); } 20% { transform:translateY(-2px) rotate(8deg); } 25% { transform:translateY(-1px) rotate(-4deg); } }
+@keyframes kp-concept-ribbon-drift { 0%,100% { transform:translate(-9px,7px) rotate(30deg); } 50% { transform:translate(9px,-7px) rotate(34deg); } }
+@keyframes kp-flow-focus { 0%,4%,27%,100% { box-shadow:0 0 0 0 #00694c00; } 10%,20% { box-shadow:0 0 0 4px #00694c35; } }
+@keyframes kp-connector-travel { 0%,100% { opacity:.35;translate:-2px 0; } 50% { opacity:1;translate:3px 0; } }
+@keyframes kp-step-focus { 0%,4%,27%,100% { background:#f4edff;box-shadow:0 0 0 0 #7d3bff00; } 10%,20% { background:#e7d7ff;box-shadow:0 0 0 4px #7d3bff12; } }
+@keyframes kp-request-focus { 0%,5%,30%,100% { box-shadow:0 0 0 0 #8b660000; } 12%,22% { box-shadow:0 0 0 3px #8b66002b; } }
+@keyframes kp-handoff-line { 0%,12%,43%,100% { background-color:transparent; } 23%,32% { background-color:#e5efff; } }
+
+@media(max-width:640px) {
+  .kotoport-page .kp-conversation .kp-conversation-sound { display:flex;align-items:center;gap:12px;border-left:0;border-top:1px solid #e8ecf0;padding:12px 0 0;margin-top:15px;text-align:left; }
+  .kotoport-page .kp-conversation-sound .kp-soundwave { width:65px;height:24px;gap:3px; }
+  .kotoport-page .kp-conversation-sound .kp-soundwave i { width:3px;max-height:24px; }
+  .kotoport-page .kp-conversation .kp-conversation-sound p { display:none; }
+  .kotoport-page .kp-conversation-status { font-size:10px;margin-top:0; }
+  .kotoport-page .kp-conversation-meter { gap:10px; }
+  .kotoport-page .kp-hero-wave.kp-wave-ribbon { height:195px; }
+  .kotoport-page .kp-closing-wave.kp-wave-ribbon { height:300px; }
+  .kotoport-page .kp-halftone-hero { width:150px;height:210px;left:-60px;top:245px;opacity:.16; }
+  .kotoport-page .kp-hero::after { width:140px;height:170px;right:-65px;top:510px; }
+  .kotoport-page .kp-halftone-feature { width:190px;height:290px;left:-115px;top:280px; }
+  .kotoport-page .kp-halftone-closing { width:245px;height:200px;right:-55px;bottom:30px; }
+  .kotoport-page .kp-workflow-card:nth-child(n)>.kp-flow-connector,
+  .kotoport-page .kp-maintenance-steps li>svg,
+  .kotoport-page .kp-outbound-line>svg,
+  .kotoport-page .kp-case-graphic>svg:nth-of-type(2) { animation-name:kp-connector-down; }
+}
+@keyframes kp-connector-down { 0%,100% { opacity:.35;translate:0 -2px; } 50% { opacity:1;translate:0 3px; } }
+@media(prefers-reduced-motion:reduce) {
+  .kotoport-page .kp-chat-text { opacity:1 !important;transform:none !important; }
+  .kotoport-page .kp-typing-dots { display:none; }
+  .kotoport-page .kp-chat-row>div { opacity:1 !important; }
+  .kotoport-page .kp-soundwave i { transform:scaleY(.4); }
+}
