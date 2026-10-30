@@ -1,4 +1,5 @@
 import { kotoportContent as content, type KotoportPlan } from "./kotoport-content";
+import { calculatePlanEstimate } from "./kotoport-pricing";
 
 export type SimulationValues = {
   dailyCalls: number;
@@ -75,5 +76,53 @@ export function simulateKotoport(values: SimulationValues, plan: KotoportPlan, a
     differenceYen: afterComparableYen === null ? null : beforeLaborYen - afterComparableYen,
     firstMonthAiYen: aiFeeYen === null ? null : aiFeeYen + plan.initialFeeYen,
     requiresVolumeReview: aiMinutes > content.pricing.calculator.referenceMinutesThreshold,
+  };
+}
+
+export type StaffingValues = { staffingCount: number; staffingHoursPerDay: number };
+export type StaffingPricing = { mode: "reference" } | { mode: "quote"; monthlyQuoteYen: number | null };
+export const staffingInputDefinitions = {
+  staffingCount: { label: "専任で配置する人数", unit: "人", min: 1, max: 1000, step: 1, integer: true, defaultValue: 1 },
+  staffingHoursPerDay: { label: "1人の配置時間", unit: "時間／日", min: 0.1, max: 24, step: 0.1, integer: false, defaultValue: 8 },
+} satisfies Record<keyof StaffingValues, SimulationInputDefinition>;
+
+/** Compare a new dedicated staffing allocation with AI for the same AI-target work. */
+export function compareKotoportStaffing(values: SimulationValues, plan: KotoportPlan, staffing: StaffingValues, pricing: StaffingPricing) {
+  const workload = simulateKotoport(values, plan);
+  if (workload === null) return null;
+  for (const field of Object.keys(staffingInputDefinitions) as (keyof StaffingValues)[]) {
+    const value = staffing[field];
+    const definition = staffingInputDefinitions[field];
+    if (!Number.isFinite(value) || value < definition.min || value > definition.max || (definition.integer && !Number.isInteger(value))) return null;
+  }
+  const staffingHours = staffing.staffingCount * staffing.staffingHoursPerDay * values.daysPerMonth;
+  const hasCapacity = staffingHours >= workload.aiMinutes / 60;
+  const staffingLaborYen = staffingHours * values.hourlyWageYen;
+  const reviewLaborYen = workload.reviewMinutes / 60 * values.hourlyWageYen;
+  const referenceEstimate = pricing.mode === "reference" ? calculatePlanEstimate(plan, workload.aiMinutes) : null;
+  const aiFeeYen = referenceEstimate?.monthlySubtotalYen ?? (pricing.mode === "quote" && isValidAiMonthlyQuoteYen(pricing.monthlyQuoteYen) ? pricing.monthlyQuoteYen : null);
+  const monthlyAiYen = aiFeeYen === null ? null : aiFeeYen + reviewLaborYen;
+  const monthlyDifferenceYen = hasCapacity && workload.aiCalls > 0 && monthlyAiYen !== null ? staffingLaborYen - monthlyAiYen : null;
+  const unitCosts = (denominator: number) => monthlyDifferenceYen === null || monthlyAiYen === null || denominator <= 0 ? null : {
+    humanYen: staffingLaborYen / denominator,
+    aiYen: monthlyAiYen / denominator,
+    differenceYen: monthlyDifferenceYen / denominator,
+  };
+  return {
+    aiCalls: workload.aiCalls,
+    aiMinutes: workload.aiMinutes,
+    staffingHours,
+    nonCallHours: Math.max(staffingHours - workload.aiMinutes / 60, 0),
+    hasCapacity,
+    staffingLaborYen,
+    reviewHours: workload.reviewMinutes / 60,
+    reviewLaborYen,
+    aiFeeYen,
+    monthlyAiYen,
+    monthlyDifferenceYen,
+    differencePercent: monthlyDifferenceYen === null ? null : monthlyDifferenceYen * 100 / staffingLaborYen,
+    perCall: unitCosts(workload.aiCalls),
+    perMinute: unitCosts(workload.aiMinutes),
+    referenceEstimate,
   };
 }

@@ -253,12 +253,23 @@ export const kotoportContent = {
     maintenanceScopeNote: "変更支援の範囲や追加作業は、料金の作業枠・見積り条件に沿って決めます。",
     responsibilityNote: "AIが扱う範囲と、人へ戻す条件を先に決めます。AIであることを偽らない案内も設計します。",
   },
+  knowledgeContinuity: {
+    title: "応対の知識を、会社に残す。",
+    description: "退職・担当交代があっても、共有した応対知識を再利用。新人教育や引き継ぎで、一から教え直す負担を抑えます。",
+    steps: [
+      { title: "資料・ルールを共有", description: "FAQや応対の決まりごと" },
+      { title: "AIの応対に使う", description: "会社の知識をもとに案内" },
+      { title: "更新して、また使う", description: "変更を反映し、電話で確認" },
+    ],
+    note: "変更の共有・内容確認は御社、設定・調整はCRUD5thが支援します。",
+  },
   pricing: {
     title: "電話の量で、\n選べる2プラン。",
     description: "料金の目安（税別）",
     qualification: "月額・利用時間・超過単価は参考条件です。範囲と料金は見積りで決めます。",
     planSelection: "同じ設定で、一つの業務から。",
     plans,
+    example: { plan: mediumPlan, monthlyMinutes: 1000 },
     labels: { initial: "初期費用", monthly: "月額基本料", included: "含むAI通話", overage: "超過AI利用料", onboarding: "導入の作業枠", support: "通常の設定相談・変更支援", locations: "同じ設定を使う拠点" },
     feeUnit: "円／月", minuteUnit: "分／月", overageUnit: "円／分", hourUnit: "時間まで", supportUnit: "時間／月まで", locationUnit: "拠点まで",
     detailsLabel: "含む範囲・追加費用を見る",

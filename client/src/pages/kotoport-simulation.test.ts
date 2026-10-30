@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { kotoportContent as content, type KotoportPlan } from "./kotoport-content";
-import { simulationInputDefinitions, simulateKotoport, type SimulationValues } from "./kotoport-simulation";
+import { compareKotoportStaffing, simulationInputDefinitions, simulateKotoport, staffingInputDefinitions, type SimulationValues, type StaffingValues, type StaffingPricing } from "./kotoport-simulation";
 
 const mediumPlan = content.pricing.plans.find(plan => plan.id === "medium")!;
 const fixture: SimulationValues = {
@@ -186,4 +186,122 @@ test("volume review uses the existing workload threshold without extrapolating a
   assert.equal(result({ aiCoveragePercent: 100, averageCallMinutes: 5.001 }).requiresVolumeReview, true);
   assert.equal(result({ dailyCalls: 1000, aiCoveragePercent: 0 }).requiresVolumeReview, false);
   noCostComparison(result({ dailyCalls: 1000, aiCoveragePercent: 100 }));
+});
+
+const staffingFixture: StaffingValues = { staffingCount: 1, staffingHoursPerDay: 8 };
+function staffingResult(values: Partial<SimulationValues> = {}, staffing: Partial<StaffingValues> = {}, pricing: StaffingPricing = { mode: "reference" }, plan = mediumPlan) {
+  const estimate = compareKotoportStaffing({ ...fixture, ...values }, plan, { ...staffingFixture, ...staffing }, pricing);
+  assert.notEqual(estimate, null);
+  return estimate!;
+}
+
+test("dedicated staffing includes the paid time around the same AI workload", () => {
+  const estimate = staffingResult();
+  assert.equal(estimate.aiCalls, 360);
+  assert.equal(estimate.aiMinutes, 1800);
+  assert.equal(estimate.staffingHours, 160);
+  assert.equal(estimate.nonCallHours, 130);
+  assert.equal(estimate.staffingLaborYen, 240000);
+  assert.equal(estimate.reviewLaborYen, 4500);
+  assert.equal(estimate.aiFeeYen, 82500);
+  assert.equal(estimate.monthlyAiYen, 87000);
+  assert.equal(estimate.monthlyDifferenceYen, 153000);
+  assert.equal(estimate.differencePercent, 63.75);
+  close(estimate.perCall!.humanYen, 240000 / 360);
+  close(estimate.perCall!.aiYen, 87000 / 360);
+  close(estimate.perCall!.differenceYen, 425);
+  close(estimate.perMinute!.humanYen, 240000 / 1800);
+  close(estimate.perMinute!.aiYen, 87000 / 1800);
+  assert.deepEqual(estimate.referenceEstimate, { overageMinutes: 1500, overageFeeYen: 52500, monthlySubtotalYen: 82500, firstMonthSubtotalYen: 132500 });
+  assert.equal(estimate.hasCapacity, true);
+});
+
+test("base fee covers included minutes and only excess minutes incur usage", () => {
+  assert.equal(staffingResult({ dailyCalls: 1, daysPerMonth: 1, aiCoveragePercent: 100, averageCallMinutes: 120 }).aiFeeYen, 30000);
+  assert.equal(staffingResult({ dailyCalls: 3, daysPerMonth: 1, aiCoveragePercent: 100, averageCallMinutes: 100 }).aiFeeYen, 30000);
+  close(staffingResult({ dailyCalls: 3, daysPerMonth: 1, aiCoveragePercent: 100, averageCallMinutes: 100.05 }).aiFeeYen, 30005.25);
+  const small = content.pricing.plans.find(plan => plan.id === "small")!;
+  assert.equal(staffingResult({}, {}, { mode: "reference" }, small).aiFeeYen, 113300);
+});
+
+test("quote mode replaces reference subtotal and retains increases and explicit zero", () => {
+  const quoted = staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: 100000 });
+  assert.equal(quoted.referenceEstimate, null);
+  assert.equal(quoted.monthlyAiYen, 104500);
+  assert.equal(quoted.monthlyDifferenceYen, 135500);
+  assert.equal(staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: 300000 }).monthlyDifferenceYen, -64500);
+  assert.equal(staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: 0 }).monthlyAiYen, 4500);
+  assert.equal(staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: 0 }).monthlyDifferenceYen, 235500);
+});
+
+test("missing or invalid quotes have no reference fallback and keep workload and staffing", () => {
+  for (const quote of [null, NaN, Infinity, -1, 100000001, "", "100000", undefined]) {
+    const estimate = staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: quote as number | null });
+    assert.equal(estimate.aiCalls, 360);
+    assert.equal(estimate.staffingLaborYen, 240000);
+    for (const key of ["aiFeeYen", "monthlyAiYen", "monthlyDifferenceYen", "differencePercent", "perCall", "perMinute", "referenceEstimate"] as const) assert.equal(estimate[key], null, key);
+  }
+  assert.equal(staffingResult({}, {}, { mode: "quote", monthlyQuoteYen: 100000000 }).aiFeeYen, 100000000);
+});
+
+test("zero calls and zero coverage retain the reference base but never divide by zero", () => {
+  for (const values of [{ dailyCalls: 0 }, { aiCoveragePercent: 0 }]) {
+    const estimate = staffingResult(values);
+    assert.equal(estimate.aiCalls, 0);
+    assert.equal(estimate.aiMinutes, 0);
+    assert.equal(estimate.aiFeeYen, 30000);
+    assert.equal(estimate.reviewLaborYen, 0);
+    assert.equal(estimate.monthlyAiYen, 30000);
+    assert.equal(estimate.perCall, null);
+    assert.equal(estimate.perMinute, null);
+    assert.equal(estimate.monthlyDifferenceYen, null);
+    assert.equal(estimate.differencePercent, null);
+  }
+});
+
+test("insufficient staffing does not auto increase people or claim a saving", () => {
+  const insufficient = staffingResult({}, { staffingHoursPerDay: 1 });
+  assert.equal(insufficient.staffingHours, 20);
+  assert.equal(insufficient.staffingLaborYen, 30000);
+  assert.equal(insufficient.nonCallHours, 0);
+  assert.equal(insufficient.hasCapacity, false);
+  assert.equal(insufficient.aiFeeYen, 82500);
+  assert.equal(insufficient.monthlyAiYen, 87000);
+  for (const key of ["monthlyDifferenceYen", "differencePercent", "perCall", "perMinute"] as const) assert.equal(insufficient[key], null, key);
+  const boundary = staffingResult({}, { staffingHoursPerDay: 1.5 });
+  assert.equal(boundary.hasCapacity, true);
+  assert.equal(boundary.nonCallHours, 0);
+  assert.equal(boundary.monthlyDifferenceYen, -42000);
+  const highVolume = staffingResult({ dailyCalls: 200, aiCoveragePercent: 80 });
+  assert.equal(highVolume.hasCapacity, false);
+  assert.equal(highVolume.monthlyDifferenceYen, null);
+  const twoStaff = staffingResult({ dailyCalls: 200, aiCoveragePercent: 80 }, { staffingCount: 2 });
+  assert.equal(twoStaff.hasCapacity, true);
+  assert.equal(twoStaff.staffingLaborYen, 480000);
+  assert.equal(twoStaff.monthlyAiYen, 619500);
+  assert.equal(twoStaff.monthlyDifferenceYen, -139500);
+});
+
+test("units use AI cases and minutes while staffing and review remain independent", () => {
+  const partial = staffingResult({ dailyCalls: 1, daysPerMonth: 1, aiCoveragePercent: 33, reviewMinutesPerAiCall: 0.25 });
+  close(partial.aiCalls, 0.33);
+  close(partial.aiMinutes, 1.65);
+  close(partial.perCall!.humanYen, 12000 / 0.33);
+  close(partial.perCall!.aiYen, (30000 + 0.33 * 0.25 / 60 * 1500) / 0.33);
+  close(partial.perMinute!.aiYen * partial.aiMinutes, partial.monthlyAiYen!);
+  const higherReview = staffingResult({ reviewMinutesPerAiCall: 30 });
+  assert.equal(higherReview.monthlyAiYen, 352500);
+  assert.equal(higherReview.monthlyDifferenceYen, -112500);
+  assert.equal(higherReview.staffingLaborYen, 240000);
+  assert.equal(staffingResult({}, { staffingCount: 2 }).staffingLaborYen, 480000);
+});
+
+test("staffing inputs reject empty or invalid runtime values and accept defined boundaries", () => {
+  for (const [field, definition] of Object.entries(staffingInputDefinitions)) {
+    for (const value of [null, undefined, "", NaN, Infinity, definition.min - 0.1, definition.max + 0.1, ...(definition.integer ? [1.5] : [])]) {
+      assert.equal(compareKotoportStaffing(fixture, mediumPlan, { ...staffingFixture, [field]: value } as StaffingValues, { mode: "reference" }), null, `${field}=${String(value)}`);
+    }
+    for (const value of [definition.min, definition.max]) assert.notEqual(compareKotoportStaffing(fixture, mediumPlan, { ...staffingFixture, [field]: value }, { mode: "reference" }), null);
+  }
+  assert.equal(compareKotoportStaffing({ ...fixture, dailyCalls: NaN }, mediumPlan, staffingFixture, { mode: "reference" }), null);
 });

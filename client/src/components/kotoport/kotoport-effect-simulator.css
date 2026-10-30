@@ -244,3 +244,99 @@
 @media (prefers-reduced-motion: reduce) {
   .kotoport-page .kp-sim-section *, .kotoport-page .kp-sim-section *::before, .kotoport-page .kp-sim-section *::after { animation: none !important; transition: none !important; }
 }
+
+.kotoport-page .kp-sim-unit-switch { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; padding: 4px; border-radius: 12px; background: #eff2f7; margin-bottom: 16px; }
+.kotoport-page .kp-sim-unit-switch button { min-width: 0; min-height: 44px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #526073; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; transition: background .2s,color .2s; }
+.kotoport-page .kp-sim-unit-switch button:hover { background: #e5dcf5; }
+.kotoport-page .kp-sim-unit-switch button[aria-pressed="true"] { background: white; color: #6333b3; border-color: #dcd0ee; box-shadow: 0 2px 5px #26364b0a; }
+.kotoport-page .kp-sim-comparison-scope { margin-bottom: 18px; color: #526073; font-size: 12px; line-height: 1.8; }
+.kotoport-page .kp-sim-comparison-scope p { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.kotoport-page .kp-sim-comparison-scope p + p { margin-top: 5px; }
+.kotoport-page .kp-sim-comparison-scope svg { width: 16px; height: 16px; color: #735590; flex-shrink: 0; }
+.kotoport-page .kp-sim-comparison-scope strong { color: var(--kp-ink); font-weight: 800; }
+.kotoport-page .kp-sim-reference-tag { display: inline-flex; align-items: center; padding: 1px 7px; border: 1px solid #d8c7ec; border-radius: 5px; margin-left: 4px; color: #6333b3; background: #faf7ff; font-size: 11px; font-weight: 800; }
+.kotoport-page .kp-sim-cost-board { --kp-gap-ink: #075e47; --kp-gap-fill: #e6f5ee; --kp-gap-line: #b5d9c8; overflow: hidden; border: 1px solid #d8e3e0; border-radius: 20px; background: #fff; }
+.kotoport-page .kp-sim-cost-board > figcaption { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; padding: 17px 20px 0; color: var(--kp-ink); font-size: 13px; }
+.kotoport-page .kp-sim-cost-board > figcaption > strong { font-weight: 800; }
+.kotoport-page .kp-sim-cost-board > figcaption > span { color: #647386; font-size: 10px; }
+.kotoport-page .kp-sim-cost-rows { display: grid; gap: 16px; padding: 16px 20px 20px; }
+.kotoport-page .kp-sim-cost-row-label { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.kotoport-page .kp-sim-cost-row-label > span { display: inline-flex; align-items: center; gap: 7px; min-width: 0; color: #34475e; font-size: 13px; font-weight: 800; }
+.kotoport-page .kp-sim-cost-row-label svg { width: 17px; height: 17px; flex-shrink: 0; }
+.kotoport-page .kp-sim-cost-row-label > strong { min-width: 0; color: #34475e; font-size: 26px; font-weight: 800; letter-spacing: -.035em; line-height: 1.2; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kotoport-page .kp-sim-cost-row-label small { display: block; margin-top: 3px; font-size: 10px; font-weight: 600; letter-spacing: 0; }
+.kotoport-page .kp-sim-cost-row-ai .kp-sim-cost-row-label > span, .kotoport-page .kp-sim-cost-row-ai .kp-sim-cost-row-label > strong { color: #6333b3; }
+.kotoport-page .kp-sim-cost-track { display: flex; height: 14px; overflow: hidden; border-radius: 4px; background: #f0f3f7; }
+.kotoport-page .kp-sim-cost-bar { flex-shrink: 0; background: #8292a7; }
+.kotoport-page .kp-sim-cost-row-ai .kp-sim-cost-bar { background: #8954d0; }
+.kotoport-page .kp-sim-cost-gap { flex-shrink: 0; border: 1px dashed var(--kp-gap-line); border-left: 0; background: repeating-linear-gradient(135deg,var(--kp-gap-fill),var(--kp-gap-fill) 5px,#fff 5px,#fff 8px); }
+.kotoport-page .kp-sim-cost-gap-result { padding: 14px 20px 16px; border-top: 1px solid var(--kp-gap-line); background: var(--kp-gap-fill); color: var(--kp-gap-ink); }
+.kotoport-page .kp-sim-cost-gap-result > span { display: block; font-size: 11px; font-weight: 700; }
+.kotoport-page .kp-sim-cost-gap-result > div { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 3px 12px; margin-top: 2px; }
+.kotoport-page .kp-sim-cost-gap-result strong { min-width: 0; font-size: 43px; font-weight: 900; letter-spacing: -.045em; line-height: 1.3; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kotoport-page .kp-sim-cost-gap-result small { display: inline-block; margin-left: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0; }
+.kotoport-page .kp-sim-cost-gap-result em { display: inline-block; margin-left: 7px; font-size: 23px; font-weight: 900; font-style: normal; letter-spacing: 0; }
+.kotoport-page .kp-sim-cost-gap-result > div > span { font-size: 15px; font-weight: 800; white-space: nowrap; }
+.kotoport-page .kp-sim-cost-board-increase { --kp-gap-ink: #924a18; --kp-gap-fill: #fff2e7; --kp-gap-line: #e8c8ad; border-color: #e8c8ad; }
+.kotoport-page .kp-sim-cost-board-equal { --kp-gap-ink: #34475e; --kp-gap-fill: #edf1f6; --kp-gap-line: #d5dfeb; }
+.kotoport-page .kp-sim-fee-details { margin-top: 12px; border-bottom: 1px solid #e2e9f2; }
+.kotoport-page .kp-sim-fee-details > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; color: #526073; font-size: 12px; font-weight: 700; cursor: pointer; list-style: none; }
+.kotoport-page .kp-sim-fee-details > summary::-webkit-details-marker { display: none; }
+.kotoport-page .kp-sim-fee-details > summary svg { width: 16px; height: 16px; flex-shrink: 0; }
+.kotoport-page .kp-sim-fee-details[open] > summary svg { transform: rotate(180deg); }
+.kotoport-page .kp-sim-fee-details .kp-sim-fee-breakdown { margin-top: 0; margin-bottom: 12px; }
+.kotoport-page .kp-sim-human-cost { background: #edf1f6; color: #34475e; }
+.kotoport-page .kp-sim-cost-delta { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 4px 9px; margin-top: 20px; color: #075e47; text-align: center; }
+.kotoport-page .kp-sim-cost-delta > span:first-child { width: 100%; font-size: 12px; font-weight: 700; }
+.kotoport-page .kp-sim-cost-delta > strong { font-size: 36px; font-weight: 900; letter-spacing: -.04em; line-height: 1.4; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.kotoport-page .kp-sim-cost-delta small { font-size: 13px; font-weight: 800; margin-left: 6px; letter-spacing: 0; }
+.kotoport-page .kp-sim-cost-rate { font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 6px; background: #e6f8f0; }
+.kotoport-page .kp-sim-cost-increase { color: #924a18; }
+.kotoport-page .kp-sim-cost-increase .kp-sim-cost-rate { background: #fff2e7; }
+.kotoport-page .kp-sim-cost-empty { min-height: 240px; padding: 24px 18px; }
+.kotoport-page .kp-sim-cost-empty > svg { width: 28px; height: 28px; margin-bottom: 12px; }
+.kotoport-page .kp-sim-cost-empty h4 { white-space: pre-line; font-size: 18px; }
+.kotoport-page .kp-sim-fee-breakdown { margin-top: 18px; padding: 14px; border-radius: 12px; background: #f6f8fb; }
+.kotoport-page .kp-sim-fee-breakdown > p:first-child { font-size: 11px; font-weight: 800; color: #526073; }
+.kotoport-page .kp-sim-fee-breakdown > div { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+.kotoport-page .kp-sim-fee-breakdown > div > span { min-width: 0; flex: 1; font-size: 11px; font-weight: 700; color: #526073; }
+.kotoport-page .kp-sim-fee-breakdown > div strong { display: block; font-size: 17px; font-weight: 800; color: var(--kp-ink); line-height: 1.6; overflow-wrap: anywhere; }
+.kotoport-page .kp-sim-fee-breakdown > div small { display: block; font-size: 10px; font-weight: 500; line-height: 1.7; }
+.kotoport-page .kp-sim-fee-breakdown > div > i { font-size: 12px; font-style: normal; color: #788a9c; }
+.kotoport-page .kp-sim-fee-total { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #dde5ee; color: #526073; font-size: 11px; }
+.kotoport-page .kp-sim-fee-total strong { color: var(--kp-ink); font-size: 14px; font-weight: 800; }
+.kotoport-page .kp-sim-staffing-time { color: #5d6879; font-size: 11px; line-height: 1.8; margin-top: 8px; }
+.kotoport-page .kp-sim-results .kp-sim-money-note { margin-top: 14px; }
+.kotoport-page .kp-sim-review-fields { margin-top: 20px; }
+@media (max-width: 640px) {
+  .kotoport-page .kp-sim-unit-switch { gap: 2px; padding: 3px; }
+  .kotoport-page .kp-sim-unit-switch button { font-size: 11px; }
+  .kotoport-page .kp-sim-comparison-scope { font-size: 11px; margin-bottom: 14px; }
+  .kotoport-page .kp-sim-comparison-scope p + p { gap: 3px; font-size: 10px; }
+  .kotoport-page .kp-sim-reference-tag { font-size: 10px; margin-left: 1px; padding-inline: 5px; }
+  .kotoport-page .kp-sim-cost-board { border-radius: 16px; }
+  .kotoport-page .kp-sim-cost-board > figcaption { padding: 14px 13px 0; font-size: 12px; gap: 3px 6px; }
+  .kotoport-page .kp-sim-cost-board > figcaption > span { font-size: 9px; }
+  .kotoport-page .kp-sim-cost-rows { gap: 13px; padding: 13px 13px 16px; }
+  .kotoport-page .kp-sim-cost-row-label > span { gap: 4px; font-size: 11px; }
+  .kotoport-page .kp-sim-cost-row-label svg { width: 14px; height: 14px; }
+  .kotoport-page .kp-sim-cost-row-label > strong { font-size: 23px; }
+  .kotoport-page .kp-sim-cost-row-label small { font-size: 9px; }
+  .kotoport-page .kp-sim-cost-track { height: 12px; }
+  .kotoport-page .kp-sim-cost-gap-result { padding: 12px 13px 13px; }
+  .kotoport-page .kp-sim-cost-gap-result strong { font-size: 35px; }
+  .kotoport-page .kp-sim-cost-gap-result small { margin-left: 4px; font-size: 10px; }
+  .kotoport-page .kp-sim-cost-gap-result em { margin-left: 5px; font-size: 21px; }
+  .kotoport-page .kp-sim-cost-gap-result > div > span { font-size: 13px; }
+  .kotoport-page .kp-sim-kpi > strong { font-size: clamp(25px,7.4vw,32px); }
+  .kotoport-page .kp-sim-cost-delta { margin-top: 16px; gap: 4px 6px; }
+  .kotoport-page .kp-sim-cost-delta > strong { font-size: 32px; }
+  .kotoport-page .kp-sim-cost-delta small { font-size: 11px; margin-left: 4px; }
+  .kotoport-page .kp-sim-cost-rate { font-size: 11px; }
+  .kotoport-page .kp-sim-fee-breakdown { padding: 12px 10px; }
+  .kotoport-page .kp-sim-fee-breakdown > div { gap: 4px; }
+  .kotoport-page .kp-sim-fee-breakdown > div strong { font-size: 14px; }
+  .kotoport-page .kp-sim-fee-breakdown > div small { font-size: 9px; }
+  .kotoport-page .kp-sim-cost-empty { min-height: 230px; }
+  .kotoport-page .kp-sim-cost-empty h4 { font-size: 17px; }
+}

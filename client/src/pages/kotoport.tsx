@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight, Check, ChevronRight, Clock3, Cloud, Cpu, FileText, Globe, Headphones, Menu, MessageCircle, Mic, Phone, PhoneIncoming, PhoneOutgoing, ShieldCheck, UserRound, UsersRound, X } from "lucide-react";
+import { ArrowDown, ArrowRight, Check, ChevronRight, Clock3, Cloud, Cpu, FileText, Globe, Headphones, Menu, MessageCircle, Mic, Phone, PhoneIncoming, PhoneOutgoing, RefreshCw, ShieldCheck, UserRound, UsersRound, X } from "lucide-react";
 import { kotoportContent as content, type CallDirection } from "./kotoport-content";
 import { EconomicsCalculator, PricingCalculator } from "./kotoport-calculators";
+import { calculatePlanEstimate } from "./kotoport-pricing";
 import { KotoportAvatarStage } from "@/components/kotoport/kotoport-avatar-stage";
 import { useKotoportDemoAccess } from "@/components/kotoport/use-kotoport-demo-access";
 import { KotoportAvatar } from "@/components/kotoport/kotoport-avatar";
@@ -89,6 +90,35 @@ function BusinessFlow() {
     })}</ol>
     <figcaption>{content.businessFlow.note}</figcaption>
   </figure>;
+}
+
+function KnowledgeContinuity() {
+  const icons = [FileText, Headphones, RefreshCw];
+  return <section className="kp-knowledge kp-container" aria-labelledby="kp-knowledge-title">
+    <div className="kp-knowledge-copy"><h2 id="kp-knowledge-title">{content.knowledgeContinuity.title}</h2><p>{content.knowledgeContinuity.description}</p></div>
+    <ol className="kp-knowledge-steps">{content.knowledgeContinuity.steps.map((step, index) => {
+      const StepIcon = icons[index];
+      return <li key={step.title}><div className="kp-knowledge-illustration" aria-hidden="true">{index === 1 ? <KotoportAvatar color="green" /> : <StepIcon />}</div><h3>{step.title}</h3><p>{step.description}</p>{index < content.knowledgeContinuity.steps.length - 1 && <ArrowRight className="kp-knowledge-arrow" aria-hidden="true" />}</li>;
+    })}</ol>
+    <p className="kp-knowledge-note"><Check aria-hidden="true" />{content.knowledgeContinuity.note}</p>
+  </section>;
+}
+
+function PricingExample() {
+  const { plan, monthlyMinutes } = content.pricing.example;
+  const estimate = calculatePlanEstimate(plan, monthlyMinutes);
+  return <div className="kp-pricing-example" aria-labelledby="kp-pricing-example-title">
+    <div className="kp-pricing-example-heading"><h3 id="kp-pricing-example-title">{plan.name}で月{monthlyMinutes.toLocaleString("ja-JP")}分使うと</h3><span>参考条件・税別</span></div>
+    <p className="kp-pricing-formula">月の料金 ＝ 基本料金 ＋ 超過通話分 × 単価</p>
+    <div className="kp-pricing-equation">
+      <div><span>月額基本料</span><strong>{plan.monthlyFeeYen.toLocaleString("ja-JP")}<small>円</small></strong><p>{plan.includedMinutes.toLocaleString("ja-JP")}分を含む</p></div>
+      <span className="kp-pricing-operator" aria-hidden="true">＋</span>
+      <div><span>超過分の従量料金</span><strong>{estimate.overageFeeYen.toLocaleString("ja-JP")}<small>円</small></strong><p>{estimate.overageMinutes.toLocaleString("ja-JP")}分 × {plan.overageYenPerMinute.toLocaleString("ja-JP")}円</p></div>
+      <span className="kp-pricing-operator" aria-hidden="true">＝</span>
+      <div className="kp-pricing-equation-total"><span>月額小計</span><strong>{estimate.monthlySubtotalYen.toLocaleString("ja-JP")}<small>円</small></strong><p>基本料＋超過分</p></div>
+    </div>
+    <p className="kp-pricing-example-note">通話0分でも基本料がかかります。含む分数以内は追加の従量料金0円。<br className="kp-desktop-break" />初期費用・税・回線／通信費などは別です。</p>
+  </div>;
 }
 
 function KotoportPage() {
@@ -181,8 +211,26 @@ function KotoportPage() {
           <dl className="kp-case-responsibilities"><div><dt><Headphones aria-hidden="true" />AIが受け持つこと</dt><dd>{item.request}</dd></div><div><dt><UserRound aria-hidden="true" />担当者へ引き継ぐこと</dt><dd>{item.human}</dd></div></dl>
         </article>)}</div><p className="kp-case-note">{content.useCases.note}</p>
       </section>
+      <KnowledgeContinuity />
       <KotoportEffectSimulator />
-      <section className="kp-pricing kp-container" id="pricing" aria-labelledby="kp-pricing-title"><span id="kotoport-pricing" className="kp-anchor-alias" aria-hidden="true" /><div className="kp-section-title"><h2 id="kp-pricing-title">電話の量で、<br className="kp-mobile-break" />選べる2プラン。</h2><p>{content.pricing.description}</p></div><p className="kp-pricing-qualification">{content.pricing.qualification}</p><div className="kp-plan-grid">{content.pricing.plans.map((plan, index) => <article className="kp-plan-card" key={plan.id}><span className="kp-plan-label">{index === 0 ? "一つの電話業務から" : "同じ業務で、電話が多いときに"}</span><h3>{plan.name}</h3><div className="kp-plan-amount"><strong>{plan.monthlyFeeYen.toLocaleString("ja-JP")}</strong><span>円／月・税別</span></div><p className="kp-plan-reference">月額基本料の参考条件</p><dl><div><dt>初期費用</dt><dd>{plan.initialFeeYen.toLocaleString("ja-JP")}円</dd></div><div><dt>含むAI通話</dt><dd>{plan.includedMinutes}分／月</dd></div><div><dt>超過AI利用料</dt><dd>{plan.overageYenPerMinute}円／分</dd></div></dl><a className="kp-button kp-button-dark" href={content.contactHref} data-analytics-contact="true">このプランを相談する<ArrowRight aria-hidden="true" /></a></article>)}</div><p className="kp-pricing-note">{content.pricing.selectionDetails}</p><details className="kp-calculator-disclosure"><summary><span>月の通話で料金を計算する</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><PricingCalculator /><p className="kp-small">{content.pricing.communicationNote}</p><p className="kp-small">{content.pricing.calculator.roundingNote}</p></details><details className="kp-calculator-disclosure"><summary><span>人数・勤務時間を変える場合の比較</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><div className="kp-economics-review"><h3>{content.economics.reviewTitle}</h3><p>{content.economics.reviewNote}</p></div><EconomicsCalculator /></details><details className="kp-calculator-disclosure"><summary><span>含む範囲・追加費用を見る</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><div className="kp-scope-grid"><div><h3>{content.scope.includedTitle}</h3>{content.scope.included.map(item => <div key={item.title}><h4>{item.title}</h4><p>{item.description}</p></div>)}</div><div><h3>{content.scope.additionalTitle}</h3>{content.scope.additional.map(item => <div key={item.title}><h4>{item.title}</h4><p>{item.description}</p></div>)}</div></div><p className="kp-small">{content.pricing.supportNote}</p></details></section>
+      <section className="kp-pricing kp-container" id="pricing" aria-labelledby="kp-pricing-title">
+        <span id="kotoport-pricing" className="kp-anchor-alias" aria-hidden="true" />
+        <div className="kp-section-title"><h2 id="kp-pricing-title">電話の量で、<br className="kp-mobile-break" />選べる2プラン。</h2><p>{content.pricing.description}</p></div>
+        <p className="kp-pricing-qualification">{content.pricing.qualification}</p>
+        <div className="kp-plan-grid">{content.pricing.plans.map((plan, index) => <article className="kp-plan-card" key={plan.id}>
+          <span className="kp-plan-label">{index === 0 ? "一つの電話業務から" : "同じ業務で、電話が多いときに"}</span><h3>{plan.name}</h3>
+          <p className="kp-plan-base-label">月額基本料</p>
+          <div className="kp-plan-amount"><strong>{plan.monthlyFeeYen.toLocaleString("ja-JP")}</strong><span>円／月・税別</span></div>
+          <p className="kp-plan-usage"><strong>＋ 従量料金</strong><span>含む{plan.includedMinutes.toLocaleString("ja-JP")}分を超えた分：<b>{plan.overageYenPerMinute.toLocaleString("ja-JP")}円／分</b></span></p>
+          <dl><div><dt>初期費用</dt><dd>{plan.initialFeeYen.toLocaleString("ja-JP")}円</dd></div><div><dt>基本料に含むAI通話</dt><dd>{plan.includedMinutes}分／月</dd></div></dl>
+          <a className="kp-button kp-button-dark" href={content.contactHref} data-analytics-contact="true">このプランを相談する<ArrowRight aria-hidden="true" /></a>
+        </article>)}</div>
+        <PricingExample />
+        <p className="kp-pricing-note">{content.pricing.selectionDetails}</p>
+        <details className="kp-calculator-disclosure"><summary><span>月の通話で料金を計算する</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><PricingCalculator /><p className="kp-small">{content.pricing.communicationNote}</p><p className="kp-small">{content.pricing.calculator.roundingNote}</p></details>
+        <details className="kp-calculator-disclosure"><summary><span>人数・勤務時間を変える場合の比較</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><div className="kp-economics-review"><h3>{content.economics.reviewTitle}</h3><p>{content.economics.reviewNote}</p></div><EconomicsCalculator /></details>
+        <details className="kp-calculator-disclosure"><summary><span>含む範囲・追加費用を見る</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><div className="kp-scope-grid"><div><h3>{content.scope.includedTitle}</h3>{content.scope.included.map(item => <div key={item.title}><h4>{item.title}</h4><p>{item.description}</p></div>)}</div><div><h3>{content.scope.additionalTitle}</h3>{content.scope.additional.map(item => <div key={item.title}><h4>{item.title}</h4><p>{item.description}</p></div>)}</div></div><p className="kp-small">{content.pricing.supportNote}</p></details>
+      </section>
       <section className="kp-faq kp-container" aria-labelledby="kp-faq-title"><h2 id="kp-faq-title">よくある質問</h2><div>{content.faq.items.map(item => <details key={item.question}><summary><span className="kp-faq-q">Q.</span><span>{item.question}</span><span className="kp-disclosure-plus" aria-hidden="true">+</span></summary><p><span className="kp-faq-a">A.</span>{item.answer}</p></details>)}</div></section>
       <section className="kp-closing kp-motion-zone" aria-labelledby="kp-closing-title"><h2 id="kp-closing-title">電話に使う時間を、<br className="kp-mobile-break" />本来の仕事へ。</h2><p>まずは、負担になっている電話業務を一つ。</p><Actions large /><KotoportWaveRibbon variant="closing" /><span className="kp-halftone kp-halftone-closing" aria-hidden="true" /><div className="kp-closing-art" aria-hidden="true"><KotoportAvatar color="yellow" /><div className="kp-closing-message"><Headphones /><span>受付はAIへ。<br />判断は、人へ。</span></div><KotoportAvatar color="green" /></div></section>
     </main>
