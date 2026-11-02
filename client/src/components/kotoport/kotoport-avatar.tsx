@@ -39,7 +39,7 @@ function PlushTextureFilter({ id }: { id: string }) {
     <feColorMatrix in="SourceGraphic" result="warm" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  18 0 -18 0 -1.08" />
     <feColorMatrix in="SourceGraphic" result="green" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 60 -60 0 -.12" />
     <feColorMatrix in="SourceGraphic" result="blue" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 -18 18 0 -1.08" />
-    <feColorMatrix in="SourceGraphic" result="dark" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -2.5512 -8.5824 -.8664 0 9" />
+    <feColorMatrix in="SourceGraphic" result="dark" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -2.5512 -8.5824 -.8664 9 0" />
     <feComposite in="warm" in2="green" operator="arithmetic" k2="1" k3="1" result="colors" />
     <feComposite in="colors" in2="blue" operator="arithmetic" k2="1" k3="1" result="chroma" />
     <feComposite in="chroma" in2="dark" operator="arithmetic" k2="1" k3="1" result="detail" />
