@@ -10,6 +10,7 @@ import { KotoportOnboardingScene } from "@/components/kotoport/kotoport-onboardi
 import { KotoportSupportFlow } from "@/components/kotoport/kotoport-support-flow";
 import { KotoportUseCaseScene } from "@/components/kotoport/kotoport-use-case-scene";
 import { KotoportEffectSimulator } from "@/components/kotoport/kotoport-effect-simulator";
+import { KotoportMarketStory } from "@/components/kotoport/kotoport-market-story";
 import "@/components/kotoport/kotoport-use-case-cards.css";
 import { KotoportMotionProvider, KotoportWaveRibbon, useConversationPlayback, useKotoportMotion, useMotionVisibility, useMotionZones } from "@/components/kotoport/kotoport-motion";
 import "./kotoport.css";
@@ -172,16 +173,7 @@ function KotoportPage() {
       </section>
       <div className="kp-purpose-band"><div><span className="kp-purpose-icon kp-purple-soft"><PhoneIncoming aria-hidden="true" /></span><strong>受電の一次受付</strong></div><div><span className="kp-purpose-icon kp-blue-soft"><PhoneOutgoing aria-hidden="true" /></span><strong>発信の確認連絡</strong></div><div><span className="kp-purpose-icon kp-yellow-soft"><FileText aria-hidden="true" /></span><strong>必要事項の整理</strong></div><div><span className="kp-purpose-icon kp-green-soft"><UsersRound aria-hidden="true" /></span><strong>人への引き継ぎ</strong></div></div>
       <section className="kp-concept kp-container kp-motion-zone" id="service-overview" aria-labelledby="kp-concept-title"><span id="kotoport-approach" className="kp-anchor-alias" aria-hidden="true" /><div className="kp-concept-ribbon" aria-hidden="true" /><div className="kp-concept-copy"><span className="kp-display-en">Voice AI</span><h2 id="kp-concept-title">話を聴いて、<br />仕事につなぐ。</h2><p>コトポートは、御社の業務に合わせて<br className="kp-desktop-break" />受付・案内・確認を受け持つAI電話です。<br />必要な内容を人へつなぎ、<br />電話にかかる負担を軽くします。</p></div><ConceptFlower /></section>
-      <section className="kp-labor-background kp-container" aria-labelledby="kp-labor-title">
-        <div className="kp-labor-copy"><span className="kp-labor-label">{content.laborBackground.label}</span><h2 id="kp-labor-title">{content.laborBackground.title}</h2><p>{content.laborBackground.description}</p></div>
-        <div className="kp-labor-statistics">{content.laborBackground.statistics.map(statistic => <article className="kp-labor-stat" key={statistic.id} aria-labelledby={`kp-labor-${statistic.id}`}>
-          <h3 id={`kp-labor-${statistic.id}`}>{statistic.title}</h3>
-          <p className="kp-labor-stat-value">{statistic.value}<span>{statistic.unit}</span></p>
-          <p className="kp-labor-stat-description">{statistic.description}</p>
-          <div className="kp-labor-stat-source"><a href={statistic.source.url} target="_blank" rel="noopener noreferrer">出典：{statistic.source.label}<ArrowRight aria-hidden="true" /><span className="sr-only">（新しいタブで開く）</span></a><p>{statistic.source.details}</p></div>
-        </article>)}</div>
-        <p className="kp-labor-note">{content.laborBackground.note}</p>
-      </section>
+      <KotoportMarketStory content={content.laborBackground} />
       <section className="kp-role-section kp-motion-zone" id="capabilities"><span id="kotoport-uses" className="kp-anchor-alias" aria-hidden="true" /><div className="kp-section-title"><h2>その電話、<br className="kp-mobile-break" />まかせられるかも。</h2><p>いつもの仕事にある、繰り返しの受付や確認から。</p></div><div className="kp-role-cards kp-container">{[{ icon: PhoneIncoming, color: "purple", title: "問い合わせを受ける", text: "用件や希望を聞いて、担当者へ。", figure: "yellow" }, { icon: Clock3, color: "blue", title: "予定を確かめる", text: "出勤予定や状況の返事を集める。", figure: "coral" }, { icon: UsersRound, color: "green", title: "応援できるか聞く", text: "確認の電話を、管理者の判断へ。", figure: "green" }].map(item => <article className={`kp-role-card kp-role-${item.color}`} key={item.title}><div className="kp-role-figure"><KotoportAvatar color={item.figure === "yellow" ? "yellow" : item.figure === "coral" ? "coral" : "green"} /><span><item.icon aria-hidden="true" /></span></div><h3>{item.title}</h3><p>{item.text}</p></article>)}</div><Actions /></section>
       <div className="kp-feature-stack">
         <section className="kp-feature kp-feature-blue kp-motion-zone" id="inbound" aria-labelledby="kp-inbound-title">

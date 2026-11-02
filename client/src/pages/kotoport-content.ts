@@ -64,48 +64,40 @@ export const kotoportContent = {
     outcome: "受付はAIへ。判断は、人へ。",
   },
   laborBackground: {
-    label: "電話業務を見直す背景",
-    title: "人を増やす以外の方法も、選択肢に。",
-    description: "人手の確保や採用時給、電話のつながりやすさ。公開調査からも、電話業務を見直す背景が見えてきます。",
-    statistics: [
-      {
-        id: "staffing",
-        title: "正社員が不足している企業",
-        value: "51.3",
-        unit: "％",
-        description: "全国企業の雇用過不足調査。2026年7月、有効回答10,518社。",
-        source: {
-          label: "帝国データバンク「人手不足に対する企業の動向調査」",
-          url: "https://www.tdb.co.jp/report/economic/20260817-laborshortage202607/",
-          details: "2026年8月17日公表。調査期間：2026年7月17日〜31日。対象22,350社。",
-        },
+    label: "電話業務のいま",
+    title: ["人が足りない。", "電話は、待ってくれない。"],
+    description: "採用の難しさ、配置の費用、つながるまでの待ち時間。電話の仕事を、分担から見直してみませんか。",
+    shortage: {
+      value: 51.3,
+      title: "正社員が足りない企業",
+      scope: "全国企業の調査 · 2026年7月",
+      source: {
+        label: "帝国データバンク「人手不足に対する企業の動向調査（2026年7月）」",
+        url: "https://www.tdb.co.jp/report/economic/20260817-laborshortage202607/",
+        details: "全国22,350社を対象、有効回答10,518社。2026年7月17日〜31日調査、8月17日公表。正社員不足を感じる企業の割合で、電話部門だけの不足率ではありません。",
       },
-      {
-        id: "wage",
-        title: "コールセンターの平均採用時時給",
-        value: "1,533",
-        unit: "円",
-        description: "全国のコールセンターの公開求人情報を集計した、採用時の平均時給。2026年1〜3月調査。",
-        source: {
-          label: "コールセンタージャパン「全国採用時 時給・月給調査2026」",
-          url: "https://callcenter-japan.com/article/9054/1/",
-          details: "2026年6月20日公表。対象：全国のコールセンター公開求人2,530件。",
-        },
+    },
+    wage: {
+      value: 1533,
+      title: "コールセンターの採用時時給",
+      scope: "全国の公開求人 · 2026年1〜3月",
+      source: {
+        label: "コールセンタージャパン「全国採用時 時給・月給調査2026」",
+        url: "https://callcenter-japan.com/article/9054/1/",
+        details: "全国2,530件の募集案件を集計。公開求人に提示された採用時時給の平均で、実際の支払賃金の平均ではありません。費用シミュレータの参考時給とは別調査です。",
       },
-      {
-        id: "connection",
-        title: "すぐにつながった人",
-        value: "22.5",
-        unit: "％",
-        description: "直近にコールセンターへ電話した際、オペレーターにすぐにつながった人の割合。4業種800人の調査。",
-        source: {
-          label: "コールセンタージャパン「コールセンター白書2025」消費者調査",
-          url: "https://callcenter-japan.com/article/8548/1/",
-          details: "2025年12月20日公表記事。通信販売・携帯通信・生損保・クレジットカードの4業種、各200人・計800人。",
-        },
+    },
+    connection: {
+      value: 22.5,
+      title: "電話がすぐにつながった人",
+      scope: "4業種・800人の消費者調査 · 白書2025",
+      source: {
+        label: "コールセンタージャパン「コールセンター白書2025」消費者調査",
+        url: "https://callcenter-japan.com/article/8548/1/",
+        details: "通信販売・携帯通信・生損保・クレジットカードの各200人、計800人。直近の電話でオペレーターにすぐにつながったと答えた割合です。残りの77.5％は、取りこぼし・放棄呼・失注の割合を示すものではありません。",
       },
-    ],
-    note: "繰り返しの受付や確認をAIへ。人は、判断が必要な対応に。",
+    },
+    calculatorHref: "#effect-simulator",
   },
   handoffExample: {
     label: "架空の利用例",
