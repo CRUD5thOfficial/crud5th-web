@@ -10,6 +10,8 @@
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --bundle --format=cjs --external:./vite --outfile=dist/index.cjs",
     "build:static": "vite build && node bin/build-corporate-static.mjs",
+    "postbuild:static": "npm test",
+    "test": "node --test bin/*.test.mjs",
     "postbuild": "chmod +x bin/postbuild.sh && ./bin/postbuild.sh",
     "start": "NODE_ENV=production node dist/index.cjs",
     "check": "tsc",
