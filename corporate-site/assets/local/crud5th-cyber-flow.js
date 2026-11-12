@@ -7,6 +7,7 @@
   const targets = new Set();
   const visible = new Set();
   const fields = new Map();
+  const videos = new Map();
   const waveStatus = { frames: 0, instances: 0, running: false, time: 0 };
   const selector = '.crud5th-light-opening,.home_about,.home_works,.home_service,.home_awards,.home_member,.home_recruit,.footer_content,.pageHead,.about_mission,.about_vision,.about_value,.about_outline,.service_businessFiled,.service_solution,.service_faq,.works_detail_header,.works_detail_content,.works_detail_footer_back,.recruit_message,.recruit_positions';
   let frame = 0, last = 0, elapsed = 0;
@@ -140,6 +141,19 @@
   }
   function update() {
     const stopped = reduced.matches || document.hidden;
+    for (const [video, playRequested] of videos) {
+      const shouldPlay = !stopped && visible.has(video);
+      if (playRequested === shouldPlay) continue;
+      // Store the requested state so repeated DOM updates do not create retry loops.
+      videos.set(video, shouldPlay);
+      if (shouldPlay) {
+        if (!video.getAttribute('src')) video.src = video.dataset.deferredSrc;
+        video.play().catch(error => {
+          // Keep the poster on denial. A stale rejection must not alter a newer playback request.
+          if (error.name !== 'NotAllowedError' && error.name !== 'AbortError') console.warn('Background video playback failed.', error);
+        });
+      } else video.pause();
+    }
     document.body.dataset.crud5thFlow = stopped ? 'paused' : 'running';
     status.hidden = document.hidden; status.reduced = reduced.matches;
     status.activeFields = [...visible].filter(field => field.isConnected && fields.has(field)).length;
@@ -157,7 +171,13 @@
   }, { rootMargin: '80px' });
   function sync() {
     for (const target of targets) {
-      if (!target.isConnected) { intersection.unobserve(target); targets.delete(target); visible.delete(target); fields.delete(target); }
+      if (!target.isConnected) {
+        if (videos.has(target)) { target.pause(); videos.delete(target); }
+        intersection.unobserve(target); targets.delete(target); visible.delete(target); fields.delete(target);
+      }
+    }
+    for (const video of document.querySelectorAll('video[data-deferred-src]')) {
+      if (!targets.has(video)) { videos.set(video, false); targets.add(video); intersection.observe(video); }
     }
     for (const section of document.querySelectorAll(selector)) {
       // Gear backgrounds keep the same live field outside clipped 3D sections.

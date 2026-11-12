@@ -45,6 +45,25 @@ function addMemberLinks(html) {
   return html;
 }
 
+// Start the entry's static dependencies with the document instead of after the entry downloads.
+function preloadEntryDependencies(html) {
+  const entry = '<script src="/assets/scripts/entry-hoisted.3B9NS3AY.js" type="module"></script>';
+  const dependencies = ['chunk-_commonjsHelpers.Cpj98o6Y.js', 'chunk-index.CUQ0l2sh.js'];
+  return html.replace(entry, dependencies.map(filename => `<link rel="modulepreload" href="/assets/scripts/${filename}">`).join('') + entry);
+}
+
+function showInitialHomeContent(html) {
+  // The custom opening is static content; it can appear while the animation bundle downloads.
+  return html.includes('class="home_kv home_kv--light"')
+    ? html.replace('<body data-pagehead="false"', '<body data-pagehead="true"')
+      .replace('<footer class="footer"', '<footer class="footer" data-hidden="true"') : html;
+}
+
+function deferBackgroundVideo(html) {
+  return html.replace('<video autoplay="" loop="" muted="" playsinline="" src="/assets/images/home/junni_is.mp4"></video>',
+    '<video loop="" muted="" playsinline="" preload="none" poster="/assets/images/home/recruit/4.webp" data-deferred-src="/assets/images/home/junni_is.mp4"></video>');
+}
+
 let contactLinks = 0;
 function activateContactLinks(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -53,7 +72,10 @@ function activateContactLinks(directory) {
       activateContactLinks(filename);
     } else if (entry.name.endsWith(".html")) {
       const relative = path.relative(source, filename);
-      const html = addMemberLinks(readFileSync(filename, "utf8")).replace(
+      let html = addMemberLinks(readFileSync(filename, "utf8"));
+      html = preloadEntryDependencies(html);
+      html = showInitialHomeContent(html);
+      html = deferBackgroundVideo(html).replace(
         /<div class="(nav_item_link|footer_menu_link)">CONTACT<\/div>/g,
         (_, className) => {
           contactLinks += 1;
