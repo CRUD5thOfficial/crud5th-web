@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024" role="img" aria-labelledby="title desc">
+<title id="title">代表ファイルの取出しと照合</title><desc id="desc">対象の図面を別保管し、隔離環境のPCへ取り出して元と照合する工程の説明図。実行済みの結果を示すものではありません。</desc>
+<defs><filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#23312f" flood-opacity=".13"/></filter><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#6d8581" stroke-opacity=".14" stroke-width="1"/></pattern><pattern id="hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V12" stroke="#81949c" stroke-width="1"/></pattern></defs>
+<g font-family="'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif"><rect width="1536" height="1024" fill="#2d3e3e"/><rect width="1536" height="1024" fill="url(#grid)"/>
+<path d="M0 780H1536" stroke="#637772" stroke-width="1"/>
+<rect x="566" y="160" width="420" height="550" fill="#38504c" stroke="#657f77" stroke-width="1.5"/>
+<path d="M590 184H962M590 686H962" stroke="#809b8f" stroke-width="1"/>
+<rect x="1050" y="160" width="420" height="550" fill="none" stroke="#a2afa7" stroke-width="1.5" stroke-dasharray="9 9"/>
+<text x="116" y="116" font-size="34" fill="#d4ded8" font-weight="500" >対象</text><text x="605" y="116" font-size="34" fill="#d4ded8" font-weight="500" >別保管</text><text x="1092" y="116" font-size="34" fill="#d4ded8" font-weight="500" >隔離環境</text><g><path d="M130 245H368L410 287V610H130Z" fill="#edf0ea" stroke="#7d9195" stroke-width="2"/>
+<path d="M368 245V287H410" fill="none" stroke="#7d9195" stroke-width="2"/>
+<path d="M157 285H242" stroke="#7d9195" stroke-width="3"/>
+<g transform="translate(170 335) scale(1.0)" fill="none" stroke="#7d9195" stroke-width="2.2">
+<path d="M24 0H176L200 24V146L176 170H24L0 146V24Z"/><circle cx="100" cy="85" r="50"/><circle cx="100" cy="85" r="33"/>
+<path d="M100 30V65M100 105V140M45 85H80M120 85H155M-16 85H216M100-16V186" stroke-dasharray="13 5 2 5" stroke-width="1"/>
+<circle cx="26" cy="27" r="8"/><circle cx="174" cy="27" r="8"/><circle cx="26" cy="143" r="8"/><circle cx="174" cy="143" r="8"/>
+<path d="M33 0V-37M167 0V-37M33-27H167M33-33V-21M167-33V-21M200 27H237M200 143H237M227 27V143M221 27H233M221 143H233" stroke-width="1.1"/>
+</g>
+<path d="M158 549H382M158 567H277" stroke="#7d9195" stroke-width="1.5"/>
+</g><g><path d="M636 245H874L916 287V610H636Z" fill="#e5ebe1" stroke="#708b81" stroke-width="2"/>
+<path d="M874 245V287H916" fill="none" stroke="#708b81" stroke-width="2"/>
+<path d="M663 285H748" stroke="#708b81" stroke-width="3"/>
+<g transform="translate(676 335) scale(1.0)" fill="none" stroke="#708b81" stroke-width="2.2">
+<path d="M24 0H176L200 24V146L176 170H24L0 146V24Z"/><circle cx="100" cy="85" r="50"/><circle cx="100" cy="85" r="33"/>
+<path d="M100 30V65M100 105V140M45 85H80M120 85H155M-16 85H216M100-16V186" stroke-dasharray="13 5 2 5" stroke-width="1"/>
+<circle cx="26" cy="27" r="8"/><circle cx="174" cy="27" r="8"/><circle cx="26" cy="143" r="8"/><circle cx="174" cy="143" r="8"/>
+<path d="M33 0V-37M167 0V-37M33-27H167M33-33V-21M167-33V-21M200 27H237M200 143H237M227 27V143M221 27H233M221 143H233" stroke-width="1.1"/>
+</g>
+<path d="M664 549H888M664 567H783" stroke="#708b81" stroke-width="1.5"/>
+</g><path d="M435 417H535M523 407L535 417L523 427M1008 417H1030" fill="none" stroke="#afc0b4" stroke-width="2"/>
+<rect x="1086" y="235" width="350" height="330" rx="9" fill="#182828" stroke="#83968c" stroke-width="2"/>
+<rect x="1100" y="249" width="322" height="300" rx="2" fill="#dfe7df"/>
+<path d="M1070 585H1451L1470 615H1052Z" fill="#879a91"/><path d="M1165 598H1356" stroke="#c3cec3" stroke-width="2"/>
+<g transform="translate(1175 293) scale(0.86)" fill="none" stroke="#526d70" stroke-width="2.2">
+<path d="M24 0H176L200 24V146L176 170H24L0 146V24Z"/><circle cx="100" cy="85" r="50"/><circle cx="100" cy="85" r="33"/>
+<path d="M100 30V65M100 105V140M45 85H80M120 85H155M-16 85H216M100-16V186" stroke-dasharray="13 5 2 5" stroke-width="1"/>
+<circle cx="26" cy="27" r="8"/><circle cx="174" cy="27" r="8"/><circle cx="26" cy="143" r="8"/><circle cx="174" cy="143" r="8"/>
+<path d="M33 0V-37M167 0V-37M33-27H167M33-33V-21M167-33V-21M200 27H237M200 143H237M227 27V143M221 27H233M221 143H233" stroke-width="1.1"/>
+</g><path d="M1123 515H1397M1123 529H1290" stroke="#8c9e96" stroke-width="1.2"/>
+<path d="M274 651V744H1261V651" fill="none" stroke="#8fa59a" stroke-width="1.2"/>
+<path d="M739 744H797" stroke="#c8d3c7" stroke-width="2.5"/>
+<text x="1190" y="674" font-size="32" fill="#d4ded8" font-weight="500" >照合</text><text x="583" y="834" font-size="29" fill="#bacbc0" font-weight="400" >代表ファイルを取り出し、内容を見比べる</text><text x="116" y="934" font-size="22" fill="#a5b6ad" font-weight="400" >工程のイメージ</text></g></svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-labelledby="title desc">
+<title id="title">小さな対象から保管と取出しを確認する</title><desc id="desc">複数のファイルから一つを選び、境界を分けた検証用PCへ取り出して確認する工程。対象を選ぶ、別の環境、取り出して確認の三段階を示します。</desc>
+<defs><filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#23312f" flood-opacity=".13"/></filter><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#c6d5db" stroke-opacity=".14" stroke-width="1"/></pattern><pattern id="hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V12" stroke="#81949c" stroke-width="1"/></pattern></defs>
+<g font-family="'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif"><rect width="1200" height="900" fill="#e9ece7"/>
+<path d="M0 730H1200V900H0Z" fill="#d8dfd7"/><path d="M0 730H1200" stroke="#c8d1c8"/>
+<g filter="url(#shadow)"><rect x="142" y="118" width="916" height="602" fill="#fafbf7"/></g>
+<text x="195" y="190" font-size="40" fill="#3d5556" font-weight="500" >小さな対象で、確かめる</text><path d="M195 222H1000" stroke="#cad4cc" stroke-width="1"/>
+<g fill="#e1e7e2" stroke="#a7b7ad" stroke-width="1.5"><path d="M208 309H270L292 331V459H208Z"/><path d="M251 291H313L335 313V441H251Z"/><path d="M294 273H356L378 295V423H294Z"/>
+<path d="M208 470H270L292 492V620H208Z"/><path d="M251 452H313L335 474V602H251Z"/></g>
+<g filter="url(#shadow)"><path d="M349 375H450L477 402V568H349Z" fill="#d8e4d8" stroke="#6f8c7d" stroke-width="2"/></g>
+<path d="M450 375V402H477M369 430H453M369 453H453M369 476H432M369 523H418" fill="none" stroke="#789a88" stroke-width="2"/>
+<path d="M510 464H588M575 453L588 464L575 475" fill="none" stroke="#7a9288" stroke-width="2"/>
+<path d="M614 263H1005V634H614Z" fill="#edf1ec" stroke="#a4b6a8" stroke-width="1.5" stroke-dasharray="8 8"/>
+<rect x="662" y="325" width="303" height="212" rx="6" fill="#607470"/><rect x="674" y="337" width="279" height="187" rx="1" fill="#e0e7df"/>
+<path d="M799 537V566M750 566H879M643 583H985L1005 607H624Z" fill="#a8b7ac" stroke="#8ca092" stroke-width="1.2"/>
+<path d="M782 364H849L869 385V493H782Z" fill="#f7f9f4" stroke="#80988c" stroke-width="1.5"/>
+<path d="M848 364V385H869M797 408H850M797 426H850M797 444H836M797 475H829" fill="none" stroke="#789a88" stroke-width="1.6"/>
+<text x="656" y="295" font-size="26" fill="#6a8176" font-weight="500" >別の環境</text><text x="199" y="676" font-size="30" fill="#405b55" font-weight="500" >対象を選ぶ</text><text x="640" y="676" font-size="30" fill="#405b55" font-weight="500" >取り出して確認</text><text x="195" y="794" font-size="28" fill="#677d73" font-weight="400" >対象と確認範囲を決めてから、試す。</text></g></svg>
