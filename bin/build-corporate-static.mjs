@@ -64,6 +64,20 @@ function deferBackgroundVideo(html) {
     '<video loop="" muted="" playsinline="" preload="none" poster="/assets/images/home/recruit/4.webp" data-deferred-src="/assets/images/home/junni_is.mp4"></video>');
 }
 
+function addFooterLegalBand(html) {
+  return html.replace(
+    /<div class="bottom" data-gooey-color="yellow"><div class="bottom_inner"><ul class="bottom_list">[\s\S]*?<\/ul><\/div><\/div>/,
+    '<div class="bottom" data-gooey-color="yellow"><div class="bottom_inner"><small class="bottom_copyright">© 2026 CRUD5th. All rights reserved.</small><nav class="bottom_legal" aria-label="法務情報"><a class="bottom_legal_link" href="/information-security" data-no-swup>情報セキュリティ基本方針</a><a class="bottom_legal_link" href="/privacy-policy" data-no-swup>個人情報保護方針</a></nav></div></div>',
+  );
+}
+
+function normalizeMenuLabels(html) {
+  return html
+    .replace(/<span class="menu_text">[\s\S]*?<\/span>/, '<span class="menu_text">MENU</span>')
+    .replace('<button class="menu_btn">', '<button class="menu_btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="crud5th-site-menu">')
+    .replace('<div class="menu_nav">', '<div class="menu_nav" id="crud5th-site-menu">');
+}
+
 let contactLinks = 0;
 function activateContactLinks(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -72,7 +86,7 @@ function activateContactLinks(directory) {
       activateContactLinks(filename);
     } else if (entry.name.endsWith(".html")) {
       const relative = path.relative(source, filename);
-      let html = addMemberLinks(readFileSync(filename, "utf8"));
+      let html = normalizeMenuLabels(addFooterLegalBand(addMemberLinks(readFileSync(filename, "utf8"))));
       html = preloadEntryDependencies(html);
       html = showInitialHomeContent(html);
       html = deferBackgroundVideo(html).replace(

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
+import { corporateLinks } from "@/components/corporate-navigation";
 
 export default function Footer({ corporate = false }: { corporate?: boolean }) {
   const scrollToSection = (id: string) => {
@@ -12,6 +13,45 @@ export default function Footer({ corporate = false }: { corporate?: boolean }) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  if (corporate) {
+    return (
+      <footer className="corporate-footer" data-testid="footer">
+        <div className="corporate-footer-main">
+          <nav aria-label="フッターナビゲーション" data-testid="footer-nav">
+            <ul className="corporate-footer-links">
+              {corporateLinks.map((link) => (
+                <li key={link.href}><a href={link.href}>{link.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+          <a className="corporate-footer-brand" href="/" data-testid="footer-brand">
+            <img src="/assets/images/footer_logo.svg" alt="CRUD5th" loading="lazy" />
+          </a>
+          <button
+            type="button"
+            className="corporate-footer-top"
+            onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })}
+            aria-label="Back to top"
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <path d="M14 25V3M4 13 14 3l10 10" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+            <span>BACK TO TOP</span>
+          </button>
+        </div>
+        <div className="corporate-footer-bottom">
+          <div className="corporate-footer-bottom-inner">
+            <small data-testid="footer-copyright">© {new Date().getFullYear()} CRUD5th</small>
+            <div className="corporate-footer-legal" data-testid="footer-compliance">
+              <a href="/information-security">情報セキュリティ基本方針</a>
+              <a href="/privacy-policy">個人情報保護方針</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="bg-secondary/30 border-t border-border py-12" data-testid="footer">
@@ -36,17 +76,7 @@ export default function Footer({ corporate = false }: { corporate?: boolean }) {
               className="flex flex-wrap gap-4 md:gap-8"
               data-testid="footer-nav"
             >
-              {corporate ? [
-                { label: "HOME", href: "/" },
-                { label: "ABOUT", href: "/about" },
-                { label: "RESEARCH", href: "/works" },
-                { label: "SERVICES", href: "/service" },
-                { label: "MEMBER", href: "/#member" },
-                { label: "PRODUCTS", href: "/recruit" },
-                { label: "CONTACT", href: "/contact" },
-              ].map(item => (
-                <a key={item.href} href={item.href} className="text-muted-foreground hover:text-primary">{item.label}</a>
-              )) : [
+              {[
                 { label: "ホーム", id: "home" },
                 { label: "サービス", id: "services" },
                 { label: "チーム", id: "team" },

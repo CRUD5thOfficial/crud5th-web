@@ -7,8 +7,26 @@
   function requestCinemaUpdate() {
     if (!document.hidden && !cinemaFrame) cinemaFrame = requestAnimationFrame(updateCinemaDimming);
   }
+  function updateFooterActivity() {
+    const footer = document.querySelector('.footer');
+    const menu = document.querySelector('.menu');
+    const content = document.querySelector('#swup main');
+    let isActive = false;
+    if (footer && menu && content && footer.dataset.hidden !== 'true') {
+      const footerRect = footer.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      const contentRect = content.getBoundingClientRect();
+      const exposedTop = Math.max(footerRect.top, contentRect.bottom);
+      isActive = footerRect.height > 0 && exposedTop <= menuRect.bottom && footerRect.bottom > menuRect.top;
+    }
+    const value = String(isActive);
+    if (document.documentElement.dataset.crud5thFooterActive !== value) {
+      document.documentElement.dataset.crud5thFooterActive = value;
+    }
+  }
   function updateCinemaDimming() {
     cinemaFrame = 0;
+    updateFooterActivity();
     updateGearBackgrounds();
     if (!cinemaSection?.isConnected) return;
     const scrollArea = cinemaSection.querySelector('.home_recruit_scrollArea');
@@ -256,10 +274,12 @@
     const panel = menu?.querySelector('.menu_nav');
     if (button && panel) {
       const isOpen = menu.getAttribute('data-menu-active') === 'true';
-      const attributes = { 'aria-label': isOpen ? 'メニューを閉じる' : 'メニューを開く', 'aria-expanded': String(isOpen), 'aria-controls': 'crud5th-site-menu', type: 'button' };
+      const attributes = { 'aria-label': isOpen ? 'Close menu' : 'Open menu', 'aria-expanded': String(isOpen), 'aria-controls': 'crud5th-site-menu', type: 'button' };
       if (panel.id !== 'crud5th-site-menu') panel.id = 'crud5th-site-menu';
       for (const [name, value] of Object.entries(attributes)) if (button.getAttribute(name) !== value) button.setAttribute(name, value);
     }
+    const label = menu?.querySelector('.menu_text');
+    if (label && label.textContent !== 'MENU') label.textContent = 'MENU';
     const inner = document.querySelector('.nav_inner');
     if (inner && !inner.querySelector('.crud5th-nav-brand')) {
       const brand = document.createElement('span');
@@ -278,6 +298,7 @@
       else if (!current && link.hasAttribute('aria-current')) link.removeAttribute('aria-current');
     }
     syncMemberAnchor();
+    updateFooterActivity();
   }
   function syncCursorLabels() {
     for (const [type, label] of [['scroll_down', 'SCROLL DOWN'], ['more_detail', 'VIEW DETAILS']]) {

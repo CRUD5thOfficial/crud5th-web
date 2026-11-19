@@ -4,16 +4,14 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Navigation from "@/components/ui/navigation";
 import Contact from "@/components/sections/contact";
-import Footer from "@/components/sections/footer";
+import CorporatePageShell from "@/components/corporate-page-shell";
 import Kotoport from "@/pages/kotoport";
 import { kotoportContent } from "@/pages/kotoport-content";
 import InformationSecurity from "@/pages/information-security";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import NotFound from "@/pages/not-found";
 import Preloader from "@/components/preloader";
-import "@/pages/contact-theme.css";
 
 function CorporateHome() {
   useEffect(() => {
@@ -24,14 +22,9 @@ function CorporateHome() {
 
 function ContactPage() {
   return (
-    <div className="gen-contact-page min-h-screen bg-background text-foreground overflow-x-hidden">
-      <link rel="stylesheet" href="/assets/local/crud5th-gen-fonts.css" />
-      <Navigation corporate />
-      <main className="pt-16">
-        <Contact />
-      </main>
-      <Footer corporate />
-    </div>
+    <CorporatePageShell page="contact">
+      <Contact />
+    </CorporatePageShell>
   );
 }
 
@@ -45,8 +38,12 @@ function Router() {
       <Route path="/" component={CorporateHome} />
       <Route path="/contact" component={ContactPage} />
       <Route path={kotoportContent.route} component={Kotoport} />
-      <Route path="/information-security" component={InformationSecurity} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/information-security">
+        <CorporatePageShell page="legal"><InformationSecurity /></CorporatePageShell>
+      </Route>
+      <Route path="/privacy-policy">
+        <CorporatePageShell page="legal"><PrivacyPolicy /></CorporatePageShell>
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
@@ -56,7 +53,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(
     () => {
       const pathname = window.location.pathname.replace(/\/+$/, "");
-      return pathname !== kotoportContent.route && pathname !== "/contact";
+      return ![kotoportContent.route, "/contact", "/information-security", "/privacy-policy"].includes(pathname);
     },
   );
 
