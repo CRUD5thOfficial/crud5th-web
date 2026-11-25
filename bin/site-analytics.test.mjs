@@ -130,6 +130,33 @@ test("built tags keep the tracker and its Google loader out of Swup script re-ex
   }
 });
 
+test("page addresses with .html or /index.html count as the same page as the clean address", () => {
+  const browser = startTracker({ url: "https://crud5th.com/about/index.html", referrer: "https://crud5th.com/contact.html" });
+  const first = browser.events("page_view")[0][2];
+  assert.equal(first.page_path, "/about");
+  assert.equal(first.page_referrer, "https://crud5th.com/contact");
+  browser.visit("/contact.html");
+  assert.equal(browser.events("page_view").at(-1)[2].page_path, "/contact");
+  browser.visit("/services/kotoport/");
+  assert.equal(browser.events("page_view").at(-1)[2].page_path, "/services/kotoport");
+  browser.visit("/about.htm");
+  assert.equal(browser.events("page_view").at(-1)[2].page_path, "/404");
+  browser.visit("/private-customer.html");
+  assert.equal(browser.events("page_view").at(-1)[2].page_path, "/404");
+});
+
+test("miakashi pages are counted by their served path, and the diagnosis page carries no analytics", () => {
+  const partner = readFileSync(new URL("../dist/public/products/miakashi/partner.html", import.meta.url), "utf8");
+  const tag = partner.match(/<script[^>]+src="\/site-analytics\.js"[^>]*>/)?.[0] || "";
+  const paths = JSON.parse(tag.match(/data-page-paths="([^"]*)"/)[1].replaceAll("&quot;", '"').replaceAll("&lt;", "<").replaceAll("&amp;", "&"));
+  for (const page of ["/products/miakashi", "/products/miakashi/partner", "/products/miakashi/scs3", "/products/miakashi/ai-agents"]) {
+    assert.ok(paths.includes(page), `${page} must not be reported as /404`);
+  }
+  const diagnosis = readFileSync(new URL("../dist/public/products/miakashi/diagnosis/index.html", import.meta.url), "utf8");
+  assert.ok(diagnosis.includes('<meta name="crud5th-analytics" content="off">'));
+  assert.equal((diagnosis.match(/site-analytics\.js|googletagmanager/g) || []).length, 0);
+});
+
 test("contact success follows an OK response and never forwards contact fields", async () => {
   const { build } = await import("esbuild");
   const names = ["Mail", "Phone", "MapPin", "Twitter", "Github", "Button", "Input", "Textarea", "Select", "SelectContent", "SelectItem", "SelectTrigger", "SelectValue", "Form", "FormControl", "FormField", "FormItem", "FormLabel", "FormMessage", "AnimatedUnderline"];

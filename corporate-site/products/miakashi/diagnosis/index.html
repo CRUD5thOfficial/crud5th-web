@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="connect-src 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="crud5th-analytics" content="off">
 <meta name="description" content="侵入した攻撃者は、御社のバックアップを消せるか。消されたあと、戻せるか。10の質問に答えると、その場で結果が出ます。入力した内容は送信も保存もされません。">
 <meta name="theme-color" content="#f2f2f2">
 <title>バックアップ診断｜御灯</title>
@@ -26,8 +27,8 @@
 <section class="intro" aria-labelledby="page-title">
 <p class="kicker">バックアップ診断</p>
 <h1 id="page-title">侵入した攻撃者は、御社の写しを消せるか。<br>消されたあと、戻せるか。</h1>
-<p class="lead">10の質問に答えると、いまの写し（バックアップ）の守り方を攻撃者の目で見た結果が、1枚にまとまります。保守会社の方は、お客様1社を思い浮かべてお答えください。</p>
-<p class="privacy">入力した内容は、どこにも送信されず、保存もされません。このページを閉じると消えます。パスワードや機密の情報は伺いません。</p>
+<p class="lead">10の質問に答えると、いまの写し（バックアップ）の守り方を攻撃者の目で見た結果を、その場で結果票にまとめます。印刷やPDFで保存して、社内や保守会社との相談に使えます。保守会社の方は、お客様1社を思い浮かべてお答えください。</p>
+<p class="privacy">入力した内容は、どこにも送信されず、保存もされません。このページを閉じると消えます。このページにはアクセス解析も入れていません。パスワードや機密の情報は伺いません。</p>
 <div class="scope">
 <h2>この診断でしないこと</h2>
 <ul class="plain-list">
@@ -43,10 +44,10 @@
 
 <section id="questions" class="questions" aria-labelledby="questions-title">
 <h2 id="questions-title">10の質問</h2>
-<p class="section-note">分からない問は、「分からない」を選んでください。分からないこと自体が、確かめる点として結果に出ます。</p>
+<p class="section-note">ここでは、普段の仕事で使うパソコン・サーバー・アカウントをまとめて「仕事場」と呼びます。分からない問は、「分からない」を選んでください。分からないこと自体が、確かめる点として結果に出ます。</p>
 <fieldset class="question" id="q1">
 <legend><span class="q-number">問1</span><span class="q-text">写しはどこにありますか（複数選択）</span></legend>
-<p class="q-hint">当てはまるものをすべて選んでください。「取っていない」「分からない」は、ほかの答えと一緒には選べません。</p>
+<p class="q-hint">当てはまるものをすべて選んでください。「取っていない」「分からない」は、ほかの答えと一緒には選べません。OneDriveやGoogleドライブなどの同期だけの場合は、元のファイルを消すと写しも消えるため、写しには数えず「取っていない」を選んでください。</p>
 <div class="options">
 <label class="option"><input type="checkbox" name="q1" value="same"><span>元のデータと同じサーバーやパソコンの中</span></label>
 <label class="option"><input type="checkbox" name="q1" value="nas"><span>社内のNAS・外付けHDD（つないだまま）</span></label>
@@ -78,6 +79,7 @@
 </fieldset>
 <fieldset class="question" id="q4">
 <legend><span class="q-number">問4</span><span class="q-text">一定の期間、誰にも消せない・書き換えられない設定がありますか</span></legend>
+<p class="q-hint">あわせて、写しを何日分残しているかも確かめてください。攻撃者は気づかれないまま何週間も潜むことがあり、残す期間が短いと、侵入されたあとの版しか残っていないことがあります。</p>
 <p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
 <div class="options">
 <label class="option"><input type="radio" name="q4" value="locked"><span>ある（期間も分かる）</span></label>
@@ -132,6 +134,7 @@
 <label class="option"><input type="radio" name="q9" value="documented"><span>決めて文書にしている</span></label>
 <label class="option"><input type="radio" name="q9" value="informal"><span>決めているが頭の中</span></label>
 <label class="option"><input type="radio" name="q9" value="none"><span>決めていない</span></label>
+<label class="option"><input type="radio" name="q9" value="unknown"><span>分からない</span></label>
 </div>
 </fieldset>
 <fieldset class="question" id="q10">
@@ -140,6 +143,7 @@
 <label class="option"><input type="radio" name="q10" value="shared"><span>決めて、連絡先も共有している</span></label>
 <label class="option"><input type="radio" name="q10" value="vendor"><span>保守会社に任せているが、取り決めはない</span></label>
 <label class="option"><input type="radio" name="q10" value="none"><span>決めていない</span></label>
+<label class="option"><input type="radio" name="q10" value="unknown"><span>分からない</span></label>
 </div>
 </fieldset>
 <div class="submit-area">
@@ -173,7 +177,7 @@
 
 <section class="result-block" aria-labelledby="criteria-title">
 <h3 id="criteria-title">評価制度の項目と、いまの回答で示せる材料</h3>
-<p class="block-lead">経済産業省・IPAの「サプライチェーン強化に向けたセキュリティ対策評価制度」のうち、バックアップと復旧に関わる項目です。</p>
+<p class="block-lead">経済産業省などの方針にもとづきIPAが運営する「サプライチェーン強化に向けたセキュリティ対策評価制度」のうち、御灯の記録が関わる評価基準です。</p>
 <p class="criteria-caution">この診断は制度の評価ではなく、★の取得や審査の通過を示すものではありません。</p>
 <div id="criteria-body"></div>
 <p class="source">出典: IPA「★3・★4要求事項・評価基準 Ver.1.1」（2026年10月28日公開）<br><a href="https://www.ipa.go.jp/security/scs/requirements-criteria.html" rel="noopener">https://www.ipa.go.jp/security/scs/requirements-criteria.html</a></p>
@@ -190,10 +194,13 @@
 </div>
 
 <section class="consult" aria-labelledby="consult-title">
-<h3 id="consult-title">御灯に相談する</h3>
-<p>御灯（ミアカシ）は、取引先に出せる、復元確認つきのバックアップです。証明つきバックアップは準備中で、ご相談と事前登録を受け付けています。</p>
-<p>結果について相談したいときは、メールでご連絡ください。回答の内容がメールに自動で入ることはありません。伝えたいことだけを、ご自身で書き添えてください。</p>
-<p><a class="contact-button" href="mailto:crud5th@crud5th.com?subject=%E5%BE%A1%E7%81%AF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E7%9B%B8%E8%AB%87">メールで相談する</a><span class="print-only">crud5th@crud5th.com</span></p>
+<h3 id="consult-title">次にできること</h3>
+<ul class="next-steps">
+<li><strong>社内や保守会社と共有する</strong><span>この結果を印刷かPDFで保存し、「確認事項」の上から順に、誰がいつ確かめるかを決めてください。保守会社に見せるときは、回答が実際の設定と合っているかも一緒に確かめてもらうと確実です。</span></li>
+<li><strong>対面で一緒に確かめる（無料の試行）</strong><span>60分の聞き取りと、保存先の設定画面を一緒に見る確認です。いまは最初の3社まで、無料の試行として受け付けています。撮影や画面の記録、パスワードの聞き取りはしません。</span><a class="text-link" href="mailto:crud5th@crud5th.com?subject=%E5%BE%A1%E7%81%AF%E3%81%AE%E5%AF%BE%E9%9D%A2%E8%A8%BA%E6%96%AD%EF%BC%88%E7%84%A1%E6%96%99%E3%81%AE%E8%A9%A6%E8%A1%8C%EF%BC%89%E3%82%92%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84&amp;body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0D%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0D%0A%E9%80%A3%E7%B5%A1%E3%81%AE%E3%81%A4%E3%81%8F%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%EF%BC%88%E4%BB%BB%E6%84%8F%EF%BC%89%EF%BC%9A%0D%0A%E4%BF%9D%E5%AD%98%E5%85%88%E3%81%AE%E7%A8%AE%E9%A1%9E%EF%BC%88%E5%88%86%E3%81%8B%E3%82%8B%E7%AF%84%E5%9B%B2%E3%81%A7%E3%80%82%E4%BE%8B%EF%BC%9ANAS%E3%80%81%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%EF%BC%89%EF%BC%9A%0D%0A%E9%83%BD%E5%90%88%E3%81%AE%E3%82%88%E3%81%84%E5%80%99%E8%A3%9C%E6%97%A5%EF%BC%9A%0D%0A%0D%0A%E2%80%BB%E5%AF%BE%E9%9D%A2%E8%A8%BA%E6%96%AD%E3%81%AF60%E5%88%86%E3%81%A7%E3%81%99%E3%80%82%E4%BF%9D%E5%AD%98%E5%85%88%E3%81%AE%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%E3%82%92%E4%B8%80%E7%B7%92%E3%81%AB%E8%A6%8B%E3%81%BE%E3%81%99%E3%81%8C%E3%80%81%E6%92%AE%E5%BD%B1%E3%82%84%E7%94%BB%E9%9D%A2%E3%81%AE%E8%A8%98%E9%8C%B2%E3%80%81%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE%E8%81%9E%E3%81%8D%E5%8F%96%E3%82%8A%E3%81%AF%E3%81%97%E3%81%BE%E3%81%9B%E3%82%93%E3%80%82%0D%0A">対面の診断を相談する</a></li>
+<li><strong>御灯に相談する</strong><span>御灯（ミアカシ）は、取引先への説明に使える、復元確認つきのバックアップです。ここでの「復元確認」は、事前に選んだ代表のファイルを定期的に取り出して確かめることを指します。月額の「証明つきバックアップ」は準備中で、ご相談と事前登録を受け付けています。</span><a class="contact-button" href="mailto:crud5th@crud5th.com?subject=%E5%BE%A1%E7%81%AF%E3%81%AE%E8%A8%BA%E6%96%AD%E7%B5%90%E6%9E%9C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84&amp;body=%E4%BC%9A%E7%A4%BE%E5%90%8D%EF%BC%9A%0D%0A%E3%81%94%E6%8B%85%E5%BD%93%E8%80%85%E5%90%8D%EF%BC%9A%0D%0A%EF%BC%88%E4%BF%9D%E5%AE%88%E4%BC%9A%E7%A4%BE%E3%81%AE%E6%96%B9%E3%81%AF%EF%BC%89%E3%81%8A%E5%AE%A2%E6%A7%98%E3%81%AE%E6%A5%AD%E7%A8%AE%E3%81%A8%E8%A6%8F%E6%A8%A1%EF%BC%9A%0D%0A%0D%0A%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%EF%BC%9A%0D%0A%0D%0A%E2%80%BB%E8%A8%BA%E6%96%AD%E3%81%AE%E5%9B%9E%E7%AD%94%E3%82%84%E7%B5%90%E6%9E%9C%E3%81%AF%E3%80%81%E4%BC%9D%E3%81%88%E3%81%9F%E3%81%84%E9%83%A8%E5%88%86%E3%81%A0%E3%81%91%E3%82%92%E3%81%94%E8%87%AA%E8%BA%AB%E3%81%A7%E6%9B%B8%E3%81%8D%E6%B7%BB%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%82%84%E8%A8%AD%E5%AE%9A%E3%81%AE%E8%A9%B3%E7%B4%B0%E3%81%AF%E6%9B%B8%E3%81%8B%E3%81%AA%E3%81%84%E3%81%A7%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82%0D%0A">メールで相談する</a><span class="print-only">crud5th@crud5th.com</span></li>
+</ul>
+<p class="consult-note">回答の内容がメールに自動で入ることはありません。伝えたいことだけを、ご自身で書き添えてください。</p>
 </section>
 </section>
 
@@ -204,8 +211,13 @@
 </main>
 
 <footer class="page-footer">
-<span>大切なデータと、仕事を続けるための備え。</span>
+<span>大切なデータと、仕事を続けるための備え。運営 CRUD5th</span>
+<nav aria-label="運営者の情報">
+<a href="https://crud5th.com/about/">会社概要</a>
+<a href="https://crud5th.com/information-security">情報セキュリティ基本方針</a>
+<a href="https://crud5th.com/privacy-policy">個人情報保護方針</a>
 <small>© CRUD5th</small>
+</nav>
 </footer>
 </body>
 </html>

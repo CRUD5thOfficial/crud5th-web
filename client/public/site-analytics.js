@@ -18,6 +18,11 @@
   window.dataLayer = window.dataLayer || [];
   function send() { window.dataLayer.push(arguments); }
 
+  // Static pages are reachable as /page, /page.html and /dir/index.html; count them as one page.
+  function cleanPath(pathname) {
+    return pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "").replace(/\/$/, "") || "/";
+  }
+
   function safeReferrer() {
     if (previousLocation) return previousLocation;
     if (!document.referrer) return "";
@@ -25,12 +30,13 @@
       const referrer = new URL(document.referrer);
       if (!/^https?:$/.test(referrer.protocol)) return "";
       if (referrer.origin !== window.location.origin) return `${referrer.origin}/`;
-      return `${referrer.origin}${pagePaths.has(referrer.pathname) ? referrer.pathname : "/404"}`;
+      const referrerPath = cleanPath(referrer.pathname);
+      return `${referrer.origin}${pagePaths.has(referrerPath) ? referrerPath : "/404"}`;
     } catch { return ""; }
   }
 
   function pageFields() {
-    const pathname = window.location.pathname.replace(/\/$/, "") || "/";
+    const pathname = cleanPath(window.location.pathname);
     const pagePath = pagePaths.has(pathname) ? pathname : "/404";
     return {
       page_path: pagePath,

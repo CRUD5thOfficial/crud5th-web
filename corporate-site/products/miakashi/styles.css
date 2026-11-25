@@ -163,3 +163,15 @@
 .evidence-note p+p{margin-top:12px}
 .section-block>p+.plain-list{margin-top:12px}
 @media(max-width:700px){.proof>h2 br,.plans>h2 br,.check>h2 br{display:none}}
+/* 2026-11-26 再点検: 最初の画面の提供状態、運営者の表示 */
+.hero-status{font-size:12.5px;line-height:1.9;margin-top:10px;padding-left:10px;border-left:2px solid #9a9a9a}
+.operator-links{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline}
+.operator-links a{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.hero-status{font-size:11.5px}.footer-bottom{flex-wrap:wrap}.operator-links{order:3;flex-basis:100%}}
+@media print{.hero-status{font-size:10px;margin-left:40%}}
+/* 2026-11-26 3回目のレビュー: 対応表の提供状態・運営者・スマホ幅・1枚での印刷 */
+.sheet-status{margin-top:10px;font-size:12.5px;line-height:1.8;padding-left:10px;border-left:2px solid #9a9a9a}
+.sheet-operator{margin-top:8px;font-size:10.5px;color:#555}
+.hero-status{font-size:14px}
+@media screen and (max-width:700px){.sheet .spec-table td:nth-child(4),.sheet .spec-table td:nth-child(5){width:auto}.hero-status{font-size:12.5px}}
+@media print{@page{size:A4;margin:10mm 12mm}.sheet-status{font-size:8.5pt;margin-top:4pt}.sheet h1{margin-top:6pt}.sheet-summary li{font-size:8.5pt;line-height:1.55}.sheet h2{margin-top:8pt}.sheet .spec-table{font-size:8pt}.sheet .spec-table th,.sheet .spec-table td{padding:4pt 7pt 4pt 0;line-height:1.5}.sheet-notes li{font-size:8.5pt;line-height:1.55}.sheet-foot{margin-top:8pt;font-size:7.5pt}.sheet-operator{font-size:7.5pt;margin-top:2pt}.hero-status{font-size:11px}}

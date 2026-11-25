@@ -2,7 +2,7 @@
 :root {
   --page: #f2f2f2;
   --ink: #424242;
-  --muted: #737373;
+  --muted: #686868;
   --line: #ccc;
   --soft-line: #e3e3e3;
   --white: #fff;
@@ -336,63 +336,100 @@ button:focus-visible,
   html { scroll-behavior: auto; }
 }
 
-/* 印刷（A4）。結果があるときは結果と回答の控えを、ないときは質問を載せる。 */
-@page { size: A4; margin: 14mm 15mm; }
+/* 結果のあとの案内 */
+.next-steps { display: grid; gap: 0; margin-top: 18px; border-top: 1px solid var(--soft-line); }
+.next-steps li { display: grid; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--soft-line); font-size: 14px; }
+.next-steps strong { font-size: 14.5px; }
+.next-steps .text-link, .next-steps .contact-button { justify-self: start; }
+.consult-note { font-size: 12.5px; color: var(--muted); }
+.criteria-status.is-partial { font-weight: 600; }
+.question.is-unanswered { box-shadow: inset 3px 0 0 #8a5a00; }
 
+/* 運営者 */
+.page-footer nav { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+.page-footer a { color: inherit; text-underline-offset: 3px; }
+
+/* 印刷（A4）。結果があるときは結果票を、ないときは質問を載せる。結果票は詰めて組む。 */
+@page { size: A4; margin: 11mm 12mm; }
 @media print {
-  :root { font-size: 10.5pt; background: #fff; }
+  :root { font-size: 9pt; background: #fff; }
   html { scroll-behavior: auto; }
   body { background: #fff; color: #222; }
-  .skip-link, .page-nav, .submit-area, .result-actions, .back-links, .contact-button, noscript { display: none !important; }
+  .skip-link, .page-nav, .submit-area, .result-actions, .back-links, .contact-button, .text-link, noscript, .consult-note { display: none !important; }
   .print-only { display: inline; }
   .page-header, .page, .page-footer { width: 100%; }
   .page-header { padding-top: 0; }
-  .wordmark-ja { font-size: 18pt; }
-  .page { padding-top: 14pt; }
-  .intro h1 { margin-top: 6pt; font-size: 14pt; line-height: 1.6; }
-  .lead { margin-top: 8pt; font-size: 10pt; line-height: 1.7; }
-  .privacy { margin-top: 8pt; padding: 0 0 0 8pt; font-size: 9.5pt; }
-  .scope { margin-top: 10pt; padding-top: 8pt; }
-  .scope h2 { font-size: 10pt; margin-bottom: 2pt; }
-  p, li, dd, dt { line-height: 1.65; }
+  .wordmark-ja { font-size: 14pt; }
+  .wordmark-en { font-size: 7pt; }
+  .page { padding-top: 6pt; }
+  .intro h1 { margin-top: 2pt; font-size: 11pt; line-height: 1.5; }
+  .lead { margin-top: 6pt; font-size: 9pt; line-height: 1.6; }
+  .privacy { margin-top: 6pt; padding: 0 0 0 6pt; font-size: 8.5pt; }
+  .scope { margin-top: 6pt; padding-top: 4pt; }
+  .scope h2 { font-size: 9pt; margin-bottom: 2pt; }
+  p, li, dd, dt { line-height: 1.5; }
   .plain-list { gap: 0; }
-  .plain-list li { font-size: 9.5pt; }
+  .plain-list li { font-size: 8.5pt; }
 
-  body.has-result .lead,
-  body.has-result .scope,
-  body.has-result .privacy,
+  body.has-result .intro,
   body.has-result .questions { display: none; }
 
-  .questions { margin-top: 16pt; }
-  .questions > h2, .result-head h2 { font-size: 13pt; }
-  .question { margin-top: 8pt; padding: 8pt 0 0; border-top: 1px solid #ccc; border-radius: 0; break-inside: avoid; }
-  .question legend { font-size: 10pt; }
+  .questions { margin-top: 10pt; }
+  .questions > h2 { font-size: 11pt; }
+  .question { margin-top: 6pt; padding: 6pt 0 0; border-top: 1px solid #ccc; border-radius: 0; break-inside: avoid; box-shadow: none; }
+  .question legend { font-size: 9pt; }
+  .q-hint, .skip-note { font-size: 8pt; }
   .options { padding-top: 2pt; gap: 0; }
-  .option { min-height: 0; padding: 1pt 0; font-size: 9.5pt; background: none !important; }
-  .option input { width: 10pt; height: 10pt; margin-top: 3pt; }
+  .option { min-height: 0; padding: 1pt 0; font-size: 8.5pt; background: none !important; }
+  .option input { width: 9pt; height: 9pt; margin-top: 2pt; }
 
-  .result { margin-top: 12pt; padding-top: 10pt; }
-  .result-block { margin-top: 10pt; padding: 10pt 0 0; border-top: 1px solid #ccc; border-radius: 0; }
-  .result-block h3, .consult h3 { font-size: 11.5pt; break-after: avoid; }
-  .result-block h4 { margin: 8pt 0 2pt; font-size: 9.5pt; break-after: avoid; }
-  .scale { margin-top: 6pt; }
-  .scale-item { padding: 4pt 6pt; border: 1px solid #ccc; background: none; font-size: 9pt; }
+  /* 結果票 */
+  .result { margin-top: 0; padding-top: 0; border-top: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 12pt; }
+  .result > * { grid-column: 1 / -1; }
+  .result > .result-block:nth-of-type(1),
+  .result > .result-block:nth-of-type(2) { grid-column: auto; }
+  .result-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10pt; padding-bottom: 4pt; border-bottom: 1.5px solid #222; }
+  .result-head .kicker { display: none; }
+  .result-head h2 { margin: 0; font-size: 12pt; }
+  .result-date { margin: 0; font-size: 8.5pt; }
+  .result-caution { flex-basis: 100%; margin-top: 2pt; font-size: 8pt; }
+  .result-block { margin-top: 6pt; padding: 0; border-radius: 0; background: none; }
+  .result-block h3, .consult h3 { font-size: 10pt; break-after: avoid; }
+  .result-block h4 { margin: 4pt 0 1pt; font-size: 8.5pt; break-after: avoid; }
+  #deletion-body h4, #deletion-body .plain-list, #restore-body h4, #restore-body .plain-list { display: none; }
+  .scale { margin-top: 3pt; gap: 1pt; }
+  .scale-item { padding: 2pt 4pt; border: 1px solid #ccc; background: none; font-size: 7.5pt; line-height: 1.3; }
   .scale-item.is-current { border: 1.5px solid #222; }
-  .verdict { margin-top: 8pt; font-size: 11pt; }
-  .verdict-reason, .block-lead { font-size: 9.5pt; }
-  .note { margin-top: 6pt; font-size: 9pt; }
-  .finding { padding: 8pt 0; break-inside: avoid; }
-  .finding-details { grid-template-columns: 90pt 1fr; font-size: 9.5pt; }
-  .criteria-caution { padding: 4pt 0; background: none; font-size: 9.5pt; font-weight: 600; }
-  .criteria-table { margin-top: 6pt; font-size: 9pt; }
-  .criteria-table th, .criteria-table td { padding: 5pt 8pt 5pt 0; line-height: 1.6; }
+  .scale-mark { font-size: 6.5pt; }
+  .verdict { margin-top: 4pt; font-size: 9.5pt; line-height: 1.5; }
+  .verdict-reason, .block-lead { margin-top: 2pt; font-size: 8.5pt; }
+  .note { margin-top: 3pt; padding-left: 5pt; font-size: 7.5pt; }
+  .findings { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12pt; margin-top: 2pt; }
+  .finding { padding: 4pt 0; border-bottom: 1px solid #ddd; break-inside: avoid; }
+  .finding:last-child { padding-bottom: 4pt; border-bottom: 1px solid #ddd; }
+  .finding-meta { font-size: 7pt; }
+  .result-block .finding-title { margin: 1pt 0 2pt; font-size: 8.5pt; }
+  .finding-details { grid-template-columns: 3.6em 1fr; gap: 1pt 4pt; font-size: 7.8pt; line-height: 1.45; }
+  .finding-details dt { font-size: 0; padding-top: 0; }
+  .finding-details dt:nth-of-type(1)::before { content: "理由"; font-size: 7pt; }
+  .finding-details dt:nth-of-type(2)::before { content: "直すなら"; font-size: 7pt; }
+  .criteria-caution { margin-top: 2pt; padding: 0; background: none; font-size: 8pt; font-weight: 600; }
+  #criteria-title, #criteria-title ~ .block-lead, .criteria-caution { break-after: avoid; }
+  .result-block[aria-labelledby="criteria-title"] { break-inside: avoid; }
+  .criteria-table thead { display: table-header-group; }
+  .criteria-table { margin-top: 3pt; font-size: 7.6pt; }
+  .criteria-table th, .criteria-table td { padding: 2pt 5pt 2pt 0; line-height: 1.4; }
   .criteria-table tr { break-inside: avoid; }
-  .source { font-size: 8.5pt; }
-  .answer-row { padding: 4pt 0; break-inside: avoid; }
-  .answers dt { font-size: 9pt; }
-  .answers dd { font-size: 9.5pt; }
-  .consult { margin-top: 14pt; padding-top: 10pt; break-inside: avoid; }
-  .consult p { margin-top: 4pt; font-size: 9.5pt; }
-  .page-footer { padding: 14pt 0 0; font-size: 8pt; }
+  .criteria-table td[data-label="原文"] { font-size: 7pt; color: #444; }
+  .source { margin-top: 2pt; font-size: 7pt; line-height: 1.4; }
+  .answers { display: grid; grid-template-columns: 1fr 1fr; column-gap: 12pt; margin-top: 2pt; }
+  .answer-row { padding: 1.5pt 0; break-inside: avoid; }
+  .answers dt { font-size: 7pt; line-height: 1.35; }
+  .answers dd { font-size: 7.8pt; line-height: 1.35; }
+  .consult { margin-top: 6pt; padding-top: 4pt; border-top: 1px solid #ccc; break-inside: avoid; }
+  .next-steps { margin-top: 2pt; border: 0; }
+  .next-steps li { padding: 1.5pt 0; border: 0; font-size: 7.8pt; gap: 0; }
+  .next-steps strong { font-size: 8pt; }
+  .page-footer { padding: 6pt 0 0; font-size: 7pt; }
   a { text-decoration: none; }
 }

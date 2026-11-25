@@ -103,7 +103,8 @@
       options: [
         { value: 'documented', label: '決めて文書にしている' },
         { value: 'informal', label: '決めているが頭の中' },
-        { value: 'none', label: '決めていない' }
+        { value: 'none', label: '決めていない' },
+        { value: 'unknown', label: '分からない' }
       ]
     },
     {
@@ -112,7 +113,8 @@
       options: [
         { value: 'shared', label: '決めて、連絡先も共有している' },
         { value: 'vendor', label: '保守会社に任せているが、取り決めはない' },
-        { value: 'none', label: '決めていない' }
+        { value: 'none', label: '決めていない' },
+        { value: 'unknown', label: '分からない' }
       ]
     }
   ];
@@ -122,7 +124,7 @@
 
   var CRITERIA = [
     {
-      id: '4-3-4-1', stage: '★3', questions: [7],
+      id: '4-3-4-1', stage: '★3', questions: [1, 7],
       text: '取得対象、取得頻度及び保管期間を定めて自社で取り扱うデータのバックアップを取得すること。'
     },
     {
@@ -130,23 +132,23 @@
       text: '重要な機密情報については、No.4-3-4-1におけるバックアップに加えて、遠隔地バックアップを実施すること。'
     },
     {
-      id: '4-3-4-3', stage: '★3', questions: [6],
+      id: '4-3-4-3', stage: '★3', questions: [1, 6],
       text: 'バックアップ対象ごとにリストア手順書を整備すること。'
     },
     {
-      id: '7-1-1-1', stage: '★3', questions: [9, 10],
-      text: '事業継続上重要なシステムについて、サイバー攻撃を念頭に、業務の目標復旧レベルを定めたうえで、当該レベルまで業務を回復するために必要な対策を整備すること。'
+      id: '7-1-1-1', stage: '★3', questions: [1, 9, 10],
+      text: '事業継続上重要なシステムについて、サイバー攻撃を念頭に、業務の目標復旧レベルを定めたうえで、当該レベルまで業務を回復するために必要な対策を、以下の例を参考として整備すること。…（抜粋。続く例の一覧は省略）'
     },
     {
-      id: '7-1-1-2', stage: '★4', questions: [5, 6, 9],
-      text: 'リストア手順書どおりに、かつ、目標復旧時間内でバックアップの復元ができることを確認すること。（抜粋）'
+      id: '7-1-1-2', stage: '★4', questions: [1, 5, 6, 9],
+      text: '（抜粋）…No.4-3-4-3で定めたリストア手順書どおりに、かつ、目標復旧時間内でバックアップの復元ができることを確認すること。'
     }
   ];
 
   var DELETION_LEVELS = {
     weak: { stage: '消されやすい', label: '管理者の権限を取られると、追加の手間なしに写しまで消せる構成です' },
     middle: { stage: '一手間かかる', label: '写しを消すには、管理者の権限のほかに、もう一つ守りを破る必要がある構成です' },
-    strong: { stage: '消されにくい', label: '仕事場の権限だけでは消せない構成です' }
+    strong: { stage: '消されにくい', label: 'お答えのとおりなら、仕事場の権限だけでは消せない構成です' }
   };
 
   var RESTORE_LEVELS = {
@@ -163,7 +165,7 @@
     restoreReason: '取り出しの確認や手順書は、写しを取り始めてからの話になります。'
   };
 
-  var STATUS_LABELS = { available: '示せる材料があります', lacking: '不足しています' };
+  var STATUS_LABELS = { available: '示せる材料があります', partial: '材料の一部があります', lacking: '不足しています' };
 
   var AREA_LABELS = { deletion: '消されにくさ', restore: '戻せるか', agreement: '取り決め', extra: 'さらに良くするなら' };
 
@@ -190,7 +192,7 @@
     'q1-onsite-only': {
       area: 'deletion', number: 1,
       title: '写しがすべて、社内でつながったままの機器にあります',
-      why: '社内のネットワークに入った攻撃者は、つながっている保存先を順に探し、写しごと暗号化します。',
+      why: '社内のネットワークに入った攻撃者は、つながっている保存先を順に探し、写しも一緒に暗号化することが多くあります。',
       fix: '社外、または取り外して保管する媒体に、もう1つ写しを置きます。'
     },
     'q2-same': {
@@ -251,13 +253,13 @@
     'q3-always-extra': {
       area: 'extra', number: 3,
       title: '保存先を、社内のネットワークから見えない置き方にする余地があります',
-      why: '別のアカウントと消せない期間の設定が効いているため、いまの構成でも写しは守られています。ただ、社内から見えている保存先は、社内に入った攻撃者にとって、設定や認証の弱い所を探す入口になります。',
+      why: 'お答えのとおりなら、別のアカウントと消せない期間の設定が効いていて、写しは守られています。ただ、社内から見えている保存先は、社内に入った攻撃者にとって、設定や認証の弱い所を探す入口になります。',
       fix: '社内からは開けず、社外で受け取るだけの形にできるかを確かめます。'
     },
     'q3-onsave-extra': {
       area: 'extra', number: 3,
       title: '保存するときだけつながる形を、社内から届かない形にする余地があります',
-      why: '別のアカウントと消せない期間の設定が効いているため、いまの構成でも写しは守られています。つながっている間は社内から保存先に届くので、届かない形にできれば、さらに確かになります。',
+      why: 'お答えのとおりなら、別のアカウントと消せない期間の設定が効いていて、写しは守られています。つながっている間は社内から保存先に届くので、届かない形にできれば、さらに確かになります。',
       fix: '社内からは開けず、社外で受け取るだけの形にできるかを確かめます。'
     },
     'q3-unknown-extra': {
@@ -356,6 +358,12 @@
       why: 'どのデータを、どの頻度で残せば足りるのかを決める基準がありません。事故のときは、戻す順番から話し合うことになります。',
       fix: '止まると困る仕事を3つまで挙げ、それぞれいつまでに戻したいかを決めて書き出します。'
     },
+    'q9-unknown': {
+      area: 'agreement', number: 9, unknown: true,
+      title: '止まると困る仕事と戻したい期限が決まっているか、分かっていません',
+      why: '決まっていても、知っている人がいない日に事故が起きると、どれから戻すかをその場で話し合うことになります。',
+      fix: '経営者か責任者に確かめ、止まると困る仕事と、いつまでに戻したいかを書き出します。'
+    },
     'q10-vendor': {
       area: 'agreement', number: 10,
       title: '保守会社に任せていますが、取り決めがありません',
@@ -367,6 +375,12 @@
       title: '事故のとき、誰へ連絡し、誰が戻すかを決めていません',
       why: '事故に気づいた人が、連絡先を探すところから始めることになります。その間も被害は広がります。',
       fix: '最初の連絡先と、戻す作業の担当を決め、連絡先を紙でも共有します。'
+    },
+    'q10-unknown': {
+      area: 'agreement', number: 10, unknown: true,
+      title: '事故のときの連絡先と、戻す作業の担当が決まっているか、分かっていません',
+      why: '知っている人がいない日に事故が起きると、連絡先を探すところから始めることになります。',
+      fix: '社内と保守会社に確かめ、最初の連絡先と戻す作業の担当を書き出して、紙でも共有します。'
     }
   };
 
@@ -379,8 +393,8 @@
     'q6-stale', 'q6-none', 'q6-unknown',
     'q8-ignored', 'q8-none', 'q8-unknown',
     'q7-settings', 'q7-none', 'q7-unknown',
-    'q9-informal', 'q9-none',
-    'q10-vendor', 'q10-none',
+    'q9-informal', 'q9-none', 'q9-unknown',
+    'q10-vendor', 'q10-none', 'q10-unknown',
     'q3-always-extra', 'q3-onsave-extra', 'q3-unknown-extra'
   ];
 
@@ -489,17 +503,15 @@
       none.label = NO_BACKUP.deletionLabel;
       return none;
     }
-    if (places.indexOf('unknown') !== -1) {
-      return deletionResult('weak', '写しがどこにあるか分かっていないため、守られているとは見なせません。', [], [1]);
-    }
-
     var unknownNumbers = [];
     if (a.q2 === 'unknown') unknownNumbers.push(2);
     if (a.q3 === 'unknown') unknownNumbers.push(3);
     if (a.q4 === 'unknown') unknownNumbers.push(4);
 
-    if (places.length === 1 && places[0] === 'same') {
-      return deletionResult('weak', '写しが元のデータと同じ機器の中にしかなく、その機器に入られると、元のデータと写しを同時に失います。', [], unknownNumbers);
+    if (places.indexOf('unknown') !== -1) {
+      var unknownPlace = deletionResult('weak', '写しがどこにあるか分かっていないため、守られているとは見なせません。', [], [1].concat(unknownNumbers));
+      unknownPlace.label = '写しの場所が分からないため、守られているかを判断できません';
+      return unknownPlace;
     }
 
     var hasSeparate = places.indexOf('removable') !== -1 || places.indexOf('offsite') !== -1;
@@ -514,12 +526,26 @@
     if (outOfSight) holds.push('保存先が、社内のネットワークからは見えません。');
     if (locked) holds.push('一定の期間、誰にも消せない・書き換えられない設定があります。');
 
+    /* 同じ機器の中だけの写しは、ほかの守りが効いていても、機器ごと失えば残らない。 */
+    if (places.length === 1 && places[0] === 'same') {
+      var sameOnly = deletionResult('weak', '写しが元のデータと同じ機器の中にしかなく、その機器に入られると、元のデータと写しを同時に失うおそれがあります。機器の故障でも両方を失います。', holds, unknownNumbers);
+      sameOnly.label = '写しが、元のデータと同じ機器の中にしかない構成です';
+      return sameOnly;
+    }
+
     var sameAccount = a.q2 === 'same' || a.q2 === 'unknown';
-    var noLock = a.q4 === 'none' || a.q4 === 'unknown';
+    /* 過去の版が残っても、普段の管理者アカウントで消せるなら、攻撃者にとっては消せない設定がないのと同じ。 */
+    var noLock = a.q4 === 'none' || a.q4 === 'unknown' || (a.q4 === 'versions' && sameAccount);
     /* 取り外して保管している写しは、ネットワーク越しには消せない。 */
     var offlineCopy = places.indexOf('removable') !== -1;
     if (sameAccount && noLock && !offlineCopy) {
       return deletionResult('weak', '保存先を消せるアカウントにも、消せない期間の設定にも守りがないため、管理者の権限を取られると、保存先の中身をそのまま消せます。', holds, unknownNumbers);
+    }
+    /* 社内でつないだままの機器にしか写しがなければ、権限を分けていても、社内に入った攻撃者は写しまで暗号化できる。 */
+    if (!hasSeparate && !locked) {
+      var onsite = deletionResult('weak', '写しがすべて社内でつないだままの機器にあり、消せない期間の設定もないため、社内に入った攻撃者は、アカウントの分け方にかかわらず、写しまで暗号化できます。', holds, unknownNumbers);
+      onsite.label = '社内に入られると、写しまで暗号化されうる構成です';
+      return onsite;
     }
     /* 社内から見えないことは守りに数えるが、それだけでは最も強い段階にしない。 */
     if (hasSeparate && locked && separateAccount) {
@@ -533,6 +559,51 @@
       return deletionResult('weak', 'アカウントの分離、社内から見えない置き方、消せない期間の設定のいずれにも、確かな守りがありません。', holds, unknownNumbers);
     }
     return deletionResult('middle', '効いている守りはありますが、仕事場の権限だけでは消せないと言える条件までは、そろっていません。', holds, unknownNumbers);
+  }
+
+  /*
+   * 「分からない」と答えた問のうち、判定に効く問だけを残す（効かない問を「判定が変わります」と書かない）。
+   * ほかの「分からない」の問がどう確かめられても判定が変わらない問を外す。ほかの問の答えの組み合わせを
+   * すべて試し、その問だけを変えて判定が変わる組み合わせが1つでもあれば残す。
+   */
+  function impactfulUnknowns(a, numbers, judgeLevel) {
+    function choices(number) {
+      return questionById('q' + number).options.map(function (option) { return option.value; });
+    }
+    function assignments(rest) {
+      if (rest.length === 0) return [{}];
+      var tail = assignments(rest.slice(1));
+      var out = [];
+      choices(rest[0]).forEach(function (value) {
+        tail.forEach(function (partial) {
+          var next = { };
+          Object.keys(partial).forEach(function (key) { next[key] = partial[key]; });
+          next['q' + rest[0]] = value;
+          out.push(next);
+        });
+      });
+      return out;
+    }
+    return numbers.filter(function (number) {
+      var others = numbers.filter(function (other) { return other !== number; });
+      return assignments(others).some(function (partial) {
+        var levels = {};
+        choices(number).forEach(function (value) {
+          var changed = {};
+          Object.keys(a).forEach(function (key) { changed[key] = a[key]; });
+          Object.keys(partial).forEach(function (key) { changed[key] = partial[key]; });
+          changed['q' + number] = value;
+          levels[judgeLevel(changed)] = true;
+        });
+        return Object.keys(levels).length > 1;
+      });
+    });
+  }
+
+  function withUnknowns(result, numbers, treatedAs) {
+    result.unknownQuestions = numbers;
+    result.unknownNote = unknownNote(numbers, treatedAs);
+    return result;
   }
 
   /* gaps は、確認事項が決まったあとに diagnose が入れる。 */
@@ -626,6 +697,7 @@
     var places = a.q1;
     if (id === '4-3-4-1') {
       if (a.noBackup) return ['lacking', '写しを取っていないため、示せる材料がありません。'];
+      if (places.indexOf('unknown') !== -1) return ['lacking', '写しがどこにあるか分かっていないため、取得していることを示せません。'];
       if (a.q7 === 'documented') return ['available', '対象・頻度・保管期間を決めた文書が材料になります。期間中に取得した記録も、あわせて残します。'];
       if (a.q7 === 'settings') return ['lacking', '設定はありますが、対象・頻度・保管期間を定めたことを示す文書がありません。'];
       if (a.q7 === 'none') return ['lacking', '対象・頻度・保管期間を定めた文書がありません。'];
@@ -646,12 +718,15 @@
       return ['lacking', '取り出しの手順書があるか、分かっていません。'];
     }
     if (id === '7-1-1-1') {
+      if (a.noBackup) return ['lacking', '写しを取っていないため、業務を回復するための対策が整っていません。'];
       var missing = [];
       if (a.q9 === 'informal') missing.push('止まると困る仕事と戻したい期限が、文書になっていません。');
       if (a.q9 === 'none') missing.push('止まると困る仕事と戻したい期限が、決まっていません。');
       if (a.q10 === 'vendor') missing.push('事故のときの連絡先と戻す担当について、保守会社との取り決めがありません。');
       if (a.q10 === 'none') missing.push('事故のときの連絡先と戻す担当が、決まっていません。');
-      if (missing.length === 0) return ['available', '止まると困る仕事と戻したい期限の文書、事故のときの連絡先と役割の取り決めが材料になります。'];
+      if (a.q9 === 'unknown') missing.push('止まると困る仕事と戻したい期限が決まっているか、分かっていません。');
+      if (a.q10 === 'unknown') missing.push('事故のときの連絡先と戻す担当が決まっているか、分かっていません。');
+      if (missing.length === 0) return ['partial', '止まると困る仕事と戻したい期限の文書、事故のときの連絡先と役割の取り決めが、材料の一部になります。この基準は、業務を回復するための対策（予備機や、電話・FAXでの連絡手段など）の整備そのものを求めています。'];
       return ['lacking', missing.join('')];
     }
     /* 7-1-1-2。原文は「手順書どおりに」「目標復旧時間内で」の確認を求めるので、問5・6・9がそろうときだけ材料ありとする。 */
@@ -660,10 +735,14 @@
     if (a.q5 === 'older') lacks.push('最後に取り出して確かめてから1年より長くたっており、いまの状態を示す材料としては古くなっています。');
     if (a.q5 === 'never') lacks.push('取り出して確かめた記録がありません。');
     if (a.q5 === 'unknown') lacks.push('取り出して確かめた時期が分かっていません。');
-    if (a.q6 !== 'full') lacks.push('「手順書どおりに」戻せたことを示すための、対象ごとの手順書が整っていません。');
-    if (a.q9 !== 'documented') lacks.push('「目標復旧時間内で」戻せたことを示すための、戻したい期限を決めた文書がありません。');
+    if (places.indexOf('unknown') !== -1) lacks.push('写しの場所が分かっていないため、取り出して確かめた記録が、どの写しのものかを示せません。');
+    if (a.q6 === 'unknown') lacks.push('「手順書どおりに」戻せたことを示すための、対象ごとの手順書があるか分かっていません。');
+    else if (a.q6 !== 'full') lacks.push('「手順書どおりに」戻せたことを示すための、対象ごとの手順書が整っていません。');
+    if (a.q9 === 'unknown') lacks.push('「目標復旧時間内で」戻せたことを示すための、戻したい期限を決めた文書があるか分かっていません。');
+    else if (a.q9 !== 'documented') lacks.push('「目標復旧時間内で」戻せたことを示すための、戻したい期限を決めた文書がありません。');
     if (lacks.length > 0) return ['lacking', lacks.join('')];
-    return ['available', '取り出して確かめた日付・対象・結果の記録が材料になります。手順書どおりに進めたことと、戻したい期限に収まったかが分かるよう、かかった時間も記録に残します。'];
+    var daily = a.q8 === 'watched' ? '' : '保存の失敗に気づく日々の確認（問8）は、この項目とは別の課題として「戻せるか」の判定に出ています。';
+    return ['available', '取り出して確かめた日付・対象・結果の記録が材料になります。手順書どおりに進めたことと、戻したい期限に収まったかが分かるよう、かかった時間も記録に残します。' + daily];
   }
 
   function buildCriteria(a) {
@@ -713,7 +792,16 @@
     });
 
     var deletion = judgeDeletion(a);
+    /* 写しの場所が分からないときは、場所が分かれば問2〜4も効いてくるので、すべて残す。 */
+    if (a.q1.indexOf('unknown') === -1 && !a.noBackup) {
+      withUnknowns(deletion, impactfulUnknowns(a, deletion.unknownQuestions,
+        function (x) { return judgeDeletion(x).level; }), '守りがない');
+    }
     var restore = judgeRestore(a, deletion.level);
+    if (!a.noBackup) {
+      withUnknowns(restore, impactfulUnknowns(a, restore.unknownQuestions,
+        function (x) { return judgeRestore(x, deletion.level).level; }), '確かめられていない・備えがない');
+    }
     var findings = collectFindings(a, deletion.level === 'strong');
     /* 足りない点は、確認事項の見出しをそのまま使う（同じ内容を二か所に書かない）。 */
     function titlesOf(area) {

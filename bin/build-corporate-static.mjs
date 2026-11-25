@@ -18,13 +18,19 @@ function collectPagePaths(directory) {
     if (entry.isDirectory() && entry.name !== "assets") collectPagePaths(filename);
     else if (entry.name === "index.html") {
       pagePaths.push(`/${path.relative(source, directory).split(path.sep).filter(Boolean).join("/")}`);
+    } else if (entry.name.endsWith(".html")) {
+      // Netlify serves /dir/page.html as /dir/page, so count that path instead of /404.
+      pagePaths.push(`/${[...path.relative(source, directory).split(path.sep).filter(Boolean), entry.name.slice(0, -".html".length)].join("/")}`);
     }
   }
 }
 collectPagePaths(source);
 const pagePathsAttribute = JSON.stringify(pagePaths).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
 const analyticsTag = `<script src="/site-analytics.js" data-swup-ignore-script data-measurement-id="${measurementId}" data-page-paths="${pagePathsAttribute}" defer></script>`;
+// A page that promises not to send anything (e.g. the miakashi diagnosis) opts out with this meta tag.
+const analyticsOptOut = '<meta name="crud5th-analytics" content="off">';
 function addAnalytics(html) {
+  if (html.includes(analyticsOptOut)) return html;
   return html.replace("</head>", `${analyticsTag}</head>`);
 }
 
