@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="connect-src 'none'; form-action 'none'">
+<meta name="description" content="侵入した攻撃者は、御社のバックアップを消せるか。消されたあと、戻せるか。10の質問に答えると、その場で結果が出ます。入力した内容は送信も保存もされません。">
+<meta name="theme-color" content="#f2f2f2">
+<title>バックアップ診断｜御灯</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%23f2f2f2%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2247%22%20text-anchor%3D%22middle%22%20font-size%3D%2244%22%20fill%3D%22%23424242%22%20font-family%3D%22sans-serif%22%3E%E5%BE%A1%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="stylesheet" href="diagnosis.css">
+<script src="diagnosis-core.js" defer></script>
+<script src="diagnosis-ui.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="page-header">
+<a class="wordmark" href="../index.html" aria-label="御灯 ミアカシ 利用企業向けページへ"><span class="wordmark-ja">御灯</span><span class="wordmark-en">MIAKASHI</span></a>
+<nav class="page-nav" aria-label="ほかのページ">
+<a href="../index.html">利用企業の方へ</a>
+<a href="../partner.html">保守会社の方へ</a>
+</nav>
+</header>
+
+<main id="main" class="page">
+<section class="intro" aria-labelledby="page-title">
+<p class="kicker">バックアップ診断</p>
+<h1 id="page-title">侵入した攻撃者は、御社の写しを消せるか。<br>消されたあと、戻せるか。</h1>
+<p class="lead">10の質問に答えると、いまの写し（バックアップ）の守り方を攻撃者の目で見た結果が、1枚にまとまります。保守会社の方は、お客様1社を思い浮かべてお答えください。</p>
+<p class="privacy">入力した内容は、どこにも送信されず、保存もされません。このページを閉じると消えます。パスワードや機密の情報は伺いません。</p>
+<div class="scope">
+<h2>この診断でしないこと</h2>
+<ul class="plain-list">
+<li>脆弱性の検査ではありません。</li>
+<li>侵入の試験ではありません。</li>
+<li>復旧を保証するものではありません。</li>
+</ul>
+<p>お答えの内容をもとにした目安です。実際の設定を確かめたものではありません。</p>
+</div>
+</section>
+
+<noscript><p class="notice">この診断は、ブラウザの中だけで結果を出します。JavaScriptを有効にしてご利用ください。</p></noscript>
+
+<section id="questions" class="questions" aria-labelledby="questions-title">
+<h2 id="questions-title">10の質問</h2>
+<p class="section-note">分からない問は、「分からない」を選んでください。分からないこと自体が、確かめる点として結果に出ます。</p>
+<fieldset class="question" id="q1">
+<legend><span class="q-number">問1</span><span class="q-text">写しはどこにありますか（複数選択）</span></legend>
+<p class="q-hint">当てはまるものをすべて選んでください。「取っていない」「分からない」は、ほかの答えと一緒には選べません。</p>
+<div class="options">
+<label class="option"><input type="checkbox" name="q1" value="same"><span>元のデータと同じサーバーやパソコンの中</span></label>
+<label class="option"><input type="checkbox" name="q1" value="nas"><span>社内のNAS・外付けHDD（つないだまま）</span></label>
+<label class="option"><input type="checkbox" name="q1" value="removable"><span>取り外して保管している媒体</span></label>
+<label class="option"><input type="checkbox" name="q1" value="offsite"><span>クラウドなど社外</span></label>
+<label class="option"><input type="checkbox" name="q1" value="none"><span>取っていない</span></label>
+<label class="option"><input type="checkbox" name="q1" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q2">
+<legend><span class="q-number">問2</span><span class="q-text">写しの保存先を消せるアカウントは、普段の仕事で使う管理者アカウントと同じですか</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q2" value="same"><span>同じ</span></label>
+<label class="option"><input type="radio" name="q2" value="shared"><span>別だが、パスワードの保管場所や管理者が同じ</span></label>
+<label class="option"><input type="radio" name="q2" value="mfa"><span>別で、追加の認証（多要素認証）もある</span></label>
+<label class="option"><input type="radio" name="q2" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q3">
+<legend><span class="q-number">問3</span><span class="q-text">保存先は、社内のネットワークからいつも見えていますか（共有フォルダとして開ける、など）</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q3" value="always"><span>いつも見える</span></label>
+<label class="option"><input type="radio" name="q3" value="onsave"><span>保存するときだけつながる</span></label>
+<label class="option"><input type="radio" name="q3" value="hidden"><span>社内からは見えない（社外で受け取るだけ、または取り外して保管）</span></label>
+<label class="option"><input type="radio" name="q3" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q4">
+<legend><span class="q-number">問4</span><span class="q-text">一定の期間、誰にも消せない・書き換えられない設定がありますか</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q4" value="locked"><span>ある（期間も分かる）</span></label>
+<label class="option"><input type="radio" name="q4" value="versions"><span>過去の版は残るが、管理者なら消せる</span></label>
+<label class="option"><input type="radio" name="q4" value="none"><span>ない</span></label>
+<label class="option"><input type="radio" name="q4" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q5">
+<legend><span class="q-number">問5</span><span class="q-text">最後に、写しからファイルを実際に取り出して確かめたのはいつですか</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q5" value="half"><span>半年以内</span></label>
+<label class="option"><input type="radio" name="q5" value="year"><span>半年〜1年前</span></label>
+<label class="option"><input type="radio" name="q5" value="older"><span>1年より前</span></label>
+<label class="option"><input type="radio" name="q5" value="never"><span>一度もない</span></label>
+<label class="option"><input type="radio" name="q5" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q6">
+<legend><span class="q-number">問6</span><span class="q-text">取り出しの手順書はありますか</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q6" value="full"><span>対象ごとにあり、更新日も分かる</span></label>
+<label class="option"><input type="radio" name="q6" value="stale"><span>あるが古い、または担当者の頭の中</span></label>
+<label class="option"><input type="radio" name="q6" value="none"><span>ない</span></label>
+<label class="option"><input type="radio" name="q6" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q7">
+<legend><span class="q-number">問7</span><span class="q-text">何を、どの頻度で、いつまで残すかを決めた文書はありますか</span></legend>
+<div class="options">
+<label class="option"><input type="radio" name="q7" value="documented"><span>ある</span></label>
+<label class="option"><input type="radio" name="q7" value="settings"><span>設定はしてあるが、文書はない</span></label>
+<label class="option"><input type="radio" name="q7" value="none"><span>ない</span></label>
+<label class="option"><input type="radio" name="q7" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q8">
+<legend><span class="q-number">問8</span><span class="q-text">保存の失敗に気づく仕組みはありますか</span></legend>
+<p class="skip-note" hidden>写しを取っていない場合、この問は答えなくて構いません。</p>
+<div class="options">
+<label class="option"><input type="radio" name="q8" value="watched"><span>毎日、結果を見る人がいる・通知を確認している</span></label>
+<label class="option"><input type="radio" name="q8" value="ignored"><span>通知は来るが見ていない</span></label>
+<label class="option"><input type="radio" name="q8" value="none"><span>ない</span></label>
+<label class="option"><input type="radio" name="q8" value="unknown"><span>分からない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q9">
+<legend><span class="q-number">問9</span><span class="q-text">止まると困る仕事と、いつまでに戻したいかを決めていますか</span></legend>
+<div class="options">
+<label class="option"><input type="radio" name="q9" value="documented"><span>決めて文書にしている</span></label>
+<label class="option"><input type="radio" name="q9" value="informal"><span>決めているが頭の中</span></label>
+<label class="option"><input type="radio" name="q9" value="none"><span>決めていない</span></label>
+</div>
+</fieldset>
+<fieldset class="question" id="q10">
+<legend><span class="q-number">問10</span><span class="q-text">事故のとき、最初に誰へ連絡し、誰が戻すかを決めていますか</span></legend>
+<div class="options">
+<label class="option"><input type="radio" name="q10" value="shared"><span>決めて、連絡先も共有している</span></label>
+<label class="option"><input type="radio" name="q10" value="vendor"><span>保守会社に任せているが、取り決めはない</span></label>
+<label class="option"><input type="radio" name="q10" value="none"><span>決めていない</span></label>
+</div>
+</fieldset>
+<div class="submit-area">
+<p id="missing" class="missing" role="status" aria-live="polite"></p>
+<button type="button" id="show-result" class="primary-button" disabled>結果を見る</button>
+</div>
+</section>
+
+<section id="result" class="result" aria-labelledby="result-title" hidden>
+<div class="result-head">
+<p class="kicker">バックアップ診断　結果</p>
+<h2 id="result-title" tabindex="-1">診断の結果</h2>
+<p id="result-date" class="result-date"></p>
+<p class="result-caution">お答えの内容をもとにした目安です。脆弱性の検査、侵入の試験、復旧の保証ではありません。</p>
+</div>
+
+<section class="result-block" aria-labelledby="deletion-title">
+<h3 id="deletion-title">攻撃者は、写しを消せるか</h3>
+<div id="deletion-body"></div>
+</section>
+
+<section class="result-block" aria-labelledby="restore-title">
+<h3 id="restore-title">消されたあと、戻せるか</h3>
+<div id="restore-body"></div>
+</section>
+
+<section class="result-block" aria-labelledby="findings-title">
+<h3 id="findings-title">確認事項（直す順）</h3>
+<div id="findings-body"></div>
+</section>
+
+<section class="result-block" aria-labelledby="criteria-title">
+<h3 id="criteria-title">評価制度の項目と、いまの回答で示せる材料</h3>
+<p class="block-lead">経済産業省・IPAの「サプライチェーン強化に向けたセキュリティ対策評価制度」のうち、バックアップと復旧に関わる項目です。</p>
+<p class="criteria-caution">この診断は制度の評価ではなく、★の取得や審査の通過を示すものではありません。</p>
+<div id="criteria-body"></div>
+<p class="source">出典: IPA「★3・★4要求事項・評価基準 Ver.1.1」（2026年10月28日公開）<br><a href="https://www.ipa.go.jp/security/scs/requirements-criteria.html" rel="noopener">https://www.ipa.go.jp/security/scs/requirements-criteria.html</a></p>
+</section>
+
+<section class="result-block" aria-labelledby="answers-title">
+<h3 id="answers-title">回答の控え</h3>
+<div id="answers-body"></div>
+</section>
+
+<div class="result-actions">
+<button type="button" id="print-result" class="primary-button">印刷・PDFで保存</button>
+<a class="text-link" href="#questions">回答を見直す</a>
+</div>
+
+<section class="consult" aria-labelledby="consult-title">
+<h3 id="consult-title">御灯に相談する</h3>
+<p>御灯（ミアカシ）は、取引先に出せる、復元確認つきのバックアップです。証明つきバックアップは準備中で、ご相談と事前登録を受け付けています。</p>
+<p>結果について相談したいときは、メールでご連絡ください。回答の内容がメールに自動で入ることはありません。伝えたいことだけを、ご自身で書き添えてください。</p>
+<p><a class="contact-button" href="mailto:crud5th@crud5th.com?subject=%E5%BE%A1%E7%81%AF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E7%9B%B8%E8%AB%87">メールで相談する</a><span class="print-only">crud5th@crud5th.com</span></p>
+</section>
+</section>
+
+<nav class="back-links" aria-label="御灯のページへ戻る">
+<a href="../index.html">利用企業向けのページへ戻る</a>
+<a href="../partner.html">保守会社向けのページへ戻る</a>
+</nav>
+</main>
+
+<footer class="page-footer">
+<span>大切なデータと、仕事を続けるための備え。</span>
+<small>© CRUD5th</small>
+</footer>
+</body>
+</html>

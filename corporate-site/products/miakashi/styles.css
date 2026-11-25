@@ -21,3 +21,145 @@
 @media(max-width:700px){.content-dialog{width:calc(100% - 24px);max-height:88vh}.dialog-close{padding:16px 20px 12px}.dialog-content{padding:0 22px 36px}.dialog-content h2{font-size:18px;margin-bottom:22px}.dialog-content .dialog-lead{font-size:13.5px}.dialog-content h3{font-size:14px;margin-top:34px;padding-top:20px}.dialog-content .dialog-defs>div{grid-template-columns:1fr;gap:2px;padding:12px 0}.dialog-content .dialog-defs dt,.dialog-content .dialog-defs dd,.dialog-content .dialog-list li{font-size:12.5px}.dialog-content .dialog-impact{grid-template-columns:1fr}.dialog-content .dialog-impact>div{padding:12px 14px}.dialog-content .dialog-steps>li{grid-template-columns:30px 1fr;gap:10px}.dialog-content .price-calculator{padding:20px 16px}.dialog-content .calc-row{grid-template-columns:1fr;gap:8px}.dialog-content .calc-options button{padding:7px 13px;font-size:12px}.dialog-content .calc-total{font-size:25px}.dialog-content .calc-scenarios>div{flex-direction:column;gap:2px}.dialog-content .calc-scenarios dd{text-align:left}.dialog-content .dialog-table{font-size:12px}.dialog-content .dialog-table .num{padding-right:12px}.dialog-content .dialog-table th,.dialog-content .dialog-table td{padding:10px 8px 10px 0}.dialog-content .dialog-related-link{font-size:13px;padding:14px 0}.dialog-content .dialog-cta{gap:16px}.service-links .service-detail{font-size:12px;padding:20px 0}.flow-copy .flow-link{font-size:11px;margin-top:10px}}
 .print-appendix{display:none}
 @media print{.price-link,.flow-link{display:none!important}.print-appendix{display:block;margin-top:40px}.print-appendix .print-dialog{padding:0;break-before:page}.print-appendix .dialog-related,.print-appendix .dialog-cta,.print-appendix .calc-row,.print-appendix .dialog-source span{display:none}.print-appendix .dialog-content h2,.print-appendix h2{font-size:18px;margin-bottom:14px}.print-appendix h3{font-size:13px;margin:22px 0 10px;padding-top:14px}.print-appendix .dialog-lead,.print-appendix p,.print-appendix li,.print-appendix dd,.print-appendix dt,.print-appendix td,.print-appendix th{font-size:10.5px!important;line-height:1.75!important}.print-appendix .dialog-defs>div{grid-template-columns:130px 1fr;padding:6px 0}.print-appendix .dialog-steps>li{padding:6px 0}.print-appendix .price-calculator{padding:12px 16px;background:#f6f6f6}.print-appendix .calc-result{margin-top:0;padding-top:0;border-top:0}.print-appendix .calc-total{font-size:18px}.print-appendix .dialog-impact>div{padding:8px 10px}.print-appendix li,.print-appendix tr,.print-appendix .dialog-defs>div{break-inside:avoid}}
+
+/* 改訂版で足した部品：最初の画面の導入文 */
+.hero{height:auto;min-height:613px;padding-top:180px;padding-bottom:70px;padding-right:var(--gutter)}
+.hero-copy{margin-top:80px}
+.hero-intro{margin:30px 0 0 348px;max-width:560px}
+.hero-lead{font-size:14px}
+.hero-actions,.block-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;margin-top:22px}
+.hero-actions a{display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;line-height:1.6;border-bottom:1px solid #999;padding-bottom:4px}
+@media(min-width:1600px){.hero{min-height:43vw;padding-top:13vw}.hero-copy{margin-top:5vw}.hero-intro{margin-left:24.2vw}}
+@media(max-width:1100px){.hero-intro{margin-left:29%}}
+@media(max-width:700px){.hero{min-height:0;padding-top:130px;padding-bottom:55px}.hero-copy{margin-top:60px}.hero-intro{margin:24px 0 0}.hero-lead{font-size:12.5px;line-height:1.95}.hero-actions{gap:12px 24px}.hero-actions a{font-size:12px}}
+
+/* 改訂版で足した部品：取引先への書類、診断、費用の章 */
+.section-block{grid-column:1/-1;margin-top:65px;border-top:1px solid var(--line);padding-top:30px}
+.section-block>h3{font-size:17px;line-height:1.8;margin-bottom:8px}
+.section-block>p{font-size:13px;max-width:760px}
+.block-note,.about-body .block-note{font-size:12px;color:#666;line-height:1.9;margin:14px 0 0;max-width:760px}
+.status-note,.about-body .status-note{font-size:13px;line-height:1.9;margin:0;padding-left:14px;border-left:2px solid #8a8a8a}
+.plain-list{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.plain-list li{position:relative;padding-left:20px;font-size:13px;line-height:1.9}
+.plain-list li:before{content:"";position:absolute;left:2px;top:.95em;width:8px;height:1px;background:var(--ink)}
+.source-links{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:14px}
+.source-link{display:inline-flex;gap:6px;font-size:12px;line-height:1.6;border-bottom:1px solid #999}
+.section-block>.source-link{margin-top:14px}
+.spec-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:22px}
+.spec-table th,.spec-table td{text-align:left;vertical-align:top;padding:16px 24px 16px 0;border-bottom:1px solid var(--line);line-height:1.9;font-weight:400}
+.spec-table th:last-child,.spec-table td:last-child{padding-right:0}
+.spec-table thead th{font-size:11px;color:#666;padding-top:0;padding-bottom:10px;white-space:nowrap}
+.spec-table tbody th{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.spec-table .spec-level{white-space:nowrap}
+.plan-grid{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:55px;margin-top:65px}
+.plan{border-top:1px solid var(--line);padding-top:25px;min-width:0}
+.plan-label{font-size:11px;color:#666;line-height:1.6}
+.plan h3{font-size:17px;line-height:1.8;margin:14px 0 6px}
+.plan-price{font-size:14px;line-height:1.6}
+.plan-price strong{font-size:30px;font-weight:600;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin:0 2px 0 6px}
+.plan-price small{font-size:12px;margin-left:4px}
+.plan>p{font-size:13px}
+.plan h4{font-size:13px;font-weight:600;line-height:1.7;margin:26px 0 10px}
+.plan .text-link{margin-top:24px}
+.plan-table{width:100%;border-collapse:collapse;font-size:13px;margin:18px 0 14px}
+.plan-table th,.plan-table td{text-align:left;padding:9px 0;border-bottom:1px solid #dcdcdc;font-weight:400;line-height:1.6}
+.plan-table td{text-align:right;font-variant-numeric:tabular-nums}
+.option-list{margin:18px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:20px 55px}
+.option-list dt{font-size:13px;font-weight:600;line-height:1.8}
+.option-list dd{margin:6px 0 0;font-size:13px;line-height:1.9}
+.action-button{display:inline-flex;background:#fff}
+.evidence-note{margin-top:70px;border-top:1px solid var(--line);padding-top:30px;display:grid;grid-template-columns:1fr 1.9fr;gap:20px 8%}
+.evidence-note h3{font-size:17px;line-height:1.8}
+.evidence-note p{font-size:13px}
+.contact-status{font-size:12px;line-height:1.9;margin-top:28px}
+.contact-status .text-link,.contact-faq .text-link{margin-left:8px;color:var(--ink);white-space:nowrap}
+.footer-columns h2.footer-sub{margin-top:18px}
+.menu-aside>a.menu-partner{margin-top:18px}
+@media(max-width:700px){.section-block{margin-top:40px;padding-top:24px}.section-block>h3{font-size:15px}.section-block>p,.plain-list li,.plan>p,.option-list dt,.option-list dd,.evidence-note p{font-size:12.5px}.plan-grid{grid-template-columns:1fr;gap:40px;margin-top:40px}.plan h3{font-size:15px}.plan-price strong{font-size:26px}.option-list{grid-template-columns:1fr}.evidence-note{display:block;margin-top:45px;padding-top:24px}.evidence-note h3{font-size:15px;margin-bottom:12px}.status-note,.about-body .status-note{font-size:12.5px}.menu-aside>a.menu-partner{margin-top:16px}}
+/* 表は、狭い画面では1項目ずつ縦に積む（印刷には適用しない） */
+@media screen and (max-width:700px){.spec-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.spec-table,.spec-table tbody,.spec-table tr,.spec-table th,.spec-table td{display:block}.spec-table tr{padding:16px 0;border-bottom:1px solid var(--line)}.spec-table th,.spec-table td{border:0;padding:0;font-size:12.5px;white-space:normal}.spec-table tbody th{white-space:normal}.spec-table td{margin-top:8px}.spec-table td:before{content:attr(data-label);display:block;font-size:10px;color:#666;line-height:1.6}}
+@media print{.hero{min-height:0;padding-top:20px;padding-bottom:20px}.hero-copy{margin-top:35px}.hero-intro{margin:14px 0 0 40%;max-width:none}.hero-lead{font-size:11px}.hero-actions,.block-actions,.plan .text-link,.contact-status .text-link{display:none!important}.section-block{margin-top:25px;padding-top:15px}.section-block>h3{font-size:13px}.section-block>p,.plain-list li,.plan>p,.option-list dt,.option-list dd,.evidence-note p,.block-note,.about-body .block-note{font-size:10.5px}.spec-table{font-size:10px;margin-top:10px}.spec-table th,.spec-table td{padding:6px 10px 6px 0;line-height:1.7}.plan-grid{gap:25px;margin-top:25px}.plan h3{font-size:13px}.plan-price strong{font-size:20px}.plan-table{font-size:10.5px}.plan-table th,.plan-table td{padding:4px 0}.evidence-note{margin-top:25px;padding-top:15px}.evidence-note h3{font-size:13px}.plan,.section-block,.spec-table tr,.evidence-note{break-inside:avoid}}
+
+/* 単独のページ（保守会社・販売店向け、AIエージェントを使う会社向け） */
+.sub-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px 30px;padding-top:40px}
+.sub-header .wordmark{width:auto}
+.sub-header .wordmark-ja{font-size:38px}
+.sub-nav{display:flex;flex-wrap:wrap;gap:4px 26px;font-size:13px;font-weight:600}
+.sub-nav a{padding:8px 0;border-bottom:1px solid transparent}
+.sub-nav a:hover{border-color:currentColor}
+.sub-hero{padding-top:90px}
+.sub-kicker{font-size:12px;color:#666;letter-spacing:.06em;line-height:1.6;margin-bottom:18px}
+.sub-hero h1{font-size:29px;line-height:1.8;letter-spacing:.035em;font-weight:600}
+.sub-lead{font-size:15px;max-width:720px;margin-top:24px}
+.sub-hero .status-note{margin-top:26px;max-width:720px}
+.sub-section{padding-top:100px}
+.sub-section>h2{font-size:21px;line-height:1.8;letter-spacing:.02em;margin-bottom:22px}
+.prose{max-width:720px}
+.prose p{font-size:14px}
+.prose p+p,.prose p+ul,.prose ul+p,.prose p+.source-links{margin-top:14px}
+.prose .plain-list li{font-size:14px}
+.sub-section .spec-table{max-width:980px}
+.sub-section .option-list{max-width:980px}
+.step-list{list-style:none;margin:0;padding:0;max-width:720px}
+.step-list>li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.step-list>li:first-child{padding-top:4px}
+.step-no{font-size:12px;color:#666;padding-top:5px;font-variant-numeric:tabular-nums}
+.step-list h3{font-size:15px;line-height:1.8;margin-bottom:6px}
+.step-list p{font-size:13px;line-height:1.9}
+.step-list .text-link{display:inline-block;margin-top:10px}
+.qa{max-width:820px;border-bottom:1px solid var(--line)}
+.qa details{border-top:1px solid var(--line)}
+.qa summary{position:relative;padding:20px 40px 20px 0;font-size:14px;font-weight:600;line-height:1.8;cursor:pointer;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:after{content:"＋";position:absolute;right:4px;top:20px;font-weight:400}
+.qa details[open] summary:after{content:"－"}
+.qa summary:focus-visible{outline:2px solid #424242;outline-offset:2px}
+.qa details p{font-size:13px;padding:0 40px 12px 0}
+.qa details p:last-child{padding-bottom:24px}
+.sub-contact{margin-top:100px;background:#fff;padding:60px 8%}
+.sub-contact h2{font-size:21px;line-height:1.8;margin-bottom:16px}
+.sub-contact p{font-size:13px;max-width:680px}
+.sub-contact .contact-button{display:inline-flex;margin-top:28px}
+.sub-contact .block-note{margin-top:20px}
+.sub-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px 30px;padding-top:70px;padding-bottom:60px;font-size:11px;color:#666}
+.sub-footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+.sub-footer a{color:var(--ink);font-weight:600}
+@media(max-width:700px){.sub-header{padding-top:24px}.sub-header .wordmark-ja{font-size:30px}.sub-nav{font-size:11.5px;gap:2px 18px}.sub-hero{padding-top:55px}.sub-hero h1{font-size:21px}.sub-lead{font-size:13.5px}.sub-section{padding-top:70px}.sub-section>h2{font-size:17px;margin-bottom:18px}.prose p,.prose .plain-list li{font-size:13px}.step-list>li{grid-template-columns:30px 1fr;gap:10px}.step-list h3{font-size:14px}.step-list p,.qa details p{font-size:12.5px}.qa summary{font-size:13px;padding-right:32px}.qa details p{padding-right:0}.sub-contact{margin-top:70px;padding:40px 28px}.sub-contact h2{font-size:17px}.sub-contact p{font-size:12.5px}.sub-contact .contact-button{white-space:normal}.sub-footer{padding-top:50px;padding-bottom:40px}}
+@media print{.sub-nav,.sub-contact .contact-button{display:none!important}.sub-hero{padding-top:30px}.sub-section{padding-top:30px}.sub-section>h2{font-size:14px;margin-bottom:10px}.sub-hero h1{font-size:19px}.sub-lead,.prose p,.prose .plain-list li,.step-list p,.qa details p,.qa summary{font-size:10.5px}.qa details>*{display:block}.sub-contact{margin-top:30px;padding:20px;background:#f8f8f8}.step-list>li,.qa details{break-inside:avoid}}
+
+/* 評価制度との対応表（A4縦1枚の資料） */
+.sheet-page{background:var(--page)}
+.sheet-tools{max-width:900px;margin:0 auto;padding:24px 20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px 24px;font-size:13px;font-weight:600}
+.sheet-tools a{padding:8px 0;border-bottom:1px solid #999}
+.sheet-print{background:#fff;border:1px solid #bcbcbc;border-radius:30px;padding:10px 22px;font-size:13px;font-weight:600}
+.sheet-print:hover{background:#e6e6e6}
+.sheet{max-width:900px;margin:20px auto 50px;background:#fff;padding:48px 52px}
+.sheet-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid var(--ink);padding-bottom:12px}
+.sheet-head .wordmark{width:auto;gap:10px}
+.sheet-head .wordmark-ja{font-size:26px}
+.sheet-head .wordmark-en{font-size:8px;padding-bottom:4px}
+.sheet-head p{font-size:11px;color:#555;line-height:1.6;text-align:right}
+.sheet h1{font-size:19px;line-height:1.7;font-weight:600;margin-top:22px}
+.sheet-summary{margin:14px 0 0;padding:0;list-style:none}
+.sheet-summary li{font-size:12.5px;line-height:1.85}
+.sheet h2{font-size:13px;font-weight:600;line-height:1.7;margin-top:24px}
+.sheet .spec-table{font-size:12px;margin-top:8px}
+.sheet .spec-table th,.sheet .spec-table td{padding:10px 16px 10px 0;line-height:1.75}
+.sheet .spec-table thead th{white-space:nowrap;padding-bottom:6px}.sheet .spec-table td:nth-child(4){width:25%}.sheet .spec-table td:nth-child(5){width:21%}
+.sheet-notes{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:4px}
+.sheet-notes li{position:relative;padding-left:14px;font-size:11.5px;line-height:1.8}
+.sheet-notes li:before{content:"";position:absolute;left:0;top:.9em;width:6px;height:1px;background:var(--ink)}
+.sheet-foot{margin-top:18px;border-top:1px solid var(--line);padding-top:10px;font-size:10.5px;color:#555;line-height:1.7;overflow-wrap:anywhere}
+@media screen and (max-width:700px){.sheet{margin:14px 12px 40px;padding:28px 22px}.sheet h1{font-size:16px}.sheet-head{flex-direction:column;align-items:flex-start;gap:8px}.sheet-head p{text-align:left}.sheet .spec-table th,.sheet .spec-table td{padding:0}}
+@media print{:root{background:#fff}.sheet-page{background:#fff}.sheet-tools{display:none!important}.sheet{max-width:none;margin:0;padding:0}.sheet-head{padding-bottom:6pt}.sheet-head .wordmark-ja{font-size:18pt}.sheet-head p{font-size:7.5pt}.sheet h1{font-size:13pt;margin-top:10pt}.sheet-summary{margin-top:6pt}.sheet-summary li{font-size:9.5pt;line-height:1.7}.sheet h2{font-size:10.5pt;margin-top:14pt}.sheet .spec-table{font-size:9pt;margin-top:5pt}.sheet .spec-table th,.sheet .spec-table td{padding:7pt 9pt 7pt 0;line-height:1.6}.sheet .spec-table thead th{font-size:8pt;padding-bottom:4pt}.sheet-notes{margin-top:5pt;gap:2pt}.sheet-notes li{font-size:9pt;line-height:1.65}.sheet-foot{margin-top:12pt;padding-top:6pt;font-size:8pt}.sheet a[href^="mailto"]:after{content:""}}
+
+/* 細かな調整 */
+.plan-table thead th{font-size:11px;color:#666}
+.plan-table th+th{text-align:right}
+.dialog-content>.text-link{display:inline-block;margin-top:14px;font-size:13px}
+.dialog-content .dialog-note .text-link{margin-left:6px;color:var(--ink)}
+.sub-contact .step-list{margin-top:20px}
+.block-note .text-link{margin-left:6px;color:var(--ink)}
+.evidence-note p+p{margin-top:12px}
+.section-block>p+.plain-list{margin-top:12px}
+@media(max-width:700px){.proof>h2 br,.plans>h2 br,.check>h2 br{display:none}}

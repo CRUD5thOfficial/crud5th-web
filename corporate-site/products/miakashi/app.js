@@ -156,7 +156,7 @@ contentDialog.addEventListener('close', () => {
 });
 
 // 印刷・PDF保存のときは、説明の窓の中身もページの末尾に載せる。
-const PRINT_DIALOGS = ['card-0', 'card-1', 'card-2', 'card-3', 'card-4', 'card-5', 'card-6', 'card-7', 'faq-0', 'faq-1', 'faq-2', 'faq-3', 'faq-4', 'faq-5'];
+const PRINT_DIALOGS = ['card-0', 'card-1', 'card-2', 'card-3', 'card-4', 'card-5', 'card-6', 'card-7', 'faq-0', 'faq-1', 'faq-2', 'faq-3', 'faq-4', 'faq-5', 'plan-0', 'proof-0'];
 window.addEventListener('beforeprint', () => {
   if (document.querySelector('.print-appendix')) return;
   const appendix = document.createElement('section');
